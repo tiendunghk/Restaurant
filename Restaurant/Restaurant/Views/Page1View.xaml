@@ -1,0 +1,18 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             mc:Ignorable="d"
+             x:Class="Restaurant.Views.Page1View">
+    <ContentPage.Content>
+        <StackLayout>
+            <Label Text="Page1"/>
+            <Label Text="{Binding So1}"/>
+            <Button Text="+so1" Command="{Binding CongSo1}"/>
+            <Label Text="{Binding So2}"/>
+            
+            <Button Text="Page2" Command="{Binding Page2Command}" />
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>
