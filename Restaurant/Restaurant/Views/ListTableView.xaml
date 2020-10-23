@@ -1,0 +1,38 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage
+    x:Class="Restaurant.Views.ListTableView"
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    x:Name="RootPage">
+    <ContentPage.Content>
+        <CollectionView ItemsLayout="VerticalGrid, 2" ItemsSource="{Binding Tables}" ItemsUpdatingScrollMode="KeepLastItemInView">
+            <CollectionView.ItemTemplate>
+                <DataTemplate>
+                    <StackLayout>
+                        <StackLayout.GestureRecognizers>
+                            <TapGestureRecognizer Command="{Binding BindingContext.TableTapped, Source={x:Reference RootPage}}" CommandParameter="{Binding .}" />
+                        </StackLayout.GestureRecognizers>
+                        <Frame
+                            Margin="5,5,5,5"
+                            BackgroundColor="Green"
+                            CornerRadius="5"
+                            HasShadow="True"
+                            HeightRequest="80"
+                            WidthRequest="80">
+                            <StackLayout>
+                                <Label>
+                                    <Label.FormattedText>
+                                        <FormattedString>
+                                            <Span Text="Bàn số " />
+                                            <Span Text="{Binding .}" />
+                                        </FormattedString>
+                                    </Label.FormattedText>
+                                </Label>
+                            </StackLayout>
+                        </Frame>
+                    </StackLayout>
+                </DataTemplate>
+            </CollectionView.ItemTemplate>
+        </CollectionView>
+    </ContentPage.Content>
+</ContentPage>

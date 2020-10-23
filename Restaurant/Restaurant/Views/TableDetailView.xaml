@@ -1,0 +1,42 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage
+    x:Class="Restaurant.Views.TableDetailView"
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:controls="clr-namespace:Restaurant.Controls">
+    <ContentPage.Content>
+        <StackLayout>
+            <controls:TabView
+                x:Name="TabView"
+                HeaderBackgroundColor="Transparent"
+                HeaderSelectionUnderlineColor="#84888b"
+                HeaderSelectionUnderlineThickness="3"
+                HeaderSelectionUnderlineWidth="164"
+                HeaderTabTextColor="#84888b">
+                <controls:TabItem
+                    HeaderTabTextFontSize="14"
+                    HeaderText="Trạng thái"
+                    HeaderTextColor="#84888b">
+                    <StackLayout>
+                        <StackLayout>
+                            <RadioButton Text="Occupied" />
+                            <RadioButton Text="Dirty" />
+                            <RadioButton Text="Clean" />
+                        </StackLayout>
+                        <Button Text="Summit" Margin="20,0,20,0"/>
+                    </StackLayout>
+                </controls:TabItem>
+
+                <controls:TabItem
+                    HeaderTabTextFontSize="14"
+                    HeaderText="Đặt món"
+                    HeaderTextColor="#84888b">
+                    <StackLayout>
+                        <Label Text="def" />
+                    </StackLayout>
+                </controls:TabItem>
+            </controls:TabView>
+
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>

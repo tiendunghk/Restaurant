@@ -5,9 +5,9 @@ using System.Text;
 
 namespace Restaurant.ViewModels
 {
-    public class Page1ViewModel: ViewModelBase
+    public class TableDetailViewModel: ViewModelBase
     {
-        public Page1ViewModel()
+        public TableDetailViewModel()
         {
 
         }

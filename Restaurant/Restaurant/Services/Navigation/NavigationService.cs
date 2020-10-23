@@ -42,7 +42,7 @@ namespace Restaurant.Services.Navigation
             //    await customNavigation.PushAsync(view);
             //}
             //else
-            if(view is Page1View)
+            if(view is LoginView)
             {
                 CurrentApplication.MainPage = new NavigationPage(view);
             }
@@ -117,6 +117,7 @@ namespace Restaurant.Services.Navigation
 
                 if (view != null)
                 {
+                    var a=ServiceLocator.Instance.Resolve(viewModelType);
                     view.BindingContext = ServiceLocator.Instance.Resolve(viewModelType);
                 }
 

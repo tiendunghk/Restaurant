@@ -31,7 +31,7 @@ namespace Restaurant
         void InitNavigation()
         {
             ServiceLocator.Instance.Resolve<Services.Navigation.INavigationService>()
-                .NavigateToAsync<Page1ViewModel>();
+                .NavigateToAsync<LoginViewModel>();
         }
 
         protected override void OnStart()

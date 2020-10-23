@@ -10,15 +10,16 @@ using Xamarin.Forms.Xaml;
 namespace Restaurant.Views
 {
     [XamlCompilation(XamlCompilationOptions.Compile)]
-    public partial class Page2View : ContentPage
+    public partial class ListTableView : ContentPage
     {
-        public Page2View()
+        public ListTableView()
         {
             InitializeComponent();
         }
-        protected override bool OnBackButtonPressed()
+
+        private void TapGestureRecognizer_Tapped(object sender, EventArgs e)
         {
-            return base.OnBackButtonPressed();
+
         }
     }
 }

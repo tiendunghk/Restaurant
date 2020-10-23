@@ -89,13 +89,16 @@
     <AndroidResource Include="Resources\mipmap-xxxhdpi\launcher_foreground.png" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Resources\drawable\" />
+    <AndroidResource Include="Resources\drawable\hide_50px.png" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Restaurant\Restaurant.csproj">
       <Project>{AC318832-7628-44B7-85EA-5812C85C8146}</Project>
       <Name>Restaurant</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\drawable\logo_login.png" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\Android\Xamarin.Android.CSharp.targets" />
 </Project>
