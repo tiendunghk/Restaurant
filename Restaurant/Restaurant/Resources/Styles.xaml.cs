@@ -7,12 +7,12 @@ using System.Threading.Tasks;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
-namespace Restaurant.Views
+namespace Restaurant.Resources
 {
     [XamlCompilation(XamlCompilationOptions.Compile)]
-    public partial class Page1View : ContentPage
+    public partial class Styles
     {
-        public Page1View()
+        public Styles()
         {
             InitializeComponent();
         }

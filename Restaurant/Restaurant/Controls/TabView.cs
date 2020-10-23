@@ -17,7 +17,7 @@ namespace Restaurant.Controls
     [ContentProperty(nameof(Content))]
     public class TabItem : Xam.Plugin.TabView.TabItem
     {
-        public TabItem() : base("", new ContentView())
+        public TabItem() : base("", new StackLayout())
         {
 
         }

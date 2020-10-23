@@ -1,9 +1,12 @@
 ﻿using Restaurant.Mvvm.Command;
+using Restaurant.Services.Navigation;
 using Restaurant.ViewModels.Base;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Text;
+using System.Threading;
+using Xamarin.Forms.PlatformConfiguration.TizenSpecific;
 
 namespace Restaurant.ViewModels
 {
@@ -25,7 +28,9 @@ namespace Restaurant.ViewModels
         }
         async void Tapped(object table)
         {
-            await NavigationService.NavigateToAsync<TableDetailViewModel>();
+            var parameters = new NavigationParameters();
+            parameters.Add("title", "Bàn số " + table.ToString());
+            await NavigationService.NavigateToAsync<TableDetailViewModel>(parameters);
         }
     }
 }

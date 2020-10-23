@@ -1,4 +1,5 @@
-﻿using Restaurant.ViewModels;
+﻿using Restaurant.Services.Dialog;
+using Restaurant.ViewModels;
 using System;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
@@ -9,6 +10,7 @@ namespace Restaurant
     {
         public App()
         {
+            Syncfusion.Licensing.SyncfusionLicenseProvider.RegisterLicense("MzQwMTAxQDMxMzgyZTMzMmUzMG9LN01CMkxyTVdjYnJDS2Q3U05MWUpyVjhPd3JZTWwzTU9nSDl4MzFVc1k9");
             InitializeComponent();
 
             BuildDependencies();
@@ -22,6 +24,7 @@ namespace Restaurant
 
             // Register dependencies
             ServiceLocator.Instance.RegisterInstance<Services.Navigation.INavigationService, Services.Navigation.NavigationService>();
+            ServiceLocator.Instance.RegisterInstance<IDialogService, DialogService>();
 
             ServiceLocator.Instance.RegisterViewModels();
 

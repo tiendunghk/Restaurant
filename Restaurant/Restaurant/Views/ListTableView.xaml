@@ -3,7 +3,8 @@
     x:Class="Restaurant.Views.ListTableView"
     xmlns="http://xamarin.com/schemas/2014/forms"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-    x:Name="RootPage">
+    x:Name="RootPage"
+    Title="Danh sách bàn">
     <ContentPage.Content>
         <CollectionView ItemsLayout="VerticalGrid, 2" ItemsSource="{Binding Tables}" ItemsUpdatingScrollMode="KeepLastItemInView">
             <CollectionView.ItemTemplate>

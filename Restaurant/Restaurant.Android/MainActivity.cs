@@ -7,6 +7,7 @@ using Android.Views;
 using Android.Widget;
 using Android.OS;
 using Xamarin.Forms;
+using Acr.UserDialogs;
 
 namespace Restaurant.Droid
 {
@@ -20,6 +21,8 @@ namespace Restaurant.Droid
 
             base.OnCreate(savedInstanceState);
             Forms.SetFlags("RadioButton_Experimental");
+
+            UserDialogs.Init(this);
 
             Xamarin.Essentials.Platform.Init(this, savedInstanceState);
             global::Xamarin.Forms.Forms.Init(this, savedInstanceState);

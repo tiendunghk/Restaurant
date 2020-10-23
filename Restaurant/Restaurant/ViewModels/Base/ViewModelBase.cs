@@ -1,4 +1,5 @@
 ﻿using Restaurant.Mvvm.Command;
+using Restaurant.Services.Dialog;
 using Restaurant.Services.Navigation;
 using System;
 using System.Collections.Generic;
@@ -13,10 +14,12 @@ namespace Restaurant.ViewModels.Base
         private bool _isBusy;
 
         protected INavigationService NavigationService { get; }
+        protected IDialogService DialogService { get; }
 
         public ViewModelBase()
         {
             NavigationService = ServiceLocator.Instance.Resolve<INavigationService>();
+            DialogService = ServiceLocator.Instance.Resolve<IDialogService>();
         }
 
         public string Title

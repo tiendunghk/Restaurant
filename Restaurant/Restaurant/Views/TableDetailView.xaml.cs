@@ -16,5 +16,26 @@ namespace Restaurant.Views
         {
             InitializeComponent();
         }
+
+        private void TapGestureRecognizer_Tapped(object sender, EventArgs e)
+        {
+            //radio1.IsChecked = true ? true : false;
+            //radio2.IsChecked = false;
+            //radio3.IsChecked = false;
+        }
+
+        private void TapGestureRecognizer_Tapped_1(object sender, EventArgs e)
+        {
+            //radio2.IsChecked = true ? true : false;
+            //radio1.IsChecked = false;
+            //radio3.IsChecked = false;
+        }
+
+        private void TapGestureRecognizer_Tapped_2(object sender, EventArgs e)
+        {
+            //radio3.IsChecked = true ? true : false;
+            //radio1.IsChecked = false;
+            //radio2.IsChecked = false;
+        }
     }
 }
