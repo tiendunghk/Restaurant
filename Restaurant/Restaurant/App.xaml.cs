@@ -19,7 +19,7 @@ namespace Restaurant
             InitializeComponent();
 
             BuildDependencies();
-            MainPage = new AppShell();
+            //MainPage = new AppShell();
 
             for (int i = 1; i < 10; i++)
                 Context.Tables.Add(new Table
@@ -29,7 +29,7 @@ namespace Restaurant
                     Status = (TableStatus)(i % 3)
                 });
 
-            //InitNavigation();
+            InitNavigation();
         }
         void BuildDependencies()
         {
@@ -48,7 +48,7 @@ namespace Restaurant
         void InitNavigation()
         {
             ServiceLocator.Instance.Resolve<Services.Navigation.INavigationService>()
-                .NavigateToAsync<ListFoodManagerViewModel>();
+                .NavigateToAsync<LoginViewModel>();
         }
 
         protected override void OnStart()

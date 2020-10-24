@@ -14,5 +14,8 @@
         <ShellContent Title="List Order">
             <views1:ListOrderView />
         </ShellContent>
+        <ShellContent Title="Kitchen">
+            <views:KitchenListFoodView/>
+        </ShellContent>
     </FlyoutItem>
 </Shell>

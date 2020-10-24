@@ -16,7 +16,15 @@ namespace Restaurant.Services.Navigation
     public class NavigationService : INavigationService
     {
         protected Application CurrentApplication => Application.Current;
+        NavigableElement _navigationRoot;
+        NavigableElement NavigationRoot => _navigationRoot ??= GetNavigationRoot();
+        static NavigableElement GetNavigationRoot()
+        {
+            if (Application.Current.MainPage is Shell shell)
+                return shell;
 
+            return null;
+        }
         public Task InitializeAsync()
         {
             //return NavigateToAsync<LoginViewModel>();
@@ -45,13 +53,14 @@ namespace Restaurant.Services.Navigation
             //    await customNavigation.PushAsync(view);
             //}
             //else
-            if(view is ListFoodManagerView)
+            if(view is LoginView || NavigationRoot==null)
             {
-                CurrentApplication.MainPage = new CustomNavigationPage(view);
+                CurrentApplication.MainPage = view;
+                _navigationRoot = null;
             }
             else
             {
-                await CurrentApplication.MainPage.Navigation.PushAsync(view);
+                await NavigationRoot.Navigation.PushAsync(view);
             }
 
             if (view.BindingContext is ViewModelBase vm)

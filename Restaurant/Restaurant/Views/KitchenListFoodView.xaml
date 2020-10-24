@@ -1,0 +1,52 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage
+    x:Class="Restaurant.Views.KitchenListFoodView"
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    x:Name="Root"
+    Title="Danh sách đang chờ">
+    <ContentPage.Content>
+        <StackLayout BackgroundColor="{x:StaticResource Backgroud}">
+            <ScrollView>
+                <StackLayout Margin="10" BindableLayout.ItemsSource="{Binding ListItems}">
+                    <BindableLayout.ItemTemplate>
+                        <DataTemplate>
+                            <StackLayout>
+                                <StackLayout>
+                                    <Label
+                                        FontAttributes="Bold"
+                                        FontFamily="{x:StaticResource AvoBold}"
+                                        FontSize="15"
+                                        Text="{Binding Header}" />
+                                </StackLayout>
+                                <StackLayout BindableLayout.ItemsSource="{Binding .}">
+                                    <BindableLayout.ItemTemplate>
+                                        <DataTemplate>
+                                            <StackLayout Orientation="Horizontal">
+                                                <Label HorizontalOptions="StartAndExpand" Text="{Binding Name}" />
+                                                <Image
+                                                    Aspect="AspectFill"
+                                                    HeightRequest="50"
+                                                    HorizontalOptions="CenterAndExpand"
+                                                    Source="{Binding DishImage}"
+                                                    WidthRequest="50" />
+                                                <Button
+                                                    BackgroundColor="{x:StaticResource FacebookBlue}"
+                                                    Command="{Binding BindingContext.CallWaiterCommand, Source={x:Reference Root}}"
+                                                    CommandParameter="{Binding Id}"
+                                                    CornerRadius="3"
+                                                    HorizontalOptions="EndAndExpand"
+                                                    Text="Call waiter" />
+                                            </StackLayout>
+                                        </DataTemplate>
+                                    </BindableLayout.ItemTemplate>
+                                </StackLayout>
+                                <BoxView BackgroundColor="Gray" HeightRequest="1" />
+                            </StackLayout>
+                        </DataTemplate>
+                    </BindableLayout.ItemTemplate>
+                </StackLayout>
+            </ScrollView>
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>

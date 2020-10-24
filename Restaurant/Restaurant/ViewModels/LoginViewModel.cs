@@ -5,6 +5,7 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 using System.Threading.Tasks;
+using Xamarin.Forms;
 
 namespace Restaurant.ViewModels
 {
@@ -23,9 +24,9 @@ namespace Restaurant.ViewModels
         {
             return base.OnNavigationAsync(parameters, navigationType);
         }
-        async void Login()
+        void Login()
         {
-            await NavigationService.NavigateToAsync<ListTableViewModel>();
+            Application.Current.MainPage = new AppShell();
         }
         public bool Hide
         {

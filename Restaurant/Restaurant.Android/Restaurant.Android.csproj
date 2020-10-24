@@ -63,9 +63,6 @@
     <PackageReference Include="Syncfusion.Xamarin.Buttons">
       <Version>18.3.0.42</Version>
     </PackageReference>
-    <PackageReference Include="Syncfusion.Xamarin.SfRadialMenu">
-      <Version>18.3.0.42</Version>
-    </PackageReference>
     <PackageReference Include="Syncfusion.Xamarin.SfTabView">
       <Version>18.3.0.40</Version>
     </PackageReference>
@@ -77,6 +74,7 @@
     <Compile Include="Renderers\CustomNavigationPageRenderer.cs" />
     <Compile Include="Resources\Resource.designer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Services\Toast_Android.cs" />
   </ItemGroup>
   <ItemGroup>
     <AndroidAsset Include="Assets\UTMAvo.ttf" />

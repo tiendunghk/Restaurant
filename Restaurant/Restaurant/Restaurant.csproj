@@ -14,7 +14,6 @@
     <PackageReference Include="Acr.UserDialogs" Version="7.1.0.462" />
     <PackageReference Include="Autofac" Version="5.1.0" />
     <PackageReference Include="Syncfusion.Xamarin.Buttons" Version="18.3.0.42" />
-    <PackageReference Include="Syncfusion.Xamarin.SfRadialMenu" Version="18.3.0.42" />
     <PackageReference Include="Syncfusion.Xamarin.SfTabView" Version="18.3.0.40" />
     <PackageReference Include="Xam.Plugin.TabView" Version="1.1.1" />
     <PackageReference Include="Xamarin.Forms" Version="4.8.0.1560" />
@@ -35,6 +34,9 @@
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
     <EmbeddedResource Update="Resources\Styles.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Views\KitchenListFoodView.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
     <EmbeddedResource Update="Views\ListTableView.xaml">
