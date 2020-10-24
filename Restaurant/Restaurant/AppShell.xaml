@@ -6,7 +6,7 @@
     xmlns:manager="clr-namespace:Restaurant.Views.Manager"
     xmlns:viewmodel="clr-namespace:Restaurant.ViewModels"
     xmlns:views="clr-namespace:Restaurant.Views"
-    xmlns:views1="clr-namespace:Restaurant.Views.Order">
+    xmlns:views1="clr-namespace:Restaurant.Views.Order" xmlns:tabs="clr-namespace:Restaurant.Views.Tabs">
 
     <Shell.FlyoutHeader>
         <ContentView BackgroundColor="{x:StaticResource Backgroud}" HeightRequest="180">
@@ -39,11 +39,11 @@
         <ShellContent Title="Kitchen">
             <views:KitchenListFoodView />
         </ShellContent>
-        <ShellContent Title="Quản lý món ăn">
-            <manager:ListFoodManagerView />
-        </ShellContent>
-        <ShellContent Title="Quản lý nhân viên">
-            <manager:ListStaffManagerView />
+        <ShellContent Title="Quản lý">
+            <tabs:ManagerTabView />
         </ShellContent>
     </FlyoutItem>
+    <MenuItem Text="Log out"
+              IconImageSource="ic_logout.png"
+              Command="{Binding LogoutCommand}" />
 </Shell>

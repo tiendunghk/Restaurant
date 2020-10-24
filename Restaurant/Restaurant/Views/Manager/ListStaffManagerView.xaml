@@ -19,7 +19,7 @@
                                     HasShadow="True">
                                     <StackLayout Orientation="Horizontal">
                                         <StackLayout.GestureRecognizers>
-                                            <TapGestureRecognizer Command="{Binding BindingContext.NavigateCommand, Source={x:Reference Root}}" />
+                                            <TapGestureRecognizer Command="{Binding BindingContext.TappedCommand, Source={x:Reference Root}}" CommandParameter="{Binding .}" />
                                         </StackLayout.GestureRecognizers>
                                         <StackLayout HorizontalOptions="StartAndExpand" Orientation="Vertical">
                                             <Label Text="{Binding Name}" />
@@ -37,9 +37,9 @@
                     AbsoluteLayout.LayoutBounds=".9,.5,60,80"
                     AbsoluteLayout.LayoutFlags="PositionProportional"
                     BackgroundColor="Transparent"
+                    Command="{Binding NavigateCommand}"
                     HeightRequest="70"
                     Source="fab.png"
-                    Command="{Binding NavigateCommand}"
                     WidthRequest="70" />
             </AbsoluteLayout>
         </StackLayout>

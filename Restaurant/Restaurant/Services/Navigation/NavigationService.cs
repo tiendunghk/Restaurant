@@ -53,7 +53,7 @@ namespace Restaurant.Services.Navigation
             //    await customNavigation.PushAsync(view);
             //}
             //else
-            if(view is LoginView || NavigationRoot==null)
+            if (view is LoginView || NavigationRoot == null)
             {
                 CurrentApplication.MainPage = view;
                 _navigationRoot = null;
@@ -120,8 +120,9 @@ namespace Restaurant.Services.Navigation
 
                 if (view != null)
                 {
-                    var a=ServiceLocator.Instance.Resolve(viewModelType);
-                    view.BindingContext = ServiceLocator.Instance.Resolve(viewModelType);
+                    var a = ServiceLocator.Instance.Resolve(viewModelType);
+                    if (view.BindingContext == null)
+                        view.BindingContext = ServiceLocator.Instance.Resolve(viewModelType);
                 }
 
                 return view;

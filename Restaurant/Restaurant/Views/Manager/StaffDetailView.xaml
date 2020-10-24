@@ -1,0 +1,40 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage
+    x:Class="Restaurant.Views.Manager.StaffDetailView"
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    Title="Chi tiết nhân viên">
+    <ContentPage.Content>
+        <StackLayout BackgroundColor="{x:StaticResource Backgroud}">
+            <Frame
+                Margin="10"
+                HasShadow="True"
+                Visual="Material">
+                <StackLayout>
+                    <StackLayout Orientation="Horizontal">
+                        <Label HorizontalOptions="StartAndExpand" Text="Tên" />
+                        <Entry HorizontalOptions="FillAndExpand" Text="{Binding Staff.Name}" />
+                    </StackLayout>
+                    <StackLayout Orientation="Horizontal">
+                        <Label HorizontalOptions="StartAndExpand" Text="Role" />
+                        <Entry HorizontalOptions="FillAndExpand" Text="{Binding Staff.Role}" />
+                    </StackLayout>
+                    <StackLayout Orientation="Horizontal">
+                        <Label HorizontalOptions="StartAndExpand" Text="Ngày sinh" />
+                        <Entry HorizontalOptions="EndAndExpand" Text="24/10/2020" />
+                    </StackLayout>
+                </StackLayout>
+            </Frame>
+            <StackLayout HorizontalOptions="Center" Orientation="Horizontal">
+                <Button
+                    BackgroundColor="{x:StaticResource FacebookBlue}"
+                    CornerRadius="3"
+                    Text="Lưu" />
+                <Button
+                    BackgroundColor="{x:StaticResource FacebookBlue}"
+                    CornerRadius="3"
+                    Text="Hủy" />
+            </StackLayout>
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>
