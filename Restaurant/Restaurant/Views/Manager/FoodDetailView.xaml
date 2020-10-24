@@ -14,11 +14,11 @@
                 <StackLayout>
                     <StackLayout Orientation="Horizontal">
                         <Label HorizontalOptions="StartAndExpand" Text="Tên" />
-                        <Entry HorizontalOptions="EndAndExpand" Text="{Binding Obj.Name}" />
+                        <Entry HorizontalOptions="FillAndExpand" Text="{Binding Obj.Name}" />
                     </StackLayout>
                     <StackLayout Orientation="Horizontal">
                         <Label HorizontalOptions="StartAndExpand" Text="Giá" />
-                        <Entry HorizontalOptions="EndAndExpand" Text="{Binding Obj.Price}" />
+                        <Entry HorizontalOptions="FillAndExpand" Text="{Binding Obj.Price}" />
                     </StackLayout>
                     <StackLayout Orientation="Horizontal">
                         <Label HorizontalOptions="StartAndExpand" Text="Loại" />
