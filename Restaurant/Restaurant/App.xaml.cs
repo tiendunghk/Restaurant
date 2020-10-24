@@ -1,5 +1,6 @@
 ﻿using Restaurant.Services.Dialog;
 using Restaurant.ViewModels;
+using Restaurant.ViewModels.Manager;
 using Restaurant.ViewModels.Order;
 using System;
 using Xamarin.Forms;
@@ -35,7 +36,7 @@ namespace Restaurant
         void InitNavigation()
         {
             ServiceLocator.Instance.Resolve<Services.Navigation.INavigationService>()
-                .NavigateToAsync<ListOrderViewModel>();
+                .NavigateToAsync<ListFoodManagerViewModel>();
         }
 
         protected override void OnStart()

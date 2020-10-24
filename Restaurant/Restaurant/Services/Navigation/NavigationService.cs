@@ -1,6 +1,7 @@
 ﻿using Restaurant.Controls;
 using Restaurant.ViewModels.Base;
 using Restaurant.Views;
+using Restaurant.Views.Manager;
 using Restaurant.Views.Order;
 using System;
 using System.Collections.Generic;
@@ -44,7 +45,7 @@ namespace Restaurant.Services.Navigation
             //    await customNavigation.PushAsync(view);
             //}
             //else
-            if(view is ListOrderView)
+            if(view is ListFoodManagerView)
             {
                 CurrentApplication.MainPage = new CustomNavigationPage(view);
             }

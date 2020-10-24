@@ -1,0 +1,50 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage
+    x:Class="Restaurant.Views.Manager.FoodDetailView"
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    x:Name="Root"
+    Title="Chi tiết món ăn">
+    <ContentPage.Content>
+        <StackLayout BackgroundColor="{x:StaticResource Backgroud}">
+            <Frame
+                Margin="10"
+                HasShadow="True"
+                Visual="Material">
+                <StackLayout>
+                    <StackLayout Orientation="Horizontal">
+                        <Label HorizontalOptions="StartAndExpand" Text="Tên" />
+                        <Entry HorizontalOptions="EndAndExpand" Text="{Binding Obj.Name}" />
+                    </StackLayout>
+                    <StackLayout Orientation="Horizontal">
+                        <Label HorizontalOptions="StartAndExpand" Text="Giá" />
+                        <Entry HorizontalOptions="EndAndExpand" Text="{Binding Obj.Price}" />
+                    </StackLayout>
+                    <StackLayout Orientation="Horizontal">
+                        <Label HorizontalOptions="StartAndExpand" Text="Loại" />
+                        <Entry HorizontalOptions="EndAndExpand" Placeholder="Món chính" />
+                    </StackLayout>
+                    <StackLayout Orientation="Horizontal">
+                        <Label HorizontalOptions="StartAndExpand" Text="Hình minh họa" />
+                        <Image
+                            Aspect="AspectFill"
+                            HeightRequest="60"
+                            HorizontalOptions="EndAndExpand"
+                            Source="com_tam"
+                            WidthRequest="60" />
+                    </StackLayout>
+                </StackLayout>
+            </Frame>
+            <StackLayout HorizontalOptions="Center" Orientation="Horizontal">
+                <Button
+                    BackgroundColor="{x:StaticResource FacebookBlue}"
+                    CornerRadius="3"
+                    Text="Xóa" />
+                <Button
+                    BackgroundColor="{x:StaticResource FacebookBlue}"
+                    CornerRadius="3"
+                    Text="Sửa" />
+            </StackLayout>
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>
