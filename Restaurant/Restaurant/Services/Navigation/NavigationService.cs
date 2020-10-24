@@ -70,16 +70,7 @@ namespace Restaurant.Services.Navigation
         }
         public async Task NavigateBackAsync(NavigationParameters parameters)
         {
-            if (CurrentApplication.MainPage is CustomNavigationPage navigationPage)
-            {
-                await navigationPage.PopAsync();
-
-                if (navigationPage.Navigation.NavigationStack.LastOrDefault() is Page view)
-                    if (view.BindingContext is ViewModelBase vm)
-                    {
-                        await vm.OnNavigationAsync(parameters, NavigationType.Back);
-                    }
-            }
+            await NavigationRoot.Navigation.PopAsync(true);
         }
 
         public async Task NavigateBackToMainPageAsync()

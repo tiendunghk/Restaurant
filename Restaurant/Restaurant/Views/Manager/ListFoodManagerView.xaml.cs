@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Restaurant.ViewModels.Manager;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -15,6 +16,7 @@ namespace Restaurant.Views.Manager
         public ListFoodManagerView()
         {
             InitializeComponent();
+            BindingContext = new ListFoodManagerViewModel();
         }
     }
 }

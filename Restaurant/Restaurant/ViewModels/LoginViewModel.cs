@@ -11,6 +11,7 @@ namespace Restaurant.ViewModels
 {
     public class LoginViewModel : ViewModelBase
     {
+        bool _isVisible;
         bool _hide;
         DelegateCommand _loginCommand;
         DelegateCommand _hideImageTapped;
@@ -24,14 +25,22 @@ namespace Restaurant.ViewModels
         {
             return base.OnNavigationAsync(parameters, navigationType);
         }
-        void Login()
+        async void Login()
         {
+            IsVisible = true;
+            await Task.Delay(2000);
+            IsVisible = false;
             Application.Current.MainPage = new AppShell();
         }
         public bool Hide
         {
             get => _hide;
             set => SetProperty(ref _hide, value);
+        }
+        public bool IsVisible
+        {
+            get => _isVisible;
+            set => SetProperty(ref _isVisible, value);
         }
         void Tapped()
         {

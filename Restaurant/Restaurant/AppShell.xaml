@@ -5,8 +5,29 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:viewmodel="clr-namespace:Restaurant.ViewModels"
     xmlns:views="clr-namespace:Restaurant.Views"
-    xmlns:views1="clr-namespace:Restaurant.Views.Order">
+    xmlns:views1="clr-namespace:Restaurant.Views.Order" xmlns:manager="clr-namespace:Restaurant.Views.Manager">
 
+    <Shell.FlyoutHeader>
+        <ContentView BackgroundColor="{x:StaticResource Backgroud}" HeightRequest="180">
+            <Grid>
+                <Image
+                    Margin="20"
+                    BackgroundColor="Transparent"
+                    HeightRequest="80"
+                    HorizontalOptions="Start"
+                    Source="default_avatar"
+                    VerticalOptions="End"
+                    WidthRequest="80" />
+                <StackLayout
+                    Margin="50,20,0,20"
+                    HorizontalOptions="Center"
+                    VerticalOptions="End">
+                    <Label Text="Nguyễn Văn A" />
+                    <Label Text="CEO" />
+                </StackLayout>
+            </Grid>
+        </ContentView>
+    </Shell.FlyoutHeader>
     <FlyoutItem Title="Animals" FlyoutDisplayOptions="AsMultipleItems">
         <ShellContent Title="List Table">
             <views:ListTableView />
@@ -15,7 +36,10 @@
             <views1:ListOrderView />
         </ShellContent>
         <ShellContent Title="Kitchen">
-            <views:KitchenListFoodView/>
+            <views:KitchenListFoodView />
+        </ShellContent>
+        <ShellContent Title="Quản lý món ăn">
+            <manager:ListFoodManagerView/>
         </ShellContent>
     </FlyoutItem>
 </Shell>

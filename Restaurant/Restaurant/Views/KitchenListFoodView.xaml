@@ -7,6 +7,7 @@
     Title="Danh sách đang chờ">
     <ContentPage.Content>
         <StackLayout BackgroundColor="{x:StaticResource Backgroud}">
+            <SearchBar Placeholder="Type here"/>
             <ScrollView>
                 <StackLayout Margin="10" BindableLayout.ItemsSource="{Binding ListItems}">
                     <BindableLayout.ItemTemplate>

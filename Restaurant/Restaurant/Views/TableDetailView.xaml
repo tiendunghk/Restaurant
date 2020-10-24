@@ -101,9 +101,9 @@
                                     BackgroundColor="Transparent"
                                     Command="{Binding FABCommand}"
                                     CommandParameter="{Binding Title, Source={x:Reference Root}}"
-                                    HeightRequest="50"
+                                    HeightRequest="70"
                                     Source="fab.png"
-                                    WidthRequest="50" />
+                                    WidthRequest="70" />
                             </AbsoluteLayout>
                         </StackLayout>
                     </tabView:SfTabItem.Content>
