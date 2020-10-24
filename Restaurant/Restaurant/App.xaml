@@ -12,6 +12,8 @@
             <ResourceDictionary.MergedDictionaries>
                 <resources:Colors />
                 <resources:Styles />
+                <resources:Converters />
+                <resources:FontStyles />
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
     </Application.Resources>

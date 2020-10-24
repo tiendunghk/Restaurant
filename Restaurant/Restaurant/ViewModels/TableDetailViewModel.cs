@@ -10,10 +10,10 @@ namespace Restaurant.ViewModels
 {
     public class TableDetailViewModel : ViewModelBase
     {
-        DelegateCommand _fabCommand;
+        DelegateCommand<string> _fabCommand;
         DelegateCommand<object> _tappedCommand;
         public DelegateCommand<object> TappedCommand => _tappedCommand ??= new DelegateCommand<object>(Tapped);
-        public DelegateCommand FABCommand => _fabCommand ??= new DelegateCommand(FABDoing);
+        public DelegateCommand<string> FABCommand => _fabCommand ??= new DelegateCommand<string>(FABDoing);
         List<string> _tests;
         public List<string> Tests
         {
@@ -37,9 +37,13 @@ namespace Restaurant.ViewModels
         {
 
         }
-        async void FABDoing()
+        async void FABDoing(string title)
         {
-            await DialogService.DisplayActionSheetAsync("Tính năng", "Hủy", null, "Tạo hóa đơn", "Yêu cầu thanh toán");
+            var parameters = new NavigationParameters();
+            parameters.Add("title", title);
+            int a=await DialogService.DisplayActionSheetAsync("Tính năng", "Hủy", null, "Tạo hóa đơn", "Yêu cầu thanh toán");
+            if (a == 0)
+                await NavigationService.NavigateToAsync<TableBillViewModel>(parameters);
         }
     }
 }

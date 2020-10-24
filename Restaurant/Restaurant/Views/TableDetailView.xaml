@@ -48,10 +48,11 @@
                                 VerticalOptions="End" />
                             <AbsoluteLayout>
                                 <ImageButton
-                                    Command="{Binding FABCommand}"
                                     AbsoluteLayout.LayoutBounds=".9,.5,60,80"
                                     AbsoluteLayout.LayoutFlags="PositionProportional"
                                     BackgroundColor="Transparent"
+                                    Command="{Binding FABCommand}"
+                                    CommandParameter="{Binding Title, Source={x:Reference Root}}"
                                     HeightRequest="50"
                                     Source="ic_fab.png"
                                     WidthRequest="50" />

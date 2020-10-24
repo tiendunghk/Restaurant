@@ -1,5 +1,6 @@
 ﻿using Restaurant.Services.Dialog;
 using Restaurant.ViewModels;
+using Restaurant.ViewModels.Order;
 using System;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;

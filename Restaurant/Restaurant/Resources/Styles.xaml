@@ -2,4 +2,15 @@
 <ResourceDictionary
     x:Class="Restaurant.Resources.Styles"
     xmlns="http://xamarin.com/schemas/2014/forms"
-    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" />
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:resources="clr-namespace:Restaurant.Resources">
+    <ResourceDictionary.MergedDictionaries>
+        <resources:FontStyles />
+    </ResourceDictionary.MergedDictionaries>
+    <Style TargetType="Button">
+        <Setter Property="FontFamily" Value="{StaticResource Avo}" />
+    </Style>
+    <Style TargetType="Label">
+        <Setter Property="FontFamily" Value="{StaticResource Avo}" />
+    </Style>
+</ResourceDictionary>

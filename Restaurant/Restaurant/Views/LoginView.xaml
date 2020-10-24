@@ -5,14 +5,14 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     NavigationPage.HasNavigationBar="False">
     <ContentPage.Content>
-        <StackLayout BackgroundColor="WhiteSmoke">
-            <StackLayout Margin="20,20,20,0">
+        <StackLayout BackgroundColor="#E7F6FE">
+            <StackLayout Margin="20,15,20,0">
                 <Image
                     Aspect="AspectFit"
                     HeightRequest="150"
                     Source="logo_login"
                     WidthRequest="150" />
-                <StackLayout Margin="10,90,10,0">
+                <StackLayout Margin="10,70,10,0">
                     <Label
                         Margin="5,0,0,-5"
                         FontAttributes="Bold"
@@ -38,12 +38,16 @@
                             FontSize="20"
                             HeightRequest="50"
                             HorizontalOptions="FillAndExpand"
-                            IsPassword="True"
+                            IsPassword="{Binding Hide}"
                             Placeholder="Password" />
                         <Image
                             HeightRequest="30"
-                            Source="hide_50px"
-                            WidthRequest="30" />
+                            Source="{Binding Hide, Converter={x:StaticResource ShowPassWordConverter}}"
+                            WidthRequest="30">
+                            <Image.GestureRecognizers>
+                                <TapGestureRecognizer Command="{Binding HideImageTapped}" />
+                            </Image.GestureRecognizers>
+                        </Image>
                     </StackLayout>
                 </StackLayout>
                 <Label
@@ -62,6 +66,12 @@
                     TextColor="White"
                     WidthRequest="300" />
             </StackLayout>
+            <Label
+                Margin="35"
+                HorizontalOptions="Center"
+                Opacity=".7"
+                Text="SE109.L11"
+                VerticalOptions="End" />
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>

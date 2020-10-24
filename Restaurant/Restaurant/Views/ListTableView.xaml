@@ -6,7 +6,10 @@
     x:Name="RootPage"
     Title="Danh sách bàn">
     <ContentPage.Content>
-        <CollectionView ItemsLayout="VerticalGrid, 2" ItemsSource="{Binding Tables}" ItemsUpdatingScrollMode="KeepLastItemInView">
+        <CollectionView
+            ItemsLayout="VerticalGrid, 2"
+            ItemsSource="{Binding Tables}"
+            ItemsUpdatingScrollMode="KeepLastItemInView">
             <CollectionView.ItemTemplate>
                 <DataTemplate>
                     <StackLayout>

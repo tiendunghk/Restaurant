@@ -1,0 +1,30 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage
+    x:Class="Restaurant.Views.TableBillView"
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:sys="clr-namespace:System;assembly=mscorlib"
+    Title="{Binding Title}">
+    <ContentPage.Content>
+        <StackLayout>
+            <StackLayout Margin="5">
+                <Label Text="Thời gian:" />
+                <Label Text="{Binding Source={x:Static sys:DateTime.Now}, StringFormat='{0:MM/dd/yyyy h:mm tt}'}" />
+            </StackLayout>
+            <ListView ItemsSource="{Binding ListItems}">
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <ViewCell>
+                            <StackLayout>
+                                <Label Text="{Binding .}" />
+                            </StackLayout>
+                        </ViewCell>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+            <Label Text="Thành tiền : 800000đ" />
+            <Label Text="Người lập: Nguyễn Văn An" />
+            <Button Text="Save" />
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>
