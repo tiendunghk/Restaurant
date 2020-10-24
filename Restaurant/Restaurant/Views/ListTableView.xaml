@@ -7,6 +7,7 @@
     Title="Danh sách bàn">
     <ContentPage.Content>
         <CollectionView
+            BackgroundColor="{x:StaticResource Backgroud}"
             ItemsLayout="VerticalGrid, 2"
             ItemsSource="{Binding Tables}"
             ItemsUpdatingScrollMode="KeepLastItemInView">

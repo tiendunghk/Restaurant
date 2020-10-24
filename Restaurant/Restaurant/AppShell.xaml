@@ -4,12 +4,22 @@
     xmlns="http://xamarin.com/schemas/2014/forms"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:manager="clr-namespace:Restaurant.Views.Manager"
+    xmlns:tabs="clr-namespace:Restaurant.Views.Tabs"
     xmlns:viewmodel="clr-namespace:Restaurant.ViewModels"
     xmlns:views="clr-namespace:Restaurant.Views"
-    xmlns:views1="clr-namespace:Restaurant.Views.Order" xmlns:tabs="clr-namespace:Restaurant.Views.Tabs">
+    xmlns:views1="clr-namespace:Restaurant.Views.Order">
 
     <Shell.FlyoutHeader>
-        <ContentView BackgroundColor="{x:StaticResource Backgroud}" HeightRequest="180">
+        <ContentView HeightRequest="180">
+            <ContentView.Background>
+                <LinearGradientBrush StartPoint="0,0"
+                             EndPoint="1,0">
+                    <GradientStop Color="Azure"
+                          Offset="0.1"/>
+                    <GradientStop Color="Gray"
+                          Offset="0.7"/>
+                </LinearGradientBrush>
+            </ContentView.Background>
             <Grid>
                 <Image
                     Margin="20"
@@ -30,20 +40,24 @@
         </ContentView>
     </Shell.FlyoutHeader>
     <FlyoutItem Title="Animals" FlyoutDisplayOptions="AsMultipleItems">
-        <ShellContent Title="List Table">
+        <ShellContent Title="List Table" Icon="ic_table">
             <views:ListTableView />
         </ShellContent>
-        <ShellContent Title="List Order">
+        <ShellContent Title="List Order" Icon="ic_order">
             <views1:ListOrderView />
         </ShellContent>
-        <ShellContent Title="Kitchen">
+        <ShellContent Title="Kitchen" Icon="ic_kitchen">
             <views:KitchenListFoodView />
         </ShellContent>
-        <ShellContent Title="Quản lý">
+        <ShellContent Title="Quản lý" Icon="ic_manager">
             <tabs:ManagerTabView />
         </ShellContent>
+        <ShellContent Title="Báo cáo" Icon="ic_report">
+            <tabs:ReportTabView />
+        </ShellContent>
     </FlyoutItem>
-    <MenuItem Text="Log out"
-              IconImageSource="ic_logout.png"
-              Command="{Binding LogoutCommand}" />
+    <MenuItem
+        Command="{Binding LogoutCommand}"
+        IconImageSource="ic_logout.png"
+        Text="Log out" />
 </Shell>

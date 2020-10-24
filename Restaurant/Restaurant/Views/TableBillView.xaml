@@ -47,8 +47,8 @@
                     </BindableLayout.ItemTemplate>
                 </StackLayout>
             </ScrollView>
-            <Label Text="Thành tiền : 800000đ" />
-            <Label Text="Người lập: Nguyễn Văn An" />
+            <Label Margin="8" Text="Thành tiền : 800000đ" />
+            <Label Margin="8" Text="Người lập: Nguyễn Văn An" />
             <Button
                 Margin="0,0,0,5"
                 BackgroundColor="{x:StaticResource FacebookBlue}"

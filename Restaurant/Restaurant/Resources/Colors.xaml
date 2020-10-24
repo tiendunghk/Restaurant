@@ -4,8 +4,8 @@
     xmlns="http://xamarin.com/schemas/2014/forms"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml">
     <Color x:Key="FacebookBlue">#2196F3</Color>
-    <Color x:Key="DirtyTable">#dfeb34</Color>
-    <Color x:Key="OccupiedTable">#eb4034</Color>
-    <Color x:Key="CleanTable">#34eb6b</Color>
+    <Color x:Key="DirtyTable">#e9f542</Color>
+    <Color x:Key="OccupiedTable">#f56f42</Color>
+    <Color x:Key="CleanTable">#90f542</Color>
     <Color x:Key="Backgroud">#E7F6FE</Color>
 </ResourceDictionary>

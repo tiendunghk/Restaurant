@@ -21,7 +21,7 @@ namespace Restaurant.Droid
             ToolbarResource = Resource.Layout.Toolbar;
 
             base.OnCreate(savedInstanceState);
-            Forms.SetFlags("RadioButton_Experimental");
+            Forms.SetFlags("RadioButton_Experimental", "Brush_Experimental");
 
             UserDialogs.Init(this);
 
