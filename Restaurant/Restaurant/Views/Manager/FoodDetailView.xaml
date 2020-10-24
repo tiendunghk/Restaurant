@@ -38,10 +38,12 @@
             <StackLayout HorizontalOptions="Center" Orientation="Horizontal">
                 <Button
                     BackgroundColor="{x:StaticResource FacebookBlue}"
+                    Command="{Binding CancelCommand}"
                     CornerRadius="3"
                     Text="Xóa" />
                 <Button
                     BackgroundColor="{x:StaticResource FacebookBlue}"
+                    Command="{Binding SaveCommand}"
                     CornerRadius="3"
                     Text="Sửa" />
             </StackLayout>

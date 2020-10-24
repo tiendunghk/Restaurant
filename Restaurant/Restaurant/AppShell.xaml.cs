@@ -1,5 +1,4 @@
-﻿using Restaurant.ViewModels.Order;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -8,15 +7,15 @@ using System.Threading.Tasks;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
-namespace Restaurant.Views.Order
+namespace Restaurant
 {
     [XamlCompilation(XamlCompilationOptions.Compile)]
-    public partial class ListOrderView : ContentPage
+    public partial class AppShell : Shell
     {
-        public ListOrderView()
+        public AppShell()
         {
             InitializeComponent();
-            //BindingContext = new ListOrderViewModel();
+            AppShell.SetTabBarIsVisible(this, false);
         }
     }
 }

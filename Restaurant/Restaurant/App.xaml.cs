@@ -1,4 +1,5 @@
-﻿using Restaurant.Services.Dialog;
+﻿using Restaurant.Models;
+using Restaurant.Services.Dialog;
 using Restaurant.ViewModels;
 using Restaurant.ViewModels.Manager;
 using Restaurant.ViewModels.Order;
@@ -10,14 +11,25 @@ namespace Restaurant
 {
     public partial class App : Application
     {
+        public static AppContext Context { get; set; } = new AppContext();
+        //app context chứa data load từ api về để set data cho shell
         public App()
         {
             Syncfusion.Licensing.SyncfusionLicenseProvider.RegisterLicense("MzQwMTAxQDMxMzgyZTMzMmUzMG9LN01CMkxyTVdjYnJDS2Q3U05MWUpyVjhPd3JZTWwzTU9nSDl4MzFVc1k9");
             InitializeComponent();
 
             BuildDependencies();
+            MainPage = new AppShell();
 
-            InitNavigation();
+            for (int i = 1; i < 10; i++)
+                Context.Tables.Add(new Table
+                {
+                    Id = Guid.NewGuid().ToString("N"),
+                    TableName = "Bàn số " + i,
+                    Status = (TableStatus)(i % 3)
+                });
+
+            //InitNavigation();
         }
         void BuildDependencies()
         {

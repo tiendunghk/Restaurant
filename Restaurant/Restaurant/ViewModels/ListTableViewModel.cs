@@ -23,12 +23,13 @@ namespace Restaurant.ViewModels
         public DelegateCommand<Table> TableTapped => _tableTapped ??= new DelegateCommand<Table>(Tapped);
         public ListTableViewModel()
         {
-            Tables = new List<Table>();
-            for (int i = 1; i < 20; i++)
-                Tables.Add(new Table { 
-                    Id = Guid.NewGuid().ToString("N"), 
-                    TableName = "Bàn số " + i, 
-                    Status = (TableStatus)(i % 3) });
+            Tables = App.Context.Tables;
+            //Tables = new List<Table>();
+            //for (int i = 1; i < 20; i++)
+            //    Tables.Add(new Table { 
+            //        Id = Guid.NewGuid().ToString("N"), 
+            //        TableName = "Bàn số " + i, 
+            //        Status = (TableStatus)(i % 3) });
         }
         async void Tapped(Table table)
         {

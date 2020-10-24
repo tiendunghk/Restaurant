@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Restaurant.ViewModels;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -15,6 +16,7 @@ namespace Restaurant.Views
         public ListTableView()
         {
             InitializeComponent();
+            BindingContext = new ListTableViewModel();
         }
 
         private void TapGestureRecognizer_Tapped(object sender, EventArgs e)
