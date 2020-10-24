@@ -3,9 +3,10 @@
     x:Class="Restaurant.AppShell"
     xmlns="http://xamarin.com/schemas/2014/forms"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:manager="clr-namespace:Restaurant.Views.Manager"
     xmlns:viewmodel="clr-namespace:Restaurant.ViewModels"
     xmlns:views="clr-namespace:Restaurant.Views"
-    xmlns:views1="clr-namespace:Restaurant.Views.Order" xmlns:manager="clr-namespace:Restaurant.Views.Manager">
+    xmlns:views1="clr-namespace:Restaurant.Views.Order">
 
     <Shell.FlyoutHeader>
         <ContentView BackgroundColor="{x:StaticResource Backgroud}" HeightRequest="180">
@@ -39,7 +40,10 @@
             <views:KitchenListFoodView />
         </ShellContent>
         <ShellContent Title="Quản lý món ăn">
-            <manager:ListFoodManagerView/>
+            <manager:ListFoodManagerView />
+        </ShellContent>
+        <ShellContent Title="Quản lý nhân viên">
+            <manager:ListStaffManagerView />
         </ShellContent>
     </FlyoutItem>
 </Shell>

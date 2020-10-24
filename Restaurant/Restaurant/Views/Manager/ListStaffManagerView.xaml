@@ -1,15 +1,15 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage
-    x:Class="Restaurant.Views.Manager.ListFoodManagerView"
+    x:Class="Restaurant.Views.Manager.ListStaffManagerView"
     xmlns="http://xamarin.com/schemas/2014/forms"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     x:Name="Root"
-    Title="Danh sách món ăn">
+    Title="Quản lý nhân viên">
     <ContentPage.Content>
         <StackLayout BackgroundColor="{x:StaticResource Backgroud}">
-            <SearchBar Placeholder="Nhập món ăn"/>
+            <SearchBar Placeholder="Nhập nhân viên" />
             <ScrollView>
-                <StackLayout BindableLayout.ItemsSource="{Binding ListFoods}">
+                <StackLayout BindableLayout.ItemsSource="{Binding ListStaffs}">
                     <BindableLayout.ItemTemplate>
                         <DataTemplate>
                             <StackLayout Spacing="10">
@@ -19,18 +19,12 @@
                                     HasShadow="True">
                                     <StackLayout Orientation="Horizontal">
                                         <StackLayout.GestureRecognizers>
-                                            <TapGestureRecognizer Command="{Binding BindingContext.NavigateCommand, Source={x:Reference Root}}" CommandParameter="{Binding .}" />
+                                            <TapGestureRecognizer Command="{Binding BindingContext.NavigateCommand, Source={x:Reference Root}}" />
                                         </StackLayout.GestureRecognizers>
                                         <StackLayout HorizontalOptions="StartAndExpand" Orientation="Vertical">
                                             <Label Text="{Binding Name}" />
-                                            <Label Text="{Binding Price}" />
+                                            <Label Text="{Binding Role}" />
                                         </StackLayout>
-                                        <Image
-                                            Aspect="AspectFill"
-                                            HeightRequest="60"
-                                            HorizontalOptions="CenterAndExpand"
-                                            Source="com_tam"
-                                            WidthRequest="60" />
                                     </StackLayout>
                                 </Frame>
                             </StackLayout>
@@ -43,10 +37,10 @@
                     AbsoluteLayout.LayoutBounds=".9,.5,60,80"
                     AbsoluteLayout.LayoutFlags="PositionProportional"
                     BackgroundColor="Transparent"
-                    Command="{Binding AddFoodCommand}"
-                    HeightRequest="50"
+                    HeightRequest="70"
                     Source="fab.png"
-                    WidthRequest="50" />
+                    Command="{Binding NavigateCommand}"
+                    WidthRequest="70" />
             </AbsoluteLayout>
         </StackLayout>
     </ContentPage.Content>
