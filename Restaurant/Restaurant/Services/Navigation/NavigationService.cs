@@ -44,7 +44,7 @@ namespace Restaurant.Services.Navigation
             //    await customNavigation.PushAsync(view);
             //}
             //else
-            if(view is LoginView)
+            if(view is ListOrderView)
             {
                 CurrentApplication.MainPage = new CustomNavigationPage(view);
             }

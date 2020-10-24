@@ -3,7 +3,7 @@ using Restaurant.ViewModels.Base;
 using System;
 using System.Collections.Generic;
 using System.Text;
-
+using Restaurant.Models;
 namespace Restaurant.ViewModels.Order
 {
     public class ListOrderViewModel : ViewModelBase
@@ -16,8 +16,8 @@ namespace Restaurant.ViewModels.Order
             get => _filters;
             set => SetProperty(ref _filters, value);
         }
-        List<int> _listOrders;
-        public List<int> ListOrders
+        List<OrderModel> _listOrders;
+        public List<OrderModel> ListOrders
         {
             get => _listOrders;
             set => SetProperty(ref _listOrders, value);
@@ -29,10 +29,15 @@ namespace Restaurant.ViewModels.Order
             Filters.Add("Cần thanh toán");
             Filters.Add("Chưa thanh toán");
 
-            ListOrders = new List<int>();
+            ListOrders = new List<OrderModel>();
             for (int i = 0; i < 10; i++)
             {
-                ListOrders.Add(i);
+                ListOrders.Add(new OrderModel
+                {
+                    Id = Guid.NewGuid().ToString("N"),
+                    OrderDate = DateTime.Now,
+                    OrderTotalAmount = 800000,
+                });
             }
         }
         async void Tapped(object obj)

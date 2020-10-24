@@ -6,22 +6,32 @@
     x:Name="Root"
     Title="Danh sách order">
     <ContentPage.Content>
-        <StackLayout>
+        <StackLayout BackgroundColor="{x:StaticResource Backgroud}">
             <Picker ItemsSource="{Binding Filters}" />
-            <ListView ItemsSource="{Binding ListOrders}" SelectionMode="None">
-                <ListView.ItemTemplate>
-                    <DataTemplate>
-                        <ViewCell>
+            <ScrollView>
+                <StackLayout BindableLayout.ItemsSource="{Binding ListOrders}">
+                    <BindableLayout.ItemTemplate>
+                        <DataTemplate>
                             <StackLayout>
                                 <StackLayout.GestureRecognizers>
                                     <TapGestureRecognizer Command="{Binding BindingContext.ItemTappedCommand, Source={x:Reference Root}}" CommandParameter="{Binding .}" />
                                 </StackLayout.GestureRecognizers>
-                                <Label Text="{Binding .}" />
+                                <StackLayout Orientation="Horizontal" Spacing="10">
+                                    <Label
+                                        Margin="5"
+                                        HorizontalOptions="StartAndExpand"
+                                        Text="{Binding OrderDate, StringFormat='{0:MM/dd/yyyy h:mm tt}'}" />
+                                    <Label
+                                        Margin="5"
+                                        Text="{Binding OrderTotalAmount}"
+                                        VerticalOptions="EndAndExpand" />
+                                </StackLayout>
+                                <BoxView BackgroundColor="Gray" HeightRequest="1" />
                             </StackLayout>
-                        </ViewCell>
-                    </DataTemplate>
-                </ListView.ItemTemplate>
-            </ListView>
+                        </DataTemplate>
+                    </BindableLayout.ItemTemplate>
+                </StackLayout>
+            </ScrollView>
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>

@@ -6,25 +6,55 @@
     xmlns:sys="clr-namespace:System;assembly=mscorlib"
     Title="{Binding Title}">
     <ContentPage.Content>
-        <StackLayout>
+        <StackLayout BackgroundColor="{x:StaticResource Backgroud}">
             <StackLayout Margin="5">
                 <Label Text="Thời gian:" />
                 <Label Text="{Binding Source={x:Static sys:DateTime.Now}, StringFormat='{0:MM/dd/yyyy h:mm tt}'}" />
             </StackLayout>
-            <ListView ItemsSource="{Binding ListItems}">
-                <ListView.ItemTemplate>
-                    <DataTemplate>
-                        <ViewCell>
-                            <StackLayout>
-                                <Label Text="{Binding .}" />
+            <ScrollView>
+                <StackLayout BindableLayout.ItemsSource="{Binding ListItems}">
+                    <BindableLayout.ItemTemplate>
+                        <DataTemplate>
+                            <StackLayout Spacing="10">
+                                <Frame
+                                    Margin="9,3,9,3"
+                                    CornerRadius="5"
+                                    HasShadow="True">
+                                    <StackLayout Orientation="Horizontal">
+                                        <StackLayout HorizontalOptions="StartAndExpand" Orientation="Vertical">
+                                            <Label Text="{Binding Name}" />
+                                            <Label Text="{Binding Price}" />
+                                        </StackLayout>
+                                        <Image
+                                            Aspect="AspectFill"
+                                            HeightRequest="60"
+                                            HorizontalOptions="CenterAndExpand"
+                                            Source="com_tam"
+                                            WidthRequest="60" />
+
+                                        <Label HorizontalOptions="EndAndExpand">
+                                            <Label.FormattedText>
+                                                <FormattedString>
+                                                    <Span Text="Số lượng: " />
+                                                    <Span Text="5" />
+                                                </FormattedString>
+                                            </Label.FormattedText>
+                                        </Label>
+                                    </StackLayout>
+                                </Frame>
                             </StackLayout>
-                        </ViewCell>
-                    </DataTemplate>
-                </ListView.ItemTemplate>
-            </ListView>
+                        </DataTemplate>
+                    </BindableLayout.ItemTemplate>
+                </StackLayout>
+            </ScrollView>
             <Label Text="Thành tiền : 800000đ" />
             <Label Text="Người lập: Nguyễn Văn An" />
-            <Button Text="Save" />
+            <Button
+                Margin="0,0,0,5"
+                BackgroundColor="{x:StaticResource FacebookBlue}"
+                CornerRadius="3"
+                HorizontalOptions="CenterAndExpand"
+                Text="Save" />
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>

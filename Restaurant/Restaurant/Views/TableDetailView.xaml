@@ -48,9 +48,6 @@
                                     <BindableLayout.ItemTemplate>
                                         <DataTemplate>
                                             <StackLayout Spacing="10">
-                                                <StackLayout.GestureRecognizers>
-                                                    <TapGestureRecognizer Command="{Binding BindingContext.TappedCommand, Source={x:Reference Root}}" CommandParameter="{Binding .}" />
-                                                </StackLayout.GestureRecognizers>
                                                 <Frame
                                                     Margin="9,3,9,3"
                                                     CornerRadius="5"
