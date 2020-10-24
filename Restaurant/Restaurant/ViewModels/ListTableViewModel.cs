@@ -1,4 +1,5 @@
-﻿using Restaurant.Mvvm.Command;
+﻿using Restaurant.Models;
+using Restaurant.Mvvm.Command;
 using Restaurant.Services.Navigation;
 using Restaurant.ViewModels.Base;
 using System;
@@ -10,26 +11,29 @@ using Xamarin.Forms.PlatformConfiguration.TizenSpecific;
 
 namespace Restaurant.ViewModels
 {
-    public class ListTableViewModel: ViewModelBase
+    public class ListTableViewModel : ViewModelBase
     {
-        ObservableCollection<int> _tables;
-        DelegateCommand<object> _tableTapped;
-        public ObservableCollection<int> Tables
+        List<Table> _tables;
+        DelegateCommand<Table> _tableTapped;
+        public List<Table> Tables
         {
             get => _tables;
             set => SetProperty(ref _tables, value);
         }
-        public DelegateCommand<object> TableTapped => _tableTapped ??= new DelegateCommand<object>(Tapped);
+        public DelegateCommand<Table> TableTapped => _tableTapped ??= new DelegateCommand<Table>(Tapped);
         public ListTableViewModel()
         {
-            Tables = new ObservableCollection<int>();
+            Tables = new List<Table>();
             for (int i = 1; i < 20; i++)
-                Tables.Add(i);
+                Tables.Add(new Table { 
+                    Id = Guid.NewGuid().ToString("N"), 
+                    TableName = "Bàn số " + i, 
+                    Status = (TableStatus)(i % 3) });
         }
-        async void Tapped(object table)
+        async void Tapped(Table table)
         {
             var parameters = new NavigationParameters();
-            parameters.Add("title", "Bàn số " + table.ToString());
+            parameters.Add("title", table.TableName);
             await NavigationService.NavigateToAsync<TableDetailViewModel>(parameters);
         }
     }

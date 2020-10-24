@@ -18,7 +18,7 @@
                         </StackLayout.GestureRecognizers>
                         <Frame
                             Margin="5,5,5,5"
-                            BackgroundColor="Green"
+                            BackgroundColor="{Binding Status, Converter={x:StaticResource TableColorConverter}}"
                             CornerRadius="5"
                             HasShadow="True"
                             HeightRequest="80"
@@ -27,8 +27,7 @@
                                 <Label>
                                     <Label.FormattedText>
                                         <FormattedString>
-                                            <Span Text="Bàn số " />
-                                            <Span Text="{Binding .}" />
+                                            <Span Text="{Binding TableName}" />
                                         </FormattedString>
                                     </Label.FormattedText>
                                 </Label>

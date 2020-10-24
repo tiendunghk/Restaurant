@@ -1,4 +1,5 @@
-﻿using Restaurant.ViewModels.Base;
+﻿using Restaurant.Controls;
+using Restaurant.ViewModels.Base;
 using Restaurant.Views;
 using Restaurant.Views.Order;
 using System;
@@ -45,7 +46,7 @@ namespace Restaurant.Services.Navigation
             //else
             if(view is LoginView)
             {
-                CurrentApplication.MainPage = new NavigationPage(view);
+                CurrentApplication.MainPage = new CustomNavigationPage(view);
             }
             else
             {
@@ -59,7 +60,7 @@ namespace Restaurant.Services.Navigation
         }
         public async Task NavigateBackAsync(NavigationParameters parameters)
         {
-            if (CurrentApplication.MainPage is NavigationPage navigationPage)
+            if (CurrentApplication.MainPage is CustomNavigationPage navigationPage)
             {
                 await navigationPage.PopAsync();
 
@@ -73,7 +74,7 @@ namespace Restaurant.Services.Navigation
 
         public async Task NavigateBackToMainPageAsync()
         {
-            if (!(CurrentApplication.MainPage is NavigationPage))
+            if (!(CurrentApplication.MainPage is CustomNavigationPage))
                 return;
 
             for (var i = CurrentApplication.MainPage.Navigation.NavigationStack.Count - 2; i > 0; i--)

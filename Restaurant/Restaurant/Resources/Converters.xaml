@@ -6,4 +6,5 @@
     xmlns:converters="clr-namespace:Restaurant.Converters">
 
     <converters:ShowPassWordConverter x:Key="ShowPassWordConverter" />
+    <converters:TableColorConverter x:Key="TableColorConverter" />
 </ResourceDictionary>
