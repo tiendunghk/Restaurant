@@ -19,5 +19,9 @@ namespace Restaurant.Services.Dialog
                     return i;
             return -1;
         }
+        public Task ShowAlertAsync(string message, string title, string buttonLabel)
+        {
+            return UserDialogs.Instance.AlertAsync(message, title, buttonLabel);
+        }
     }
 }

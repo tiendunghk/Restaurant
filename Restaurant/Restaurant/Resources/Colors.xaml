@@ -7,4 +7,5 @@
     <Color x:Key="DirtyTable">#dfeb34</Color>
     <Color x:Key="OccupiedTable">#eb4034</Color>
     <Color x:Key="CleanTable">#34eb6b</Color>
+    <Color x:Key="Backgroud">#E7F6FE</Color>
 </ResourceDictionary>

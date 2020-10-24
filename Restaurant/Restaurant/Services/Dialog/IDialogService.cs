@@ -8,5 +8,6 @@ namespace Restaurant.Services.Dialog
     public interface IDialogService
     {
         Task<int> DisplayActionSheetAsync(string title, string cancelButton, string destroyButton, params string[] otherButtons);
+        Task ShowAlertAsync(string message, string title, string buttonLabel);
     }
 }
