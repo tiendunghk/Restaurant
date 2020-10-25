@@ -1,9 +1,12 @@
 ﻿using Restaurant.Models;
 using Restaurant.Mvvm.Command;
+using Restaurant.Services.Navigation;
 using Restaurant.ViewModels.Base;
 using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Threading.Tasks;
+using Xamarin.Forms;
 
 namespace Restaurant.ViewModels
 {
@@ -20,6 +23,12 @@ namespace Restaurant.ViewModels
         public KitchenListFoodViewModel()
         {
             SetData();
+            MessagingCenter.Subscribe<string>("abc", "LoadDataKitchen", async (a) =>
+            {
+                IsLoadingData = true;
+                await Task.Delay(2000);
+                IsLoadingData = false;
+            });
         }
         void SetData()
         {
@@ -61,13 +70,17 @@ namespace Restaurant.ViewModels
                     if (e.Id == str)
                     {
                         ele.Remove(e);
-                        if (ele==null)
+                        if (ele == null)
                             ListItems.Remove(ele);
                         DialogService.ShowToast("Đã thông báo cho waiter!");
                         return;
                     }
                 }
             }
+        }
+        public override Task OnNavigationAsync(NavigationParameters parameters, NavigationType navigationType)
+        {
+            return base.OnNavigationAsync(parameters, navigationType);
         }
     }
 }

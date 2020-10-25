@@ -30,4 +30,7 @@
   <style name="Toolbar.TitleText" parent="TextAppearance.Widget.AppCompat.Toolbar.Title">
     <item name="android:fontFamily">@font/utmavo</item>
   </style>
+  <style name="MineCustomTabText" parent="TextAppearance.Design.Tab">
+    <item name="android:fontFamily">@font/utmavo</item>
+  </style>
 </resources>

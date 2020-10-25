@@ -7,8 +7,13 @@
     Title="Danh sách order">
     <ContentPage.Content>
         <StackLayout BackgroundColor="{x:StaticResource Backgroud}">
+            <ActivityIndicator
+                HeightRequest="35"
+                IsRunning="{Binding IsLoadingData}"
+                IsVisible="{Binding IsLoadingData}"
+                WidthRequest="35" />
             <Picker ItemsSource="{Binding Filters}" />
-            <ScrollView>
+            <ScrollView IsVisible="{Binding IsLoadingData, Converter={x:StaticResource InverseBoolConverter}}">
                 <StackLayout BindableLayout.ItemsSource="{Binding ListOrders}">
                     <BindableLayout.ItemTemplate>
                         <DataTemplate>

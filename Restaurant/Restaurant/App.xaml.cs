@@ -28,7 +28,6 @@ namespace Restaurant
                     TableName = "Bàn số " + i,
                     Status = (TableStatus)(i % 3)
                 });
-
             InitNavigation();
         }
         void BuildDependencies()

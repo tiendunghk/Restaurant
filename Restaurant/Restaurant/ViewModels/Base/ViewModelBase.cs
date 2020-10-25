@@ -10,6 +10,7 @@ namespace Restaurant.ViewModels.Base
 {
     public class ViewModelBase : Mvvm.BindableBase
     {
+        private bool _isLoadingData;
         private string _title;
         private bool _isBusy;
 
@@ -36,6 +37,11 @@ namespace Restaurant.ViewModels.Base
         }
 
         public bool IsNotBusy => !IsBusy;
+        public bool IsLoadingData
+        {
+            get => _isLoadingData;
+            set => SetProperty(ref _isLoadingData, value);
+        }
 
         public virtual Task OnNavigationAsync(NavigationParameters parameters, NavigationType navigationType)
         {

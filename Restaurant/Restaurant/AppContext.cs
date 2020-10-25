@@ -5,8 +5,9 @@ using System.Text;
 
 namespace Restaurant
 {
-    public class AppContext
+    public class AppContext : Restaurant.Mvvm.BindableBase
     {
-        public List<Table> Tables=new List<Table>();
+        public List<Table> Tables = new List<Table>();
+        public int KitchenClickCount = 0;
     }
 }

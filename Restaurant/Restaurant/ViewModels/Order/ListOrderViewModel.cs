@@ -4,6 +4,9 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 using Restaurant.Models;
+using Xamarin.Forms;
+using System.Threading.Tasks;
+
 namespace Restaurant.ViewModels.Order
 {
     public class ListOrderViewModel : ViewModelBase
@@ -39,6 +42,12 @@ namespace Restaurant.ViewModels.Order
                     OrderTotalAmount = 800000,
                 });
             }
+            MessagingCenter.Subscribe<string>("abc", "LoadDataOrder", async (a) =>
+            {
+                IsLoadingData = true;
+                await Task.Delay(2000);
+                IsLoadingData = false;
+            });
         }
         async void Tapped(object obj)
         {

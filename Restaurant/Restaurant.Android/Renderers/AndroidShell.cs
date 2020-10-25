@@ -29,87 +29,38 @@ namespace Restaurant.Droid.Renderers
         }
         protected override IShellBottomNavViewAppearanceTracker CreateBottomNavViewAppearanceTracker(ShellItem shellItem)
         {
-            return new MyBottomNavigationView(this);
+            return new CustomBottomNavAppearance();
         }
     }
 
-    internal class MyBottomNavigationView : IShellBottomNavViewAppearanceTracker
+    public class CustomBottomNavAppearance : IShellBottomNavViewAppearanceTracker
     {
-        private AndroidShell androidShell;
-
-        public MyBottomNavigationView(AndroidShell androidShell)
-        {
-            this.androidShell = androidShell;
-        }
-
         public void Dispose()
         {
-            
+
         }
 
         public void ResetAppearance(BottomNavigationView bottomView)
+        {
+
+        }
+
+
+        public void SetAppearance(BottomNavigationView bottomView, IShellAppearanceElement appearance)
         {
             IMenu menu = bottomView.Menu;
             for (int i = 0; i < bottomView.Menu.Size(); i++)
             {
                 IMenuItem menuItem = menu.GetItem(i);
                 var title = menuItem.TitleFormatted;
-                Typeface typeface = Typeface.CreateFromAsset(MainActivity.Instance.Assets, "UTMAvo.ttf");
                 SpannableStringBuilder sb = new SpannableStringBuilder(title);
 
-                sb.SetSpan(new CustomTypefaceSpan("", typeface), 0, sb.Length(), SpanTypes.InclusiveInclusive);
+                int a = sb.Length();
+
+                sb.SetSpan(new AbsoluteSizeSpan(20, true), 0, a, SpanTypes.ExclusiveExclusive);
+
                 menuItem.SetTitle(sb);
             }
-        }
-
-        public void SetAppearance(BottomNavigationView bottomView, IShellAppearanceElement appearance)
-        {
-            
-        }
-    }
-
-    internal class CustomTypefaceSpan : TypefaceSpan
-    {
-        private Typeface typeface;
-
-        public CustomTypefaceSpan(string family, Typeface typeface):base(family)
-        {
-            this.typeface = typeface;
-        }
-        public override void UpdateDrawState(TextPaint ds)
-        {
-            applyCustomTypeFace(ds, typeface);
-
-        }
-        public override void UpdateMeasureState(TextPaint paint)
-        {
-            applyCustomTypeFace(paint, typeface);
-        }
-        private static void applyCustomTypeFace(Paint paint, Typeface tf)
-        {
-            TypefaceStyle oldStyle;
-            Typeface old = paint.Typeface;
-            if (old == null)
-            {
-                oldStyle = 0;
-            }
-            else
-            {
-                oldStyle = old.Style;
-            }
-
-            TypefaceStyle fake = oldStyle & ~tf.Style;
-            if ((fake & TypefaceStyle.Bold) != 0)
-            {
-                paint.FakeBoldText = true;
-            }
-
-            if ((fake & TypefaceStyle.Italic) != 0)
-            {
-                paint.TextSkewX = -0.25f;
-            }
-
-            paint.SetTypeface(tf);
         }
     }
 }

@@ -7,8 +7,13 @@
     Title="Danh sách đang chờ">
     <ContentPage.Content>
         <StackLayout BackgroundColor="{x:StaticResource Backgroud}">
+            <ActivityIndicator
+                HeightRequest="35"
+                IsRunning="{Binding IsLoadingData}"
+                IsVisible="{Binding IsLoadingData}"
+                WidthRequest="35" />
             <SearchBar Placeholder="Type here" />
-            <ScrollView>
+            <ScrollView IsVisible="{Binding IsLoadingData, Converter={x:StaticResource InverseBoolConverter}}">
                 <StackLayout Margin="10" BindableLayout.ItemsSource="{Binding ListItems}">
                     <BindableLayout.ItemTemplate>
                         <DataTemplate>

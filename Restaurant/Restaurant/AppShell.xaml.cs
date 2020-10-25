@@ -1,4 +1,5 @@
 ﻿using Restaurant.Mvvm.Command;
+using Restaurant.ViewModels;
 using Restaurant.Views;
 using System;
 using System.Collections.Generic;
@@ -25,6 +26,23 @@ namespace Restaurant
         void Logout()
         {
             Application.Current.MainPage = new LoginView();
+        }
+        protected override async void OnNavigating(ShellNavigatingEventArgs args)
+        {
+            //call api to load data here
+            base.OnNavigating(args);
+            if (args.Target.Location.OriginalString.Contains("4"))
+            {
+                //order
+                MessagingCenter.Send("abc", "LoadDataOrder");
+            }
+            if (args.Target.Location.OriginalString.Contains("6"))
+            {
+                //kitchen
+                App.Context.KitchenClickCount++;
+                if (App.Context.KitchenClickCount <= 1)
+                    MessagingCenter.Send("abc", "LoadDataKitchen");
+            }
         }
     }
 }

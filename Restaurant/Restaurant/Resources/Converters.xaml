@@ -7,4 +7,5 @@
 
     <converters:ShowPassWordConverter x:Key="ShowPassWordConverter" />
     <converters:TableColorConverter x:Key="TableColorConverter" />
+    <converters:InverseBoolConverter x:Key="InverseBoolConverter" />
 </ResourceDictionary>

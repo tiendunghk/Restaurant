@@ -16,7 +16,7 @@ namespace Restaurant.Views
         public KitchenListFoodView()
         {
             InitializeComponent();
-            BindingContext = new KitchenListFoodViewModel();
+            BindingContext = ServiceLocator.Instance.Resolve<Restaurant.ViewModels.KitchenListFoodViewModel>();
         }
     }
 }

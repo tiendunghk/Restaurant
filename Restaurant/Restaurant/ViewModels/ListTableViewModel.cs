@@ -7,6 +7,7 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Text;
 using System.Threading;
+using Xamarin.Forms;
 using Xamarin.Forms.PlatformConfiguration.TizenSpecific;
 
 namespace Restaurant.ViewModels
@@ -30,6 +31,7 @@ namespace Restaurant.ViewModels
             //        Id = Guid.NewGuid().ToString("N"), 
             //        TableName = "Bàn số " + i, 
             //        Status = (TableStatus)(i % 3) });
+            
         }
         async void Tapped(Table table)
         {
