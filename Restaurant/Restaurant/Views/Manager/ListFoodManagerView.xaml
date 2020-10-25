@@ -7,7 +7,7 @@
     Title="Danh sách món ăn">
     <ContentPage.Content>
         <StackLayout BackgroundColor="{x:StaticResource Backgroud}">
-            <SearchBar Placeholder="Nhập món ăn"/>
+            <SearchBar Placeholder="Nhập món ăn" />
             <ScrollView>
                 <StackLayout BindableLayout.ItemsSource="{Binding ListFoods}">
                     <BindableLayout.ItemTemplate>

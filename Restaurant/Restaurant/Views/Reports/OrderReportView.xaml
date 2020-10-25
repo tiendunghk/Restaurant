@@ -1,12 +1,14 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
-<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
-             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="Restaurant.Views.Reports.OrderReportView">
+<ContentPage
+    x:Class="Restaurant.Views.Reports.OrderReportView"
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml">
     <ContentPage.Content>
         <StackLayout BackgroundColor="{x:StaticResource Backgroud}">
-            <Label Text="Order Report View"
-                VerticalOptions="CenterAndExpand" 
-                HorizontalOptions="CenterAndExpand" />
+            <Label
+                HorizontalOptions="CenterAndExpand"
+                Text="Order Report View"
+                VerticalOptions="CenterAndExpand" />
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>

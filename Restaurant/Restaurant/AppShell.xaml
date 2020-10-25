@@ -12,12 +12,9 @@
     <Shell.FlyoutHeader>
         <ContentView HeightRequest="180">
             <ContentView.Background>
-                <LinearGradientBrush StartPoint="0,0"
-                             EndPoint="1,0">
-                    <GradientStop Color="Azure"
-                          Offset="0.1"/>
-                    <GradientStop Color="Gray"
-                          Offset="0.7"/>
+                <LinearGradientBrush StartPoint="0,0" EndPoint="1,0">
+                    <GradientStop Offset="0.1" Color="Azure" />
+                    <GradientStop Offset="0.7" Color="Gray" />
                 </LinearGradientBrush>
             </ContentView.Background>
             <Grid>
