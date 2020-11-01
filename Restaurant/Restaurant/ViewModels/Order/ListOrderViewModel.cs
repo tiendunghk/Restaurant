@@ -86,7 +86,7 @@ namespace Restaurant.ViewModels.Order
             }
             await NavigationService.NavigateToAsync<OrderDetailViewModel>(new NavigationParameters
             {
-                { "listorderdetails",orderDetailUIs },
+                {"listorderdetails",orderDetailUIs },
                 {"tongtien",obj.OrderTotalAmount },
                 {"orderstatus",obj.Status }
             });

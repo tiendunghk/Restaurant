@@ -15,6 +15,7 @@ namespace Restaurant.Views
         public TableDetailView()
         {
             InitializeComponent();
+            MessagingCenter.Subscribe<string>("changed", "switchtab", (a) => tabView.SelectedIndex = 2);
         }
 
         private void TapGestureRecognizer_Tapped(object sender, EventArgs e)

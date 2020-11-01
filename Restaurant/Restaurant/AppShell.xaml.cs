@@ -28,17 +28,28 @@ namespace Restaurant
         {
             var answer = await ServiceLocator.Instance.Resolve<IDialogService>().ShowConfirmDialog("Warning", "Bạn có chắc chắn muốn thoát ứng dụng?", "OK", "Cancel");
             if (answer)
+            {
                 Application.Current.MainPage = new LoginView();
+            }    
+                
         }
         protected override async void OnNavigating(ShellNavigatingEventArgs args)
         {
             //call api to load data here
             //base.OnNavigating(args);
+            if (args.Target.Location.OriginalString.Contains("2"))
+            {
+                //order
+                App.Context.TableClickCount++;
+                if (App.Context.TableClickCount <= 1)
+                    MessagingCenter.Send("abc", "LoadDataTable");
+            }
             if (args.Target.Location.OriginalString.Contains("4"))
             {
                 //order
-                MessagingCenter.Send("abc", "LoadDataOrder");
-                return;
+                App.Context.OrderClickCount++;
+                if (App.Context.OrderClickCount <= 1)
+                    MessagingCenter.Send("abc", "LoadDataOrder");
             }
             if (args.Target.Location.OriginalString.Contains("6"))
             {

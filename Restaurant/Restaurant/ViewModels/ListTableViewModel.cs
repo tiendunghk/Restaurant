@@ -7,6 +7,7 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Text;
 using System.Threading;
+using System.Threading.Tasks;
 using Xamarin.Forms;
 using Xamarin.Forms.PlatformConfiguration.TizenSpecific;
 
@@ -33,12 +34,18 @@ namespace Restaurant.ViewModels
                     TableName = "Bàn số " + i,
                     Status = (TableStatus)(i % 3)
                 });
-
+            MessagingCenter.Subscribe<string>("abc", "LoadDataTable", async (a) =>
+            {
+                IsLoadingData = true;
+                await Task.Delay(2000);
+                IsLoadingData = false;
+            });
         }
         async void Tapped(Table table)
         {
             var parameters = new NavigationParameters();
             parameters.Add("title", table.TableName);
+            parameters.Add("tableId", table.Id);
             await NavigationService.NavigateToAsync<TableDetailViewModel>(parameters);
         }
     }

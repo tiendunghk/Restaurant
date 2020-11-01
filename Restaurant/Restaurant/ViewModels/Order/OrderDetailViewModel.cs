@@ -19,7 +19,8 @@ namespace Restaurant.ViewModels.Order
             set => SetProperty(ref _orderStatus, value);
         }
         DelegateCommand _purchaseCommand;
-        public DelegateCommand PurchaseCommand => _purchaseCommand ??= new DelegateCommand(Purchase, () => OrderStatus >= 1);
+        public DelegateCommand PurchaseCommand => _purchaseCommand ??= new DelegateCommand(Purchase, () =>
+        OrderStatus >= 1).ObservesProperty(() => OrderStatus);
         public OrderDetailViewModel()
         {
 
@@ -45,7 +46,7 @@ namespace Restaurant.ViewModels.Order
             get => _orderDetailUIs;
             set => SetProperty(ref _orderDetailUIs, value);
         }
-        
+
         public override Task OnNavigationAsync(NavigationParameters parameters, NavigationType navigationType)
         {
             parameters.TryGetValue("listorderdetails", out var orderDetailUIs);

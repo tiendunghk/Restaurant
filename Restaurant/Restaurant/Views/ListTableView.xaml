@@ -6,37 +6,44 @@
     x:Name="RootPage"
     Title="Danh sách bàn">
     <ContentPage.Content>
-        <CollectionView
-            BackgroundColor="{x:StaticResource Backgroud}"
-            ItemsLayout="VerticalGrid, 2"
-            ItemsSource="{Binding Tables}"
-            ItemsUpdatingScrollMode="KeepLastItemInView">
-            <CollectionView.ItemTemplate>
-                <DataTemplate>
-                    <StackLayout>
-                        <StackLayout.GestureRecognizers>
-                            <TapGestureRecognizer Command="{Binding BindingContext.TableTapped, Source={x:Reference RootPage}}" CommandParameter="{Binding .}" />
-                        </StackLayout.GestureRecognizers>
-                        <Frame
-                            Margin="5,5,5,5"
-                            BackgroundColor="{Binding Status, Converter={x:StaticResource TableColorConverter}}"
-                            CornerRadius="5"
-                            HasShadow="True"
-                            HeightRequest="80"
-                            WidthRequest="80">
-                            <StackLayout>
-                                <Label>
-                                    <Label.FormattedText>
-                                        <FormattedString>
-                                            <Span Text="{Binding TableName}" />
-                                        </FormattedString>
-                                    </Label.FormattedText>
-                                </Label>
-                            </StackLayout>
-                        </Frame>
-                    </StackLayout>
-                </DataTemplate>
-            </CollectionView.ItemTemplate>
-        </CollectionView>
+        <StackLayout BackgroundColor="{x:StaticResource Backgroud}">
+            <ActivityIndicator
+                HeightRequest="35"
+                IsRunning="{Binding IsLoadingData}"
+                IsVisible="{Binding IsLoadingData}"
+                WidthRequest="35" />
+            <CollectionView
+                IsVisible="{Binding IsLoadingData, Converter={x:StaticResource InverseBoolConverter}}"
+                ItemsLayout="VerticalGrid, 2"
+                ItemsSource="{Binding Tables}"
+                ItemsUpdatingScrollMode="KeepLastItemInView">
+                <CollectionView.ItemTemplate>
+                    <DataTemplate>
+                        <StackLayout>
+                            <StackLayout.GestureRecognizers>
+                                <TapGestureRecognizer Command="{Binding BindingContext.TableTapped, Source={x:Reference RootPage}}" CommandParameter="{Binding .}" />
+                            </StackLayout.GestureRecognizers>
+                            <Frame
+                                Margin="5,5,5,5"
+                                BackgroundColor="{Binding Status, Converter={x:StaticResource TableColorConverter}}"
+                                CornerRadius="5"
+                                HasShadow="True"
+                                HeightRequest="80"
+                                WidthRequest="80">
+                                <StackLayout>
+                                    <Label>
+                                        <Label.FormattedText>
+                                            <FormattedString>
+                                                <Span Text="{Binding TableName}" />
+                                            </FormattedString>
+                                        </Label.FormattedText>
+                                    </Label>
+                                </StackLayout>
+                            </Frame>
+                        </StackLayout>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
+        </StackLayout>
     </ContentPage.Content>
 </ContentPage>

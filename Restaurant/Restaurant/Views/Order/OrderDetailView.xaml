@@ -37,7 +37,7 @@
                     </BindableLayout.ItemTemplate>
                 </StackLayout>
             </ScrollView>
-            <Label Margin="5">
+            <Label Margin="15">
                 <Label.FormattedText>
                     <FormattedString>
                         <Span Text="Tổng tiền: " />

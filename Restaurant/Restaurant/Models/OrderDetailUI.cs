@@ -16,5 +16,6 @@ namespace Restaurant.Models
         public OrderDetailStatus Status { get => _status; set => SetProperty(ref _status, value); }
         public Dish Dish { get; set; }
         OrderDetailStatus _status;
+        public string TableId { get; set; }
     }
 }
