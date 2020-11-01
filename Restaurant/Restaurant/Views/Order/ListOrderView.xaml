@@ -12,26 +12,29 @@
                 IsRunning="{Binding IsLoadingData}"
                 IsVisible="{Binding IsLoadingData}"
                 WidthRequest="35" />
-            <Picker ItemsSource="{Binding Filters}" />
-            <ScrollView IsVisible="{Binding IsLoadingData, Converter={x:StaticResource InverseBoolConverter}}">
+            <Picker ItemsSource="{Binding Filters}" SelectedIndex="{Binding SelectedIndex}" />
+            <ScrollView Padding="8" IsVisible="{Binding IsLoadingData, Converter={x:StaticResource InverseBoolConverter}}">
                 <StackLayout BindableLayout.ItemsSource="{Binding ListOrders}">
                     <BindableLayout.ItemTemplate>
                         <DataTemplate>
-                            <StackLayout>
+                            <StackLayout Spacing="5">
                                 <StackLayout.GestureRecognizers>
                                     <TapGestureRecognizer Command="{Binding BindingContext.ItemTappedCommand, Source={x:Reference Root}}" CommandParameter="{Binding .}" />
                                 </StackLayout.GestureRecognizers>
-                                <StackLayout Orientation="Horizontal" Spacing="10">
-                                    <Label
-                                        Margin="5"
-                                        HorizontalOptions="StartAndExpand"
-                                        Text="{Binding OrderDate, StringFormat='{0:MM/dd/yyyy h:mm tt}'}" />
-                                    <Label
-                                        Margin="5"
-                                        Text="{Binding OrderTotalAmount}"
-                                        VerticalOptions="EndAndExpand" />
+                                <StackLayout>
+                                    <Frame CornerRadius="5">
+                                        <StackLayout>
+                                            <Label
+                                                Margin="5"
+                                                HorizontalOptions="StartAndExpand"
+                                                Text="{Binding OrderDate, StringFormat='{0:MM/dd/yyyy h:mm tt}'}" />
+                                            <Label
+                                                Margin="5"
+                                                Text="{Binding OrderTotalAmount}"
+                                                VerticalOptions="EndAndExpand" />
+                                        </StackLayout>
+                                    </Frame>
                                 </StackLayout>
-                                <BoxView BackgroundColor="Gray" HeightRequest="1" />
                             </StackLayout>
                         </DataTemplate>
                     </BindableLayout.ItemTemplate>

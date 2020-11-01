@@ -20,14 +20,6 @@ namespace Restaurant
 
             BuildDependencies();
             //MainPage = new AppShell();
-
-            for (int i = 1; i < 10; i++)
-                Context.Tables.Add(new Table
-                {
-                    Id = Guid.NewGuid().ToString("N"),
-                    TableName = "Bàn số " + i,
-                    Status = (TableStatus)(i % 3)
-                });
             InitNavigation();
         }
         void BuildDependencies()

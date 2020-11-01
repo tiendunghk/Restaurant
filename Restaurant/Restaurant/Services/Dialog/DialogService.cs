@@ -28,5 +28,9 @@ namespace Restaurant.Services.Dialog
         {
             DependencyService.Get<IToast>().Show(message);
         }
+        public Task<bool> ShowConfirmDialog(string tittle, string message, string oklabel, string cancellabel)
+        {
+            return UserDialogs.Instance.ConfirmAsync(message, tittle, oklabel, cancellabel);
+        }
     }
 }

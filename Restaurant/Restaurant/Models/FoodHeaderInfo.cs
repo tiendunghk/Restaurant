@@ -5,7 +5,7 @@ using System.Text;
 
 namespace Restaurant.Models
 {
-    public class FoodHeaderInfo: ObservableCollection<Dish>
+    public class FoodHeaderInfo: ObservableCollection<OrderDetailUI>
     {
         public string Header { get; set; }
     }

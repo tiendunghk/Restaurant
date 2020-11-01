@@ -29,20 +29,20 @@
                                     <BindableLayout.ItemTemplate>
                                         <DataTemplate>
                                             <StackLayout Orientation="Horizontal">
-                                                <Label HorizontalOptions="StartAndExpand" Text="{Binding Name}" />
+                                                <Label HorizontalOptions="StartAndExpand" Text="{Binding NameDish}" />
                                                 <Image
                                                     Aspect="AspectFill"
                                                     HeightRequest="50"
                                                     HorizontalOptions="CenterAndExpand"
-                                                    Source="{Binding DishImage}"
+                                                    Source="{Binding ImageUrl}"
                                                     WidthRequest="50" />
                                                 <Button
                                                     BackgroundColor="{x:StaticResource FacebookBlue}"
                                                     Command="{Binding BindingContext.CallWaiterCommand, Source={x:Reference Root}}"
-                                                    CommandParameter="{Binding Id}"
+                                                    CommandParameter="{Binding .}"
                                                     CornerRadius="3"
                                                     HorizontalOptions="EndAndExpand"
-                                                    Text="Call waiter" />
+                                                    Text="{Binding Status, Converter={x:StaticResource KitchenButtonTextConverter}}" />
                                             </StackLayout>
                                         </DataTemplate>
                                     </BindableLayout.ItemTemplate>

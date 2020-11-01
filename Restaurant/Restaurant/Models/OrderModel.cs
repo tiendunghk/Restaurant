@@ -12,5 +12,7 @@ namespace Restaurant.Models
         public Decimal OrderTotalAmount { get; set; }
         public DateTime OrderStart { get; set; }
         public DateTime OrderEnd { get; set; }
+        public OrderStatus Status { get; set; }
+        public string TableName { get; set; }
     }
 }

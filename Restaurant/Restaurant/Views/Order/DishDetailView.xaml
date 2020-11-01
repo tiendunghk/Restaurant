@@ -1,0 +1,39 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage
+    x:Class="Restaurant.Views.Order.DishDetailView"
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    Title="Chi tiết món ăn">
+    <ContentPage.Content>
+        <StackLayout BackgroundColor="{x:StaticResource Backgroud}">
+            <Frame
+                Margin="10"
+                HasShadow="True"
+                Visual="Material">
+                <StackLayout>
+                    <StackLayout Orientation="Horizontal">
+                        <Label HorizontalOptions="StartAndExpand" Text="Tên" />
+                        <Label HorizontalOptions="EndAndExpand" Text="{Binding Obj.Name}" />
+                    </StackLayout>
+                    <StackLayout Orientation="Horizontal">
+                        <Label HorizontalOptions="StartAndExpand" Text="Giá" />
+                        <Label HorizontalOptions="EndAndExpand" Text="{Binding Obj.Price}" />
+                    </StackLayout>
+                    <StackLayout Orientation="Horizontal">
+                        <Label HorizontalOptions="StartAndExpand" Text="Loại" />
+                        <Label HorizontalOptions="EndAndExpand" Text="Món chính" />
+                    </StackLayout>
+                    <StackLayout Orientation="Horizontal">
+                        <Label HorizontalOptions="StartAndExpand" Text="Hình minh họa" />
+                        <Image
+                            Aspect="AspectFill"
+                            HeightRequest="60"
+                            HorizontalOptions="EndAndExpand"
+                            Source="com_tam"
+                            WidthRequest="60" />
+                    </StackLayout>
+                </StackLayout>
+            </Frame>
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>

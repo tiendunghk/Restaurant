@@ -10,4 +10,15 @@ namespace Restaurant.Models
         CLEAN,
         DIRTY
     }
+    public enum OrderDetailStatus
+    {
+        WAITING,
+        COMPLETED,
+        COOKING
+    }
+    public enum OrderStatus
+    {
+        PENDING,
+        COMPLETED
+    }
 }

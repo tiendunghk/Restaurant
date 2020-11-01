@@ -1,4 +1,5 @@
 ﻿using Restaurant.Mvvm.Command;
+using Restaurant.Services.Dialog;
 using Restaurant.ViewModels;
 using Restaurant.Views;
 using System;
@@ -23,18 +24,21 @@ namespace Restaurant
             BindingContext = this;
             AppShell.SetTabBarIsVisible(this, false);
         }
-        void Logout()
+        async void Logout()
         {
-            Application.Current.MainPage = new LoginView();
+            var answer = await ServiceLocator.Instance.Resolve<IDialogService>().ShowConfirmDialog("Warning", "Bạn có chắc chắn muốn thoát ứng dụng?", "OK", "Cancel");
+            if (answer)
+                Application.Current.MainPage = new LoginView();
         }
         protected override async void OnNavigating(ShellNavigatingEventArgs args)
         {
             //call api to load data here
-            base.OnNavigating(args);
+            //base.OnNavigating(args);
             if (args.Target.Location.OriginalString.Contains("4"))
             {
                 //order
                 MessagingCenter.Send("abc", "LoadDataOrder");
+                return;
             }
             if (args.Target.Location.OriginalString.Contains("6"))
             {

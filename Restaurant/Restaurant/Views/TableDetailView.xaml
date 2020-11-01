@@ -9,7 +9,7 @@
     Title="{Binding Title}">
     <ContentPage.Content>
         <StackLayout>
-            <tabView:SfTabView BackgroundColor="WhiteSmoke" VisibleHeaderCount="2">
+            <tabView:SfTabView BackgroundColor="WhiteSmoke" VisibleHeaderCount="3">
                 <tabView:SfTabItem Title="Trạng thái">
                     <tabView:SfTabItem.Content>
                         <StackLayout Margin="10,20,10,0" BackgroundColor="{x:StaticResource Backgroud}">
@@ -18,6 +18,7 @@
                                     <syncfusion:SfRadioButton
                                         x:Name="radioButton"
                                         FontFamily="{x:StaticResource Avo}"
+                                        IsChecked="True"
                                         Text="Occupied" />
                                     <syncfusion:SfRadioButton
                                         x:Name="radioButton1"
@@ -42,6 +43,7 @@
                 <tabView:SfTabItem Title="Đặt món">
                     <tabView:SfTabItem.Content>
                         <StackLayout BackgroundColor="{x:StaticResource Backgroud}" VerticalOptions="StartAndExpand">
+                            <Label Margin="8" Text="Thực đơn (VND)" />
                             <SearchBar Placeholder="Search dish" />
                             <ScrollView>
                                 <StackLayout BindableLayout.ItemsSource="{Binding Tests}">
@@ -74,8 +76,8 @@
                                                             </Label>
                                                             <Stepper
                                                                 x:Name="stepper"
-                                                                Maximum="10"
-                                                                Minimum="0" />
+                                                                Minimum="0"
+                                                                Value="{Binding SoLuong, Mode=TwoWay}" />
                                                         </StackLayout>
                                                     </StackLayout>
                                                 </Frame>
@@ -91,11 +93,12 @@
                                     AbsoluteLayout.LayoutBounds=".5,.6,70,90"
                                     AbsoluteLayout.LayoutFlags="PositionProportional"
                                     BackgroundColor="{x:StaticResource FacebookBlue}"
+                                    Command="{Binding SubmitCommand}"
                                     CornerRadius="5"
                                     HorizontalOptions="Center"
                                     Text="Submit"
                                     VerticalOptions="End" />
-                                <ImageButton
+                                <!--<ImageButton
                                     AbsoluteLayout.LayoutBounds=".9,.5,60,80"
                                     AbsoluteLayout.LayoutFlags="PositionProportional"
                                     BackgroundColor="Transparent"
@@ -103,8 +106,52 @@
                                     CommandParameter="{Binding Title, Source={x:Reference Root}}"
                                     HeightRequest="70"
                                     Source="fab.png"
-                                    WidthRequest="70" />
+                                    WidthRequest="70" />-->
                             </AbsoluteLayout>
+                        </StackLayout>
+                    </tabView:SfTabItem.Content>
+                </tabView:SfTabItem>
+                <tabView:SfTabItem Title="Món đã đặt">
+                    <tabView:SfTabItem.Content>
+                        <StackLayout Margin="10,20,10,0" BackgroundColor="{x:StaticResource Backgroud}">
+                            <StackLayout>
+                                <Picker ItemsSource="{Binding Filters}" SelectedIndex="{Binding SelectedIndex}" />
+                                <ScrollView>
+                                    <StackLayout BindableLayout.ItemsSource="{Binding OrderedItems}">
+                                        <BindableLayout.ItemTemplate>
+                                            <DataTemplate>
+                                                <StackLayout Spacing="5">
+                                                    <Frame CornerRadius="5">
+                                                        <StackLayout Orientation="Horizontal">
+                                                            <StackLayout HorizontalOptions="StartAndExpand">
+                                                                <Label Text="{Binding NameDish}" />
+                                                                <Label Text="{Binding Status}" />
+                                                            </StackLayout>
+                                                            <Image
+                                                                Aspect="AspectFill"
+                                                                HeightRequest="30"
+                                                                HorizontalOptions="CenterAndExpand"
+                                                                Source="{Binding ImageUrl}"
+                                                                WidthRequest="30" />
+                                                            <Button
+                                                                HorizontalOptions="EndAndExpand"
+                                                                IsVisible="{Binding Status, Converter={x:StaticResource ShowDeleteButtonConverter}}"
+                                                                Text="Xoa" />
+                                                        </StackLayout>
+                                                    </Frame>
+                                                </StackLayout>
+                                            </DataTemplate>
+                                        </BindableLayout.ItemTemplate>
+                                    </StackLayout>
+                                </ScrollView>
+                                <Button
+                                    Margin="5"
+                                    BackgroundColor="{x:StaticResource FacebookBlue}"
+                                    CornerRadius="5"
+                                    HorizontalOptions="Center"
+                                    Text="Yêu cầu thanh toán"
+                                    VerticalOptions="End" />
+                            </StackLayout>
                         </StackLayout>
                     </tabView:SfTabItem.Content>
                 </tabView:SfTabItem>

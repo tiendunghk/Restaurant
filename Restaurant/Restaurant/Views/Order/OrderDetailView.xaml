@@ -3,11 +3,12 @@
     x:Class="Restaurant.Views.Order.OrderDetailView"
     xmlns="http://xamarin.com/schemas/2014/forms"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    x:Name="Root"
     Title="Chi tiết order">
     <ContentPage.Content>
         <StackLayout BackgroundColor="{x:StaticResource Backgroud}">
             <ScrollView>
-                <StackLayout BindableLayout.ItemsSource="{Binding Tests}">
+                <StackLayout BindableLayout.ItemsSource="{Binding OrderDetailUIs}">
                     <BindableLayout.ItemTemplate>
                         <DataTemplate>
                             <StackLayout Spacing="10">
@@ -16,24 +17,19 @@
                                     CornerRadius="5"
                                     HasShadow="True">
                                     <StackLayout Orientation="Horizontal">
+                                        <StackLayout.GestureRecognizers>
+                                            <TapGestureRecognizer Command="{Binding BindingContext.TappedCommand, Source={x:Reference Root}}" CommandParameter="{Binding .}" />
+                                        </StackLayout.GestureRecognizers>
                                         <StackLayout HorizontalOptions="StartAndExpand" Orientation="Vertical">
-                                            <Label Text="{Binding Name}" />
+                                            <Label Text="{Binding NameDish}" />
                                             <Label Text="{Binding Price}" />
                                         </StackLayout>
                                         <Image
                                             Aspect="AspectFill"
                                             HeightRequest="60"
-                                            HorizontalOptions="CenterAndExpand"
-                                            Source="com_tam"
+                                            HorizontalOptions="EndAndExpand"
+                                            Source="{Binding ImageUrl}"
                                             WidthRequest="60" />
-                                        <Label HorizontalOptions="EndAndExpand">
-                                            <Label.FormattedText>
-                                                <FormattedString>
-                                                    <Span Text="Số lượng: " />
-                                                    <Span Text="5" />
-                                                </FormattedString>
-                                            </Label.FormattedText>
-                                        </Label>
                                     </StackLayout>
                                 </Frame>
                             </StackLayout>
@@ -41,9 +37,19 @@
                     </BindableLayout.ItemTemplate>
                 </StackLayout>
             </ScrollView>
+            <Label Margin="5">
+                <Label.FormattedText>
+                    <FormattedString>
+                        <Span Text="Tổng tiền: " />
+                        <Span Text="{Binding OrderTotalAmount}" />
+                        <Span Text="₫" />
+                    </FormattedString>
+                </Label.FormattedText>
+            </Label>
             <Button
                 Margin="0,0,0,5"
                 BackgroundColor="{x:StaticResource FacebookBlue}"
+                Command="{Binding PurchaseCommand}"
                 CornerRadius="3"
                 HorizontalOptions="CenterAndExpand"
                 Text="Thanh toán" />

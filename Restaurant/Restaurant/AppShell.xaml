@@ -8,7 +8,6 @@
     xmlns:viewmodel="clr-namespace:Restaurant.ViewModels"
     xmlns:views="clr-namespace:Restaurant.Views"
     xmlns:views1="clr-namespace:Restaurant.Views.Order">
-
     <Shell.FlyoutHeader>
         <ContentView HeightRequest="180">
             <ContentView.Background>
