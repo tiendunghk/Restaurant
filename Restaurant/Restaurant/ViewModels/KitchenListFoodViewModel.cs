@@ -31,6 +31,10 @@ namespace Restaurant.ViewModels
                 await Task.Delay(2000);
                 IsLoadingData = false;
             });
+            MessagingCenter.Subscribe<string,string>("a", "OnNotificationReceived", (a,b) =>
+            {
+                Title = b;
+            });
         }
         void CallWaiter(OrderDetailUI str)
         {

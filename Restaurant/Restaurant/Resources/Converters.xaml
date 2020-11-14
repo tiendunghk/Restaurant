@@ -9,5 +9,5 @@
     <converters:TableColorConverter x:Key="TableColorConverter" />
     <converters:InverseBoolConverter x:Key="InverseBoolConverter" />
     <converters:ShowDeleteButtonConverter x:Key="ShowDeleteButtonConverter" />
-    <converters:KitchenButtonTextConverter x:Key="KitchenButtonTextConverter"/>
+    <converters:KitchenButtonTextConverter x:Key="KitchenButtonTextConverter" />
 </ResourceDictionary>

@@ -1,4 +1,7 @@
-﻿using Restaurant.Models;
+﻿using Com.OneSignal;
+using Com.OneSignal.Abstractions;
+using Restaurant.Models;
+using Restaurant.Services;
 using Restaurant.Services.Dialog;
 using Restaurant.ViewModels;
 using Restaurant.ViewModels.Manager;
@@ -17,6 +20,10 @@ namespace Restaurant
         {
             Syncfusion.Licensing.SyncfusionLicenseProvider.RegisterLicense("MzQwMTAxQDMxMzgyZTMzMmUzMG9LN01CMkxyTVdjYnJDS2Q3U05MWUpyVjhPd3JZTWwzTU9nSDl4MzFVc1k9");
             InitializeComponent();
+            OneSignal.Current.StartInit("511f254e-f0fe-4353-856d-1ac41bee6027")
+                .HandleNotificationReceived(Notification.HandleNotificationReceived)
+                .InFocusDisplaying(OSInFocusDisplayOption.Notification)
+                .EndInit();
 
             BuildDependencies();
             //MainPage = new AppShell();
