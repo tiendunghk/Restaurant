@@ -22,6 +22,7 @@ namespace Restaurant
             InitializeComponent();
             OneSignal.Current.StartInit("511f254e-f0fe-4353-856d-1ac41bee6027")
                 .HandleNotificationReceived(Notification.HandleNotificationReceived)
+                .HandleNotificationOpened(Notification.HandleNotificationOpened)
                 .InFocusDisplaying(OSInFocusDisplayOption.Notification)
                 .EndInit();
 

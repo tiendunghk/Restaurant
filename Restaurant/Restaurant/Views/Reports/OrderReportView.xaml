@@ -9,6 +9,7 @@
                 HorizontalOptions="CenterAndExpand"
                 Text="Order Report View"
                 VerticalOptions="CenterAndExpand" />
+            <Button Text="abc" Clicked="Button_Clicked"/>
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>

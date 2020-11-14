@@ -24,11 +24,12 @@ namespace Restaurant.ViewModels
         }
         public KitchenListFoodViewModel()
         {
-            FakeData();
+            Title = "Danh sách đang chờ";
             MessagingCenter.Subscribe<string>("abc", "LoadDataKitchen", async (a) =>
             {
                 IsLoadingData = true;
                 await Task.Delay(2000);
+                FakeData();
                 IsLoadingData = false;
             });
             MessagingCenter.Subscribe<string,string>("a", "OnNotificationReceived", (a,b) =>
@@ -61,9 +62,12 @@ namespace Restaurant.ViewModels
             }
 
         }
-        public override Task OnNavigationAsync(NavigationParameters parameters, NavigationType navigationType)
+        public override async Task OnNavigationAsync(NavigationParameters parameters, NavigationType navigationType)
         {
-            return base.OnNavigationAsync(parameters, navigationType);
+            IsLoadingData = true;
+            await Task.Delay(2000);
+            FakeData();
+            IsLoadingData = false;
         }
         List<OrderModel> _listOrders;
         public List<OrderModel> ListOrders
