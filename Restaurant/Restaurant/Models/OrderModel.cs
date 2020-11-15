@@ -8,6 +8,7 @@ namespace Restaurant.Models
     {
         public string Id { get; set; }
         public string StaffId { get; set; }
+        public string TableId { get; set; }
         public DateTime OrderDate { get; set; }
         public Decimal OrderTotalAmount { get; set; }
         public DateTime OrderStart { get; set; }

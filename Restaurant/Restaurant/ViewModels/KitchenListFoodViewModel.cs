@@ -32,10 +32,10 @@ namespace Restaurant.ViewModels
                 FakeData();
                 IsLoadingData = false;
             });
-            MessagingCenter.Subscribe<string,string>("a", "OnNotificationReceived", (a,b) =>
-            {
-                Title = b;
-            });
+            MessagingCenter.Subscribe<string, string>("a", "OnNotificationReceived", (a, b) =>
+             {
+                 Title = b;
+             });
         }
         void CallWaiter(OrderDetailUI str)
         {
@@ -77,52 +77,32 @@ namespace Restaurant.ViewModels
         }
         void FakeData()
         {
-            ListOrders = new List<OrderModel>();
+            ListOrders = Datas.Orders.ListOrders;
             ListItems = new ObservableCollection<FoodHeaderInfo>();
             FoodHeaderInfo obj;
+            Dish d;
 
-            var d = new Dish
-            {
-                Id = Guid.NewGuid().ToString("N"),
-                Name = "Món " + 99,
-                Description = "Quá hấp dẫn",
-                Price = 30000,
-                DishImage = "com_tam.jpg",
-            };
-
-            for (int i = 0; i < 10; i++)
-            {
-                ListOrders.Add(new OrderModel
-                {
-                    Id = Guid.NewGuid().ToString("N"),
-                    OrderDate = DateTime.Now,
-                    OrderTotalAmount = 800000,
-                    Status = i / 3 == 0 ? OrderStatus.COMPLETED : OrderStatus.PENDING,
-                    TableName = "Bàn " + new Random().Next(20)
-                });
-            }
-
-            for (int i = 0; i < 10; i++)//10 order
+            for (int i = 0; i < ListOrders.Count; i++)
             {
                 obj = new FoodHeaderInfo();
                 obj.Header = ListOrders[i].TableName;
-                for (int j = 0; j < 5; j++)//mỗi order 5 món
+                foreach (var e in Datas.Orders.ListOrderDetails)
                 {
-                    obj.Add(new OrderDetailUI
+                    if (e.OrderDetail_OrderID == ListOrders[i].Id)
                     {
-                        OrderDetailUIId = Guid.NewGuid().ToString("N"),
-                        OrderId = ListOrders[i].Id,
-                        OrderDetail = new OrderDetail
+                        d = Datas.Dishs.ListDishs.Find(x => x.Id == e.DishId);
+                        obj.Add(new OrderDetailUI
                         {
-                            OrderDetailId = Guid.NewGuid().ToString("N"),
-                            DishId = d.Id
-                        },
-                        NameDish = d.Name,
-                        ImageUrl = d.DishImage,
-                        Status = j / 2 == 1 ? OrderDetailStatus.WAITING : OrderDetailStatus.COOKING,
-                        Price = d.Price,
-                        Dish = d,
-                    });
+                            OrderDetailUIId = Guid.NewGuid().ToString("N"),
+                            OrderId = ListOrders[i].Id,
+                            OrderDetail = e,
+                            NameDish = d.Name,
+                            ImageUrl = d.DishImage,
+                            Status = e.OrderDetailStatus,
+                            Price = d.Price,
+                            Dish = d,
+                        });
+                    }
                 }
                 ListItems.Add(obj);
             }

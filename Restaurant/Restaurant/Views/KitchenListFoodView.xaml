@@ -31,6 +31,7 @@
                                             <StackLayout Orientation="Horizontal">
                                                 <Label HorizontalOptions="StartAndExpand" Text="{Binding NameDish}" />
                                                 <Image
+                                                    Margin="0,0,8,0"
                                                     Aspect="AspectFill"
                                                     HeightRequest="50"
                                                     HorizontalOptions="CenterAndExpand"

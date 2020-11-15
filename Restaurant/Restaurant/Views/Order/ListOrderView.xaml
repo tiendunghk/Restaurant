@@ -28,10 +28,14 @@
                                                 Margin="5"
                                                 HorizontalOptions="StartAndExpand"
                                                 Text="{Binding OrderDate, StringFormat='{0:MM/dd/yyyy h:mm tt}'}" />
-                                            <Label
-                                                Margin="5"
-                                                Text="{Binding OrderTotalAmount}"
-                                                VerticalOptions="EndAndExpand" />
+                                            <Label Margin="5" VerticalOptions="EndAndExpand">
+                                                <Label.FormattedText>
+                                                    <FormattedString>
+                                                        <Span Text="Tổng tiền: " />
+                                                        <Span Text="{Binding OrderTotalAmount}" />
+                                                    </FormattedString>
+                                                </Label.FormattedText>
+                                            </Label>
                                         </StackLayout>
                                     </Frame>
                                 </StackLayout>

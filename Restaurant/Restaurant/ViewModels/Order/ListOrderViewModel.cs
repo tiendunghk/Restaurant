@@ -39,17 +39,7 @@ namespace Restaurant.ViewModels.Order
             Filters = new List<string> { "Hôm nay", "Cần thanh toán", "Chưa thanh toán" };
             SelectedIndex = 0;
 
-            ListOrders = new List<OrderModel>();
-            for (int i = 0; i < 10; i++)
-            {
-                ListOrders.Add(new OrderModel
-                {
-                    Id = Guid.NewGuid().ToString("N"),
-                    OrderDate = DateTime.Now,
-                    OrderTotalAmount = 800000,
-                    Status = i / 3 == 0 ? OrderStatus.COMPLETED : OrderStatus.PENDING
-                });
-            }
+            ListOrders = Datas.Orders.ListOrders;
             MessagingCenter.Subscribe<string>("abc", "LoadDataOrder", async (a) =>
             {
                 IsLoadingData = true;
@@ -59,30 +49,23 @@ namespace Restaurant.ViewModels.Order
         }
         async void Tapped(OrderModel obj)
         {
+            Dish d;
             List<OrderDetailUI> orderDetailUIs = new List<OrderDetailUI>();
-            var d = new Dish
+            foreach (var e in Datas.Orders.ListOrderDetails)
             {
-                Id = Guid.NewGuid().ToString("N"),
-                Name = "Món " + 99,
-                Description = "Quá hấp dẫn",
-                Price = 30000,
-                DishImage = "com_tam.jpg",
-            };
-            for (int i = 0; i < 5; i++)
-            {
-                orderDetailUIs.Add(new OrderDetailUI
+                if (e.OrderDetail_OrderID == obj.Id)
                 {
-                    OrderDetail = new OrderDetail
+                    d = Datas.Dishs.ListDishs.Find(x => x.Id == e.DishId);
+                    orderDetailUIs.Add(new OrderDetailUI
                     {
-                        OrderDetailId = Guid.NewGuid().ToString("N"),
-                        DishId = d.Id
-                    },
-                    NameDish = d.Name,
-                    ImageUrl = d.DishImage,
-                    Status = OrderDetailStatus.WAITING,
-                    Price = d.Price,
-                    Dish=d
-                });
+                        OrderDetail = e,
+                        NameDish = d.Name,
+                        ImageUrl = d.DishImage,
+                        Status = e.OrderDetailStatus,
+                        Price = d.Price,
+                        Dish = d
+                    });
+                }
             }
             await NavigationService.NavigateToAsync<OrderDetailViewModel>(new NavigationParameters
             {
