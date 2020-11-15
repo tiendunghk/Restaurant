@@ -26,14 +26,7 @@ namespace Restaurant.ViewModels
         public ListTableViewModel()
         {
             Tables = App.Context.Tables;
-            Tables = new List<Table>();
-            for (int i = 1; i < 10; i++)
-                Tables.Add(new Table
-                {
-                    Id = Guid.NewGuid().ToString("N"),
-                    TableName = "Bàn số " + i,
-                    Status = (TableStatus)(i % 3)
-                });
+            Tables = Datas.Tables.ListTables;
             MessagingCenter.Subscribe<string>("abc", "LoadDataTable", async (a) =>
             {
                 IsLoadingData = true;

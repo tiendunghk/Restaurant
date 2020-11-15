@@ -57,16 +57,7 @@ namespace Restaurant.ViewModels
                 "Đang nấu","Đã phục vụ","Đang chờ"
             };
             SelectedIndex = 0;
-            Tests = new ObservableCollection<Dish>();
-            for (int i = 0; i < 10; i++)
-                Tests.Add(new Dish
-                {
-                    Id = Guid.NewGuid().ToString("N"),
-                    Name = "Món " + i,
-                    Description = "Quá hấp dẫn",
-                    Price = 30000,
-                    DishImage = "com_tam.jpg",
-                });
+            Tests = new ObservableCollection<Dish>(Datas.Dishs.ListDishs);
         }
         public string TableId { get; set; }
         public override Task OnNavigationAsync(NavigationParameters parameters, NavigationType navigationType)
