@@ -10,4 +10,5 @@
     <converters:InverseBoolConverter x:Key="InverseBoolConverter" />
     <converters:ShowDeleteButtonConverter x:Key="ShowDeleteButtonConverter" />
     <converters:KitchenButtonTextConverter x:Key="KitchenButtonTextConverter" />
+    <converters:StatusActiveConverter x:Key="StatusActiveConverter" />
 </ResourceDictionary>

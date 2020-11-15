@@ -17,6 +17,7 @@
                                 <StackLayout Spacing="10">
                                     <Frame
                                         Margin="9,3,9,3"
+                                        BackgroundColor="{Binding IsActive, Converter={x:StaticResource StatusActiveConverter}}"
                                         CornerRadius="5"
                                         HasShadow="True">
                                         <StackLayout Orientation="Horizontal">

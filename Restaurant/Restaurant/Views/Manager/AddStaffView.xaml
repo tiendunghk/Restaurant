@@ -13,7 +13,7 @@
                 <StackLayout>
                     <Switch
                         HorizontalOptions="EndAndExpand"
-                        IsToggled="True"
+                        IsToggled="{Binding Staff.IsActive}"
                         VerticalOptions="StartAndExpand" />
                     <StackLayout Orientation="Horizontal">
                         <Label HorizontalOptions="StartAndExpand" Text="Tên đăng nhập" />

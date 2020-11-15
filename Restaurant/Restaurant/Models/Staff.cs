@@ -27,5 +27,6 @@ namespace Restaurant.Models
 
         public string Token;
         public string ExternalId { get; set; }
+        public bool IsActive { get; set; }
     }
 }

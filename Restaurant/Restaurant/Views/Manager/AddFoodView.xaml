@@ -11,6 +11,10 @@
                 HasShadow="True"
                 Visual="Material">
                 <StackLayout>
+                    <Switch
+                        HorizontalOptions="EndAndExpand"
+                        IsToggled="{Binding Obj.IsActive}"
+                        VerticalOptions="StartAndExpand" />
                     <StackLayout Orientation="Horizontal">
                         <Label HorizontalOptions="StartAndExpand" Text="Tên" />
                         <Entry HorizontalOptions="FillAndExpand" Placeholder="Tên món" />

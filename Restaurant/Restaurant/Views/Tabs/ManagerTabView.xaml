@@ -6,7 +6,7 @@
     xmlns:android="clr-namespace:Xamarin.Forms.PlatformConfiguration.AndroidSpecific;assembly=Xamarin.Forms.Core"
     xmlns:manager="clr-namespace:Restaurant.Views.Manager"
     android:TabbedPage.ToolbarPlacement="Bottom"
-    BarBackgroundColor="{StaticResource FacebookBlue}"
+    BarBackgroundColor="WhiteSmoke"
     Shell.NavBarIsVisible="False">
     <!--  Pages can be added as references or inline  -->
     <manager:ListFoodManagerView Title="Food" IconImageSource="ic_food" />

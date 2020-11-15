@@ -22,17 +22,7 @@ namespace Restaurant.ViewModels.Manager
         }
         public ListStaffManagerViewModel()
         {
-            ListStaffs = new List<Staff>()
-            {
-                new Staff{Id=Guid.NewGuid().ToString("N"),Name="Dũng Nguyễn",UserName="dnuit",PassWord="12345",Role="CEO"},
-                new Staff{Id=Guid.NewGuid().ToString("N"),Name="Dũng Nguyễn",UserName="dnuit",PassWord="12345",Role="CEO"},
-                new Staff{Id=Guid.NewGuid().ToString("N"),Name="Dũng Nguyễn",UserName="dnuit",PassWord="12345",Role="CEO"},
-                new Staff{Id=Guid.NewGuid().ToString("N"),Name="Dũng Nguyễn",UserName="dnuit",PassWord="12345",Role="CEO"},
-                new Staff{Id=Guid.NewGuid().ToString("N"),Name="Dũng Nguyễn",UserName="dnuit",PassWord="12345",Role="CEO"},
-                new Staff{Id=Guid.NewGuid().ToString("N"),Name="Dũng Nguyễn",UserName="dnuit",PassWord="12345",Role="CEO"},
-                new Staff{Id=Guid.NewGuid().ToString("N"),Name="Dũng Nguyễn",UserName="dnuit",PassWord="12345",Role="CEO"},
-                new Staff{Id=Guid.NewGuid().ToString("N"),Name="Dũng Nguyễn",UserName="dnuit",PassWord="12345",Role="CEO"},
-            };
+            ListStaffs = Datas.Staffs.ListStaffs;
         }
         async void AddNavigate()
         {

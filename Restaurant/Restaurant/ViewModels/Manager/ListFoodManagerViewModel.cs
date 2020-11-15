@@ -23,16 +23,7 @@ namespace Restaurant.ViewModels.Manager
         }
         public ListFoodManagerViewModel()
         {
-            ListFoods = new List<Dish>();
-            for (int i = 0; i < 10; i++)
-                ListFoods.Add(new Dish
-                {
-                    Id = Guid.NewGuid().ToString("N"),
-                    Name = "Món " + i,
-                    Description = "Quá hấp dẫn",
-                    Price = 30000,
-                    DishImage = "com_tam.jpg",
-                });
+            ListFoods = Datas.Dishs.ListDishs;
         }
         async void AddFood()
         {
