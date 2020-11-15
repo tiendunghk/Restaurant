@@ -6,7 +6,7 @@
     xmlns:android="clr-namespace:Xamarin.Forms.PlatformConfiguration.AndroidSpecific;assembly=Xamarin.Forms.Core"
     xmlns:reports="clr-namespace:Restaurant.Views.Reports"
     android:TabbedPage.ToolbarPlacement="Bottom"
-    BarBackgroundColor="WhiteSmoke"
+    BarBackgroundColor="{StaticResource FacebookBlue}"
     Shell.NavBarIsVisible="False">
     <!--  Pages can be added as references or inline  -->
     <reports:OrderReportView Title="Order" IconImageSource="order_rp" />

@@ -4,50 +4,51 @@
     xmlns="http://xamarin.com/schemas/2014/forms"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     x:Name="Root"
-    Title="Danh sách món ăn">
+    Title="Food">
     <ContentPage.Content>
-        <StackLayout BackgroundColor="{x:StaticResource Backgroud}">
-            <SearchBar Placeholder="Nhập món ăn" />
-            <ScrollView>
-                <StackLayout BindableLayout.ItemsSource="{Binding ListFoods}">
-                    <BindableLayout.ItemTemplate>
-                        <DataTemplate>
-                            <StackLayout Spacing="10">
-                                <Frame
-                                    Margin="9,3,9,3"
-                                    CornerRadius="5"
-                                    HasShadow="True">
-                                    <StackLayout Orientation="Horizontal">
-                                        <StackLayout.GestureRecognizers>
-                                            <TapGestureRecognizer Command="{Binding BindingContext.NavigateCommand, Source={x:Reference Root}}" CommandParameter="{Binding .}" />
-                                        </StackLayout.GestureRecognizers>
-                                        <StackLayout HorizontalOptions="StartAndExpand" Orientation="Vertical">
-                                            <Label Text="{Binding Name}" />
-                                            <Label Text="{Binding Price}" />
+        <AbsoluteLayout>
+            <StackLayout AbsoluteLayout.LayoutBounds="0,0,1,1" AbsoluteLayout.LayoutFlags="SizeProportional">
+                <SearchBar Placeholder="Nhập món ăn" />
+                <ScrollView BackgroundColor="{StaticResource Backgroud}">
+                    <StackLayout BindableLayout.ItemsSource="{Binding ListFoods}">
+                        <BindableLayout.ItemTemplate>
+                            <DataTemplate>
+                                <StackLayout Spacing="10">
+                                    <Frame
+                                        Margin="9,3,9,3"
+                                        CornerRadius="5"
+                                        HasShadow="True">
+                                        <StackLayout Orientation="Horizontal">
+                                            <StackLayout.GestureRecognizers>
+                                                <TapGestureRecognizer Command="{Binding BindingContext.NavigateCommand, Source={x:Reference Root}}" CommandParameter="{Binding .}" />
+                                            </StackLayout.GestureRecognizers>
+                                            <StackLayout HorizontalOptions="StartAndExpand" Orientation="Vertical">
+                                                <Label Text="{Binding Name}" />
+                                                <Label Text="{Binding Price}" />
+                                            </StackLayout>
+                                            <Image
+                                                Aspect="AspectFill"
+                                                HeightRequest="60"
+                                                HorizontalOptions="CenterAndExpand"
+                                                Source="com_tam"
+                                                WidthRequest="60" />
                                         </StackLayout>
-                                        <Image
-                                            Aspect="AspectFill"
-                                            HeightRequest="60"
-                                            HorizontalOptions="CenterAndExpand"
-                                            Source="com_tam"
-                                            WidthRequest="60" />
-                                    </StackLayout>
-                                </Frame>
-                            </StackLayout>
-                        </DataTemplate>
-                    </BindableLayout.ItemTemplate>
-                </StackLayout>
-            </ScrollView>
-            <AbsoluteLayout>
-                <ImageButton
-                    AbsoluteLayout.LayoutBounds=".9,.5,60,80"
-                    AbsoluteLayout.LayoutFlags="PositionProportional"
-                    BackgroundColor="Transparent"
-                    Command="{Binding AddFoodCommand}"
-                    HeightRequest="50"
-                    Source="fab.png"
-                    WidthRequest="50" />
-            </AbsoluteLayout>
-        </StackLayout>
+                                    </Frame>
+                                </StackLayout>
+                            </DataTemplate>
+                        </BindableLayout.ItemTemplate>
+                    </StackLayout>
+                </ScrollView>
+            </StackLayout>
+            <ImageButton
+                AbsoluteLayout.LayoutBounds="0.95,0.95,80,80"
+                AbsoluteLayout.LayoutFlags="PositionProportional"
+                BackgroundColor="Transparent"
+                Command="{Binding AddFoodCommand}"
+                CornerRadius="40"
+                HeightRequest="80"
+                Source="fab.png"
+                WidthRequest="80" />
+        </AbsoluteLayout>
     </ContentPage.Content>
 </ContentPage>
