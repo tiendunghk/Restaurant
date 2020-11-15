@@ -13,11 +13,11 @@
                 <StackLayout>
                     <StackLayout Orientation="Horizontal">
                         <Label HorizontalOptions="StartAndExpand" Text="Tên" />
-                        <Entry HorizontalOptions="EndAndExpand" Placeholder="Món 1" />
+                        <Entry HorizontalOptions="FillAndExpand" Placeholder="Tên món" />
                     </StackLayout>
                     <StackLayout Orientation="Horizontal">
                         <Label HorizontalOptions="StartAndExpand" Text="Giá" />
-                        <Entry HorizontalOptions="EndAndExpand" Placeholder="100000" />
+                        <Entry HorizontalOptions="FillAndExpand" Placeholder="Giá món" Keyboard="Numeric"/>
                     </StackLayout>
                     <StackLayout Orientation="Horizontal">
                         <Label HorizontalOptions="StartAndExpand" Text="Loại" />
@@ -25,12 +25,45 @@
                     </StackLayout>
                     <StackLayout Orientation="Horizontal">
                         <Label HorizontalOptions="StartAndExpand" Text="Hình minh họa" />
-                        <Image
-                            Aspect="AspectFill"
-                            HeightRequest="60"
-                            HorizontalOptions="EndAndExpand"
-                            Source="com_tam"
-                            WidthRequest="60" />
+                        <Grid Padding="5">
+                            <Frame
+                                BackgroundColor="WhiteSmoke"
+                                CornerRadius="5"
+                                HeightRequest="90"
+                                WidthRequest="90">
+                                <StackLayout>
+                                    <StackLayout.GestureRecognizers>
+                                        <TapGestureRecognizer Command="{Binding PickCommand}" CommandParameter="{Binding Obj}" />
+                                    </StackLayout.GestureRecognizers>
+                                    <Image
+                                        HorizontalOptions="CenterAndExpand"
+                                        IsVisible="{Binding NullImage}"
+                                        Source="image_file_add_48px"
+                                        VerticalOptions="FillAndExpand" />
+                                    <Image
+                                        Aspect="AspectFill"
+                                        HeightRequest="80"
+                                        HorizontalOptions="CenterAndExpand"
+                                        Source="{Binding Obj.DishImage}"
+                                        VerticalOptions="CenterAndExpand"
+                                        WidthRequest="80" />
+                                </StackLayout>
+                            </Frame>
+                            <Image
+                                Margin="0,-7,-5,0"
+                                Aspect="AspectFill"
+                                BackgroundColor="Transparent"
+                                HeightRequest="25"
+                                HorizontalOptions="End"
+                                IsVisible="{Binding NullImage, Converter={StaticResource InverseBoolConverter}}"
+                                Source="ic_remove"
+                                VerticalOptions="Start"
+                                WidthRequest="25">
+                                <Image.GestureRecognizers>
+                                    <TapGestureRecognizer Command="{Binding RemoveCommand}" CommandParameter="{Binding Obj}" />
+                                </Image.GestureRecognizers>
+                            </Image>
+                        </Grid>
                     </StackLayout>
                 </StackLayout>
             </Frame>
@@ -38,7 +71,8 @@
                 <Button
                     BackgroundColor="{x:StaticResource FacebookBlue}"
                     CornerRadius="3"
-                    Text="Lưu" />
+                    Text="Lưu"
+                    Command="{Binding SaveCommand}"/>
                 <Button
                     BackgroundColor="{x:StaticResource FacebookBlue}"
                     CornerRadius="3"

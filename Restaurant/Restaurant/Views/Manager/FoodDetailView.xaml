@@ -27,7 +27,11 @@
                     <StackLayout Orientation="Horizontal">
                         <Label HorizontalOptions="StartAndExpand" Text="Hình minh họa" />
                         <Grid Padding="5">
-                            <Frame BackgroundColor="WhiteSmoke" CornerRadius="5" WidthRequest="90" HeightRequest="90">
+                            <Frame
+                                BackgroundColor="WhiteSmoke"
+                                CornerRadius="5"
+                                HeightRequest="90"
+                                WidthRequest="90">
                                 <StackLayout>
                                     <StackLayout.GestureRecognizers>
                                         <TapGestureRecognizer Command="{Binding PickCommand}" CommandParameter="{Binding Obj}" />
