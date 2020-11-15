@@ -26,12 +26,41 @@
                     </StackLayout>
                     <StackLayout Orientation="Horizontal">
                         <Label HorizontalOptions="StartAndExpand" Text="Hình minh họa" />
-                        <Image
-                            Aspect="AspectFill"
-                            HeightRequest="60"
-                            HorizontalOptions="EndAndExpand"
-                            Source="com_tam"
-                            WidthRequest="60" />
+                        <Grid Padding="5">
+                            <Frame BackgroundColor="WhiteSmoke" CornerRadius="5" WidthRequest="90" HeightRequest="90">
+                                <StackLayout>
+                                    <StackLayout.GestureRecognizers>
+                                        <TapGestureRecognizer Command="{Binding PickCommand}" CommandParameter="{Binding Obj}" />
+                                    </StackLayout.GestureRecognizers>
+                                    <Image
+                                        HorizontalOptions="CenterAndExpand"
+                                        IsVisible="{Binding NullImage}"
+                                        Source="image_file_add_48px"
+                                        VerticalOptions="FillAndExpand" />
+                                    <Image
+                                        Aspect="AspectFill"
+                                        HeightRequest="80"
+                                        HorizontalOptions="CenterAndExpand"
+                                        Source="{Binding Obj.DishImage}"
+                                        VerticalOptions="CenterAndExpand"
+                                        WidthRequest="80" />
+                                </StackLayout>
+                            </Frame>
+                            <Image
+                                Margin="0,-7,-5,0"
+                                Aspect="AspectFill"
+                                BackgroundColor="Transparent"
+                                HeightRequest="25"
+                                HorizontalOptions="End"
+                                IsVisible="{Binding NullImage, Converter={StaticResource InverseBoolConverter}}"
+                                Source="ic_remove"
+                                VerticalOptions="Start"
+                                WidthRequest="25">
+                                <Image.GestureRecognizers>
+                                    <TapGestureRecognizer Command="{Binding RemoveCommand}" CommandParameter="{Binding Obj}" />
+                                </Image.GestureRecognizers>
+                            </Image>
+                        </Grid>
                     </StackLayout>
                 </StackLayout>
             </Frame>

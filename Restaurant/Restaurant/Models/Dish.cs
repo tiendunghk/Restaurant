@@ -12,7 +12,11 @@ namespace Restaurant.Models
         public string Name { get; set; }
         public string Description { get; set; }
         public bool IsActive { get; set; } = true;
-        public string DishImage { get; set; }
+        public string DishImage
+        {
+            get => _dishImage;
+            set => SetProperty(ref _dishImage, value);
+        }
         public decimal Price { get; set; }
 
         int _soLuong;
@@ -22,5 +26,6 @@ namespace Restaurant.Models
             get => _soLuong;
             set => SetProperty(ref _soLuong, value);
         }
+        string _dishImage;
     }
 }
