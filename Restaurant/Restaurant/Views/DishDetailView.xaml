@@ -1,0 +1,56 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage
+    x:Class="Restaurant.Views.DishDetailView"
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    Title="Chi tiết món ăn">
+    <ContentPage.Content>
+        <StackLayout BackgroundColor="{x:StaticResource Backgroud}">
+            <Frame
+                Margin="10"
+                HasShadow="True"
+                Visual="Material">
+                <StackLayout>
+                    <StackLayout Orientation="Horizontal">
+                        <Label HorizontalOptions="StartAndExpand" Text="Tên" />
+                        <Label HorizontalOptions="FillAndExpand" Text="{Binding Obj.Name}" />
+                    </StackLayout>
+                    <BoxView BackgroundColor="Gray" HeightRequest="1" />
+                    <StackLayout Orientation="Horizontal">
+                        <Label HorizontalOptions="StartAndExpand" Text="Giá" />
+                        <Label HorizontalOptions="FillAndExpand" Text="{Binding Obj.Price}" />
+                    </StackLayout>
+                    <BoxView BackgroundColor="Gray" HeightRequest="1" />
+                    <StackLayout Orientation="Horizontal">
+                        <Label HorizontalOptions="StartAndExpand" Text="Loại" />
+                        <Label HorizontalOptions="EndAndExpand" Text="Món chính" />
+                    </StackLayout>
+                    <BoxView BackgroundColor="Gray" HeightRequest="1" />
+                    <StackLayout Orientation="Horizontal">
+                        <Label HorizontalOptions="StartAndExpand" Text="Hình minh họa" />
+                        <Frame
+                            BackgroundColor="WhiteSmoke"
+                            CornerRadius="5"
+                            HeightRequest="90"
+                            WidthRequest="90">
+                            <StackLayout>
+                                <Image
+                                    Aspect="AspectFill"
+                                    HeightRequest="80"
+                                    HorizontalOptions="CenterAndExpand"
+                                    Source="{Binding Obj.DishImage}"
+                                    VerticalOptions="CenterAndExpand"
+                                    WidthRequest="80" />
+                            </StackLayout>
+                        </Frame>
+                    </StackLayout>
+                    <BoxView BackgroundColor="Gray" HeightRequest="1" />
+                    <StackLayout>
+                        <Label Text="Mô tả" />
+                        <Label HorizontalOptions="FillAndExpand" Text="{Binding Obj.Description}" />
+                    </StackLayout>
+                </StackLayout>
+            </Frame>
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>

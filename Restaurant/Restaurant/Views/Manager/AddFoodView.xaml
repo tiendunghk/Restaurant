@@ -17,7 +17,10 @@
                     </StackLayout>
                     <StackLayout Orientation="Horizontal">
                         <Label HorizontalOptions="StartAndExpand" Text="Giá" />
-                        <Entry HorizontalOptions="FillAndExpand" Placeholder="Giá món" Keyboard="Numeric"/>
+                        <Entry
+                            HorizontalOptions="FillAndExpand"
+                            Keyboard="Numeric"
+                            Placeholder="Giá món" />
                     </StackLayout>
                     <StackLayout Orientation="Horizontal">
                         <Label HorizontalOptions="StartAndExpand" Text="Loại" />
@@ -70,9 +73,9 @@
             <StackLayout HorizontalOptions="Center" Orientation="Horizontal">
                 <Button
                     BackgroundColor="{x:StaticResource FacebookBlue}"
+                    Command="{Binding SaveCommand}"
                     CornerRadius="3"
-                    Text="Lưu"
-                    Command="{Binding SaveCommand}"/>
+                    Text="Lưu" />
                 <Button
                     BackgroundColor="{x:StaticResource FacebookBlue}"
                     CornerRadius="3"

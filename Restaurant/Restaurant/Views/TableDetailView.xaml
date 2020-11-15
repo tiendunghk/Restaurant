@@ -68,7 +68,11 @@
                                                             HeightRequest="60"
                                                             HorizontalOptions="CenterAndExpand"
                                                             Source="com_tam"
-                                                            WidthRequest="60" />
+                                                            WidthRequest="60">
+                                                            <Image.GestureRecognizers>
+                                                                <TapGestureRecognizer Command="{Binding BindingContext.DetailCommand, Source={x:Reference Root}}" CommandParameter="{Binding .}" />
+                                                            </Image.GestureRecognizers>
+                                                        </Image>
                                                         <StackLayout HorizontalOptions="EndAndExpand" Orientation="Vertical">
                                                             <Label>
                                                                 <Label.FormattedText>

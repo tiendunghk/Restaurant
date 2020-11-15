@@ -17,7 +17,9 @@ namespace Restaurant.ViewModels
         OrderModel order = null;
         DelegateCommand<string> _fabCommand;
         DelegateCommand<object> _tappedCommand;
+        DelegateCommand<Dish> _detailCommand;
         public DelegateCommand<object> TappedCommand => _tappedCommand ??= new DelegateCommand<object>(Tapped);
+        public DelegateCommand<Dish> DetailCommand => _detailCommand ??= new DelegateCommand<Dish>(ShowDetail);
         ObservableCollection<Dish> _tests;
         public ObservableCollection<Dish> Tests
         {
@@ -138,6 +140,13 @@ namespace Restaurant.ViewModels
             if (App.Context.ListOrderDetailUI.TryGetValue(TableId, out var x))
                 App.Context.ListOrderDetailUI[TableId] = OrderedItems;
             DialogService.ShowToast("Đã xóa item");
+        }
+        async void ShowDetail(Dish dish)
+        {
+            await NavigationService.NavigateToAsync<DishDetailViewModel>(new NavigationParameters
+            {
+                {"Food",dish }
+            });
         }
     }
 }
