@@ -10,6 +10,18 @@ namespace Restaurant.ViewModels.Manager
 {
     public class StaffDetailViewModel : ViewModelBase
     {
+        int _selectedItem;
+        public int SelectedItem
+        {
+            get => _selectedItem;
+            set => SetProperty(ref _selectedItem, value);
+        }
+        List<string> _roles;
+        public List<string> Roles
+        {
+            get => _roles;
+            set => SetProperty(ref _roles, value);
+        }
         Staff _staff;
         public Staff Staff
         {
@@ -18,7 +30,11 @@ namespace Restaurant.ViewModels.Manager
         }
         public StaffDetailViewModel()
         {
-
+            Roles = new List<string>
+            {
+                "Busboy","Waiter","Kitchen",
+            };
+            SelectedItem = 0;
         }
         public override Task OnNavigationAsync(NavigationParameters parameters, NavigationType navigationType)
         {

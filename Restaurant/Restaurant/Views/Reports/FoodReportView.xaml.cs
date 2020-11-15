@@ -1,4 +1,5 @@
-﻿using Restaurant.ViewModels.Manager;
+﻿using Restaurant.Services;
+using Restaurant.ViewModels.Manager;
 using Restaurant.ViewModels.Reports;
 using System;
 using System.Collections.Generic;
@@ -18,6 +19,11 @@ namespace Restaurant.Views.Reports
         {
             InitializeComponent();
             BindingContext = new FoodReportViewModel();
+        }
+
+        private async void Button_Clicked(object sender, EventArgs e)
+        {
+            var output = await HttpService.GetAsync<object>("http://192.168.137.1:5001/api/user");
         }
     }
 }

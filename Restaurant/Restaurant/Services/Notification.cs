@@ -36,7 +36,8 @@ namespace Restaurant.Services
             {
                 app_id = "511f254e-f0fe-4353-856d-1ac41bee6027",
                 contents = new { en = "English Message" },
-                included_segments = new string[] { "All" }
+                included_segments = new string[] { "All" },
+                smallIcon="ic_noti"
             };
             var param = JsonConvert.SerializeObject(obj);
             byte[] byteArray = Encoding.UTF8.GetBytes(param);

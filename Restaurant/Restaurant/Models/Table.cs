@@ -9,5 +9,9 @@ namespace Restaurant.Models
         public string Id { get; set; }
         public string TableName { get; set; }
         public TableStatus Status { get; set; }
+
+        public string TableIdOrderServing { get; set; }
+
+        public bool TableIsDeleted { get; set; }
     }
 }

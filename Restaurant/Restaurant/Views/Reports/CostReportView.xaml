@@ -9,6 +9,8 @@
                 HorizontalOptions="CenterAndExpand"
                 Text="Cost Report View"
                 VerticalOptions="CenterAndExpand" />
+            <Image x:Name="img" Source="ic_noti" />
+            <Button Clicked="Button_Clicked" Text="pick image" />
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>

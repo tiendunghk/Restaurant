@@ -11,17 +11,32 @@
                 HasShadow="True"
                 Visual="Material">
                 <StackLayout>
+                    <Switch
+                        HorizontalOptions="EndAndExpand"
+                        IsToggled="True"
+                        VerticalOptions="StartAndExpand" />
+                    <StackLayout Orientation="Horizontal">
+                        <Label HorizontalOptions="StartAndExpand" Text="Tên đăng nhập" />
+                        <Entry HorizontalOptions="EndAndExpand" Placeholder="tên đăng nhập" />
+                    </StackLayout>
                     <StackLayout Orientation="Horizontal">
                         <Label HorizontalOptions="StartAndExpand" Text="Tên" />
-                        <Entry HorizontalOptions="EndAndExpand" Placeholder="Nhân viên 1" />
+                        <Entry HorizontalOptions="FillAndExpand" Placeholder="tên" />
+                    </StackLayout>
+                    <StackLayout Orientation="Horizontal">
+                        <Label HorizontalOptions="StartAndExpand" Text="Visa" />
+                        <Entry HorizontalOptions="EndAndExpand" Placeholder="nhập visa" />
                     </StackLayout>
                     <StackLayout Orientation="Horizontal">
                         <Label HorizontalOptions="StartAndExpand" Text="Role" />
-                        <Entry HorizontalOptions="EndAndExpand" Placeholder="Busboy" />
+                        <Picker
+                            HorizontalOptions="EndAndExpand"
+                            ItemsSource="{Binding Roles}"
+                            SelectedIndex="{Binding SelectedItem}" />
                     </StackLayout>
                     <StackLayout Orientation="Horizontal">
                         <Label HorizontalOptions="StartAndExpand" Text="Ngày sinh" />
-                        <Entry HorizontalOptions="EndAndExpand" Placeholder="24/10/2020" />
+                        <DatePicker HorizontalOptions="EndAndExpand" TextColor="{StaticResource FacebookBlue}" />
                     </StackLayout>
                 </StackLayout>
             </Frame>

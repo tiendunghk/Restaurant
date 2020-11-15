@@ -14,5 +14,6 @@ namespace Restaurant.Models
         public DateTime OrderEnd { get; set; }
         public OrderStatus Status { get; set; }
         public string TableName { get; set; }
+        public string IdWaiter { get; set; }
     }
 }

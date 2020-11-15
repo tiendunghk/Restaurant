@@ -144,7 +144,7 @@
                                                                 CornerRadius="3"
                                                                 HorizontalOptions="EndAndExpand"
                                                                 IsVisible="{Binding Status, Converter={x:StaticResource ShowDeleteButtonConverter}}"
-                                                                Text="Xoa" />
+                                                                Text="Xóa" />
                                                         </StackLayout>
                                                     </Frame>
                                                 </StackLayout>

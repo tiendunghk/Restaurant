@@ -1,4 +1,6 @@
-﻿using Restaurant.ViewModels.Reports;
+﻿using Restaurant.Services;
+using Restaurant.Services.Dialog;
+using Restaurant.ViewModels.Reports;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -16,7 +18,13 @@ namespace Restaurant.Views.Reports
         public CostReportView()
         {
             InitializeComponent();
-            BindingContext = new CostReportViewModel();
+        }
+
+        private async void Button_Clicked(object sender, EventArgs e)
+        {
+            var dialog = ServiceLocator.Instance.Resolve<IDialogService>();
+            var path = await FileService.PickImageAsync(dialog);
+            img.Source = ImageSource.FromFile(path);
         }
     }
 }
