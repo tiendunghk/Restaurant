@@ -11,12 +11,24 @@ namespace Restaurant.ViewModels
 {
     public class LoginViewModel : ViewModelBase
     {
+        string _userName;
+        string _passWord;
         bool _isVisible;
         bool _hide;
         DelegateCommand _loginCommand;
         DelegateCommand _hideImageTapped;
         public DelegateCommand LoginCommand => _loginCommand ??= new DelegateCommand(Login);
         public DelegateCommand HideImageTapped => _hideImageTapped ??= new DelegateCommand(Tapped);
+        public string UserName
+        {
+            get => _userName;
+            set => SetProperty(ref _userName, value);
+        }
+        public string PassWord
+        {
+            get => _passWord;
+            set => SetProperty(ref _passWord, value);
+        }
         public LoginViewModel()
         {
             //Hide = false;
@@ -29,8 +41,14 @@ namespace Restaurant.ViewModels
         {
             IsVisible = true;
             await Task.Delay(2000);
+            var d = Datas.Staffs.ListStaffs.Find(x => x.UserName == UserName && x.PassWord == PassWord);
+            if (d != null)
+            {
+                App.Context.CurrentStaff = d;
+                Application.Current.MainPage = new AppShell();
+            }
+            else await DialogService.ShowAlertAsync("Vui lòng kiểm tra lại tài khoản của bạn!", "Error", "OK");
             IsVisible = false;
-            Application.Current.MainPage = new AppShell();
         }
         public bool Hide
         {

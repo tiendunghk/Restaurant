@@ -23,7 +23,8 @@
                         FontSize="20"
                         HeightRequest="50"
                         HorizontalOptions="FillAndExpand"
-                        Placeholder="Username" />
+                        Placeholder="Username"
+                        Text="{Binding UserName}" />
                 </StackLayout>
                 <StackLayout Margin="10,5,10,0" Spacing="0">
                     <Label
@@ -39,7 +40,8 @@
                             HeightRequest="50"
                             HorizontalOptions="FillAndExpand"
                             IsPassword="{Binding Hide}"
-                            Placeholder="Password" />
+                            Placeholder="Password"
+                            Text="{Binding PassWord}" />
                         <Image
                             HeightRequest="30"
                             Source="{Binding Hide, Converter={x:StaticResource ShowPassWordConverter}}"

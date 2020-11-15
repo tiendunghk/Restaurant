@@ -7,7 +7,8 @@
     xmlns:tabs="clr-namespace:Restaurant.Views.Tabs"
     xmlns:viewmodel="clr-namespace:Restaurant.ViewModels"
     xmlns:views="clr-namespace:Restaurant.Views"
-    xmlns:views1="clr-namespace:Restaurant.Views.Order">
+    xmlns:views1="clr-namespace:Restaurant.Views.Order"
+    FlyoutBackgroundColor="WhiteSmoke">
     <Shell.FlyoutHeader>
         <ContentView HeightRequest="180">
             <ContentView.Background>
@@ -23,14 +24,36 @@
                     HeightRequest="80"
                     HorizontalOptions="Start"
                     Source="default_avatar"
-                    VerticalOptions="End"
+                    VerticalOptions="Center"
                     WidthRequest="80" />
                 <StackLayout
                     Margin="50,20,0,20"
                     HorizontalOptions="Center"
-                    VerticalOptions="End">
-                    <Label Text="Nguyễn Văn A" />
-                    <Label Text="CEO" />
+                    VerticalOptions="Center">
+                    <Label Margin="25,0,0,0" FontFamily="{x:StaticResource AvoBold}">
+                        <Label.FormattedText>
+                            <FormattedString>
+                                <Span Text="Tên: " />
+                                <Span Text="{Binding Staff.Name}" />
+                            </FormattedString>
+                        </Label.FormattedText>
+                    </Label>
+                    <Label Margin="25,0,0,0" FontFamily="{x:StaticResource AvoBold}">
+                        <Label.FormattedText>
+                            <FormattedString>
+                                <Span Text="Vai trò: " />
+                                <Span Text="{Binding Staff.Role}" />
+                            </FormattedString>
+                        </Label.FormattedText>
+                    </Label>
+                    <Label Margin="25,0,0,0" FontFamily="{x:StaticResource AvoBold}">
+                        <Label.FormattedText>
+                            <FormattedString>
+                                <Span Text="Số VISA: " />
+                                <Span Text="{Binding Staff.StaffVisa}" />
+                            </FormattedString>
+                        </Label.FormattedText>
+                    </Label>
                 </StackLayout>
             </Grid>
         </ContentView>

@@ -1,4 +1,6 @@
-﻿using Restaurant.Mvvm.Command;
+﻿using Restaurant.Models;
+using Restaurant.Mvvm;
+using Restaurant.Mvvm.Command;
 using Restaurant.Services.Dialog;
 using Restaurant.ViewModels;
 using Restaurant.Views;
@@ -16,11 +18,13 @@ namespace Restaurant
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class AppShell : Shell
     {
+        public Staff Staff { get; set; }
         DelegateCommand _logoutCommand;
         public DelegateCommand LogoutCommand => _logoutCommand ??= new DelegateCommand(Logout);
         public AppShell()
         {
             InitializeComponent();
+            Staff = App.Context.CurrentStaff;
             BindingContext = this;
             AppShell.SetTabBarIsVisible(this, false);
         }
@@ -30,8 +34,8 @@ namespace Restaurant
             if (answer)
             {
                 Application.Current.MainPage = new LoginView();
-            }    
-                
+            }
+
         }
         protected override async void OnNavigating(ShellNavigatingEventArgs args)
         {
