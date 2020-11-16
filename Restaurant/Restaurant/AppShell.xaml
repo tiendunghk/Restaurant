@@ -59,19 +59,34 @@
         </ContentView>
     </Shell.FlyoutHeader>
     <FlyoutItem Title="Animals" FlyoutDisplayOptions="AsMultipleItems">
-        <ShellContent Title="List Table" Icon="ic_table">
+        <ShellContent
+            Title="List Table"
+            Icon="ic_table"
+            Route="table">
             <views:ListTableView />
         </ShellContent>
-        <ShellContent Title="List Order" Icon="ic_order">
+        <ShellContent
+            Title="List Order"
+            Icon="ic_order"
+            Route="order">
             <views1:ListOrderView />
         </ShellContent>
-        <ShellContent Title="Kitchen" Icon="ic_kitchen">
+        <ShellContent
+            Title="Kitchen"
+            Icon="ic_kitchen"
+            Route="kitchen">
             <views:KitchenListFoodView />
         </ShellContent>
-        <ShellContent Title="Quản lý" Icon="ic_manager">
+        <ShellContent
+            Title="Quản lý"
+            Icon="ic_manager"
+            Route="manager">
             <tabs:ManagerTabView />
         </ShellContent>
-        <ShellContent Title="Báo cáo" Icon="ic_report">
+        <ShellContent
+            Title="Báo cáo"
+            Icon="ic_report"
+            Route="report">
             <tabs:ReportTabView />
         </ShellContent>
     </FlyoutItem>
