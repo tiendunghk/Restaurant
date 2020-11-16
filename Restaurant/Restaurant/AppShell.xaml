@@ -19,7 +19,7 @@
             </ContentView.Background>
             <Grid>
                 <Image
-                    Margin="20"
+                    Margin="8"
                     BackgroundColor="Transparent"
                     HeightRequest="80"
                     HorizontalOptions="Start"
@@ -27,7 +27,7 @@
                     VerticalOptions="Center"
                     WidthRequest="80" />
                 <StackLayout
-                    Margin="50,20,0,20"
+                    Margin="55,20,0,20"
                     HorizontalOptions="Center"
                     VerticalOptions="Center">
                     <Label Margin="25,0,0,0" FontFamily="{x:StaticResource AvoBold}">

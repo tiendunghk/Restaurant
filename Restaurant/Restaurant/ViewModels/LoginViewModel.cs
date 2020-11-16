@@ -11,10 +11,10 @@ namespace Restaurant.ViewModels
 {
     public class LoginViewModel : ViewModelBase
     {
-        string _userName;
-        string _passWord;
+        string _userName = "e";
+        string _passWord = "1";
         bool _isVisible;
-        bool _hide;
+        bool _hide = true;
         DelegateCommand _loginCommand;
         DelegateCommand _hideImageTapped;
         public DelegateCommand LoginCommand => _loginCommand ??= new DelegateCommand(Login);

@@ -23,19 +23,25 @@
                                 </StackLayout.GestureRecognizers>
                                 <StackLayout>
                                     <Frame CornerRadius="5">
-                                        <StackLayout>
+                                        <StackLayout Orientation="Horizontal">
                                             <Label
-                                                Margin="5"
                                                 HorizontalOptions="StartAndExpand"
-                                                Text="{Binding OrderDate, StringFormat='{0:MM/dd/yyyy h:mm tt}'}" />
-                                            <Label Margin="5" VerticalOptions="EndAndExpand">
-                                                <Label.FormattedText>
-                                                    <FormattedString>
-                                                        <Span Text="Tổng tiền: " />
-                                                        <Span Text="{Binding OrderTotalAmount}" />
-                                                    </FormattedString>
-                                                </Label.FormattedText>
-                                            </Label>
+                                                Text="{Binding TableName}"
+                                                VerticalOptions="CenterAndExpand" />
+                                            <StackLayout>
+                                                <Label
+                                                    Margin="5"
+                                                    HorizontalOptions="StartAndExpand"
+                                                    Text="{Binding OrderDate, StringFormat='{0:MM/dd/yyyy h:mm tt}'}" />
+                                                <Label Margin="5" VerticalOptions="EndAndExpand">
+                                                    <Label.FormattedText>
+                                                        <FormattedString>
+                                                            <Span Text="Tổng tiền: " />
+                                                            <Span Text="{Binding OrderTotalAmount}" />
+                                                        </FormattedString>
+                                                    </Label.FormattedText>
+                                                </Label>
+                                            </StackLayout>
                                         </StackLayout>
                                     </Frame>
                                 </StackLayout>
