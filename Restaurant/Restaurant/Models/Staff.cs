@@ -1,11 +1,12 @@
 ﻿using Newtonsoft.Json;
+using Restaurant.Mvvm;
 using System;
 using System.Collections.Generic;
 using System.Text;
 
 namespace Restaurant.Models
 {
-    public class Staff
+    public class Staff : BindableBase
     {
         public string Id { get; set; }
 
@@ -27,6 +28,11 @@ namespace Restaurant.Models
 
         public string Token;
         public string ExternalId { get; set; }
-        public bool IsActive { get; set; }
+        bool _isActive = true;
+        public bool IsActive
+        {
+            get => _isActive;
+            set => SetProperty(ref _isActive, value);
+        }
     }
 }

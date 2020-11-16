@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 
 namespace Restaurant.Services
@@ -47,6 +48,10 @@ namespace Restaurant.Services
                     str = str.Replace(VietnameseSigns[i][j], VietnameseSigns[0][i - 1]);
             }
             return str;
+        }
+        public static IList<T> Clone<T>(this IList<T> listToClone) where T : ICloneable
+        {
+            return listToClone.Select(item => (T)item.Clone()).ToList();
         }
     }
 }
