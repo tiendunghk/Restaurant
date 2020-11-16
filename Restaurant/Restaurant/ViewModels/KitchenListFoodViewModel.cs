@@ -23,7 +23,7 @@ namespace Restaurant.ViewModels
             {
                 SetProperty(ref _foodSearch, value);
                 if (string.IsNullOrEmpty(value))
-                    ListItems = new ObservableCollection<FoodHeaderInfo>(ListItemsBackup.Clone());
+                    ListItems = ListItemsBackup;
             }
         }
         DelegateCommand _searchCommand;
@@ -62,6 +62,7 @@ namespace Restaurant.ViewModels
                     {
                         if (e.OrderDetailUIId == str.OrderDetailUIId)
                         {
+                            Datas.Orders.ListOrderDetails.Remove(e.OrderDetail);
                             elem.Remove(e);
                             if (elem.Count == 0)
                                 ListItems.Remove(elem);
@@ -92,7 +93,7 @@ namespace Restaurant.ViewModels
         }
         void FakeData()
         {
-            ListOrders = Datas.Orders.ListOrders.Clone().ToList();
+            ListOrders = Datas.Orders.ListOrders;
             ListItems = new ObservableCollection<FoodHeaderInfo>();
             FoodHeaderInfo obj;
             Dish d;
@@ -110,7 +111,7 @@ namespace Restaurant.ViewModels
                         {
                             OrderDetailUIId = Guid.NewGuid().ToString("N"),
                             OrderId = ListOrders[i].Id,
-                            OrderDetail = e.Clone() as OrderDetail,
+                            OrderDetail = e,
                             NameDish = d.Name,
                             ImageUrl = d.DishImage,
                             Status = e.OrderDetailStatus,
@@ -121,25 +122,31 @@ namespace Restaurant.ViewModels
                 }
                 ListItems.Add(obj);
             }
-            ListItemsBackup = new ObservableCollection<FoodHeaderInfo>(ListItems.Clone());
+            ListItemsBackup = ListItems;
         }
         async void Search()
         {
+            FoodHeaderInfo obj;
             var unicodeKeyword = Helpers.RemoveSign4VietnameseString(FoodSearch).ToLower();
-            var lists = ListItemsBackup.ToList().Clone().ToList();
+            var lists = ListItemsBackup;
+            var pivot = new ObservableCollection<FoodHeaderInfo>();
             for (int i = 0; i < lists.Count; i++)
             {
+                obj = new FoodHeaderInfo();
                 for (int j = 0; j < lists[i].Count; j++)
                 {
-                    if (!Helpers.RemoveSign4VietnameseString(lists[i][j].Dish.Name).ToLower().Contains(unicodeKeyword))
+                    if (Helpers.RemoveSign4VietnameseString(lists[i][j].Dish.Name).ToLower().Contains(unicodeKeyword))
                     {
-                        lists[i].RemoveAt(j);
+                        obj.Add(lists[i][j]);
                     }
                 }
-                if (lists[i].Count == 0)
-                    lists.RemoveAt(i);
+                if (obj.Count != 0)
+                {
+                    obj.Header = lists[i].Header;
+                    pivot.Add(obj);
+                }
             }
-            ListItems = new ObservableCollection<FoodHeaderInfo>(lists);
+            ListItems = pivot;
         }
     }
 }
