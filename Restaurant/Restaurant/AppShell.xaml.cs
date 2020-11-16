@@ -43,7 +43,7 @@ namespace Restaurant
             //base.OnNavigating(args);
             if (args.Target.Location.OriginalString.Contains("2"))
             {
-                //order
+                //Table
                 App.Context.TableClickCount++;
                 if (App.Context.TableClickCount <= 1)
                     MessagingCenter.Send("abc", "LoadDataTable");
@@ -57,11 +57,51 @@ namespace Restaurant
             }
             if (args.Target.Location.OriginalString.Contains("6"))
             {
-                //kitchen
-                App.Context.KitchenClickCount++;
-                if (App.Context.KitchenClickCount <= 1)
-                    MessagingCenter.Send("abc", "LoadDataKitchen");
+                if (App.Context.CurrentStaff.Role != "Kitchen")
+                {
+                    args.Cancel();
+                    await ServiceLocator.Instance.Resolve<IDialogService>().ShowAlertAsync("Bạn không có quyền truy cập", "Cảnh báo", "OK");
+                }
+                else
+                {
+                    //kitchen
+                    App.Context.KitchenClickCount++;
+                    if (App.Context.KitchenClickCount <= 1)
+                        MessagingCenter.Send("abc", "LoadDataKitchen");
+                }
+
             }
+            if (args.Target.Location.OriginalString.Contains("8"))
+            {
+                if (App.Context.CurrentStaff.Role != "Manager")
+                {
+                    args.Cancel();
+                    await ServiceLocator.Instance.Resolve<IDialogService>().ShowAlertAsync("Bạn không có quyền truy cập", "Cảnh báo", "OK");
+                }
+                else
+                {
+                    //manager
+                }
+
+            }
+            if (args.Target.Location.OriginalString.Contains("10"))
+            {
+                if (App.Context.CurrentStaff.Role != "Manager")
+                {
+                    args.Cancel();
+                    await ServiceLocator.Instance.Resolve<IDialogService>().ShowAlertAsync("Bạn không có quyền truy cập", "Cảnh báo", "OK");
+                }
+                else
+                {
+                    //report
+                }
+
+            }
+        }
+        protected override bool OnBackButtonPressed()
+        {
+            Current.Navigation.PopAsync(true);
+            return true;
         }
     }
 }
