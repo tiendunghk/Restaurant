@@ -9,18 +9,39 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Xamarin.Forms;
+using Restaurant.Services;
 
 namespace Restaurant.ViewModels
 {
     public class TableDetailViewModel : ViewModelBase
     {
         OrderModel order = null;
-        DelegateCommand<string> _fabCommand;
+        DelegateCommand _searchCommand;
         DelegateCommand<object> _tappedCommand;
         DelegateCommand<Dish> _detailCommand;
         public DelegateCommand<object> TappedCommand => _tappedCommand ??= new DelegateCommand<object>(Tapped);
         public DelegateCommand<Dish> DetailCommand => _detailCommand ??= new DelegateCommand<Dish>(ShowDetail);
+        public DelegateCommand SearchCommand => _searchCommand ??= new DelegateCommand(Search);
+
         ObservableCollection<Dish> _tests;
+        public ObservableCollection<Dish> BackupDish { get; set; }
+        string _monan;
+        public string MonAn
+        {
+            get => _monan;
+            set
+            {
+                SetProperty(ref _monan, value);
+                if (string.IsNullOrEmpty(value))
+                    Tests = BackupDish;
+            }
+        }
+        bool _searchMonAn;
+        public bool SearchMonAn
+        {
+            get => _searchMonAn;
+            set => SetProperty(ref _searchMonAn, value);
+        }
         public ObservableCollection<Dish> Tests
         {
             get => _tests;
@@ -58,6 +79,7 @@ namespace Restaurant.ViewModels
             };
             SelectedIndex = 0;
             Tests = new ObservableCollection<Dish>(Datas.Dishs.ListDishs);
+            BackupDish = Tests;
         }
         public string TableId { get; set; }
         public override Task OnNavigationAsync(NavigationParameters parameters, NavigationType navigationType)
@@ -138,6 +160,15 @@ namespace Restaurant.ViewModels
             {
                 {"Food",dish }
             });
+        }
+        async void Search()
+        {
+            SearchMonAn = true;
+            var unicodeKeyword = Helpers.RemoveSign4VietnameseString(MonAn).ToLower();
+            Tests = new ObservableCollection<Dish>();
+            await Task.Delay(1500);
+            SearchMonAn = false;
+            Tests = new ObservableCollection<Dish>(BackupDish.Where(x => Helpers.RemoveSign4VietnameseString(x.Name).ToLower().Contains(unicodeKeyword)));
         }
     }
 }

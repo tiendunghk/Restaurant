@@ -48,7 +48,15 @@
                     <tabView:SfTabItem.Content>
                         <StackLayout BackgroundColor="{x:StaticResource Backgroud}" VerticalOptions="StartAndExpand">
                             <Label Margin="8" Text="Thực đơn (VND)" />
-                            <SearchBar Placeholder="Search dish" />
+                            <ActivityIndicator
+                                HeightRequest="35"
+                                IsRunning="{Binding SearchMonAn}"
+                                IsVisible="{Binding SearchMonAn}"
+                                WidthRequest="35" />
+                            <SearchBar
+                                Placeholder="Search dish"
+                                SearchCommand="{Binding SearchCommand}"
+                                Text="{Binding MonAn}" />
                             <ScrollView>
                                 <StackLayout BindableLayout.ItemsSource="{Binding Tests}">
                                     <BindableLayout.ItemTemplate>
