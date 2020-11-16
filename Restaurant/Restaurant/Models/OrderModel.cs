@@ -4,7 +4,7 @@ using System.Text;
 
 namespace Restaurant.Models
 {
-    public class OrderModel
+    public class OrderModel : ICloneable
     {
         public string Id { get; set; }
         public string StaffId { get; set; }
@@ -16,5 +16,10 @@ namespace Restaurant.Models
         public OrderStatus Status { get; set; }
         public string TableName { get; set; }
         public string IdWaiter { get; set; }
+
+        public object Clone()
+        {
+            return MemberwiseClone();
+        }
     }
 }

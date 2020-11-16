@@ -4,7 +4,7 @@ using System.Text;
 
 namespace Restaurant.Models
 {
-    public class OrderDetail
+    public class OrderDetail : ICloneable
     {
         public string OrderDetailId { get; set; }
         public string DishId { get; set; }
@@ -14,5 +14,9 @@ namespace Restaurant.Models
         public DateTime OrderDetailStartTime { get; set; }
         public DateTime OrderDetailEndTime { get; set; }
 
+        public object Clone()
+        {
+            return MemberwiseClone();
+        }
     }
 }

@@ -92,7 +92,7 @@ namespace Restaurant.ViewModels
         }
         void FakeData()
         {
-            ListOrders = Datas.Orders.ListOrders;
+            ListOrders = Datas.Orders.ListOrders.Clone().ToList();
             ListItems = new ObservableCollection<FoodHeaderInfo>();
             FoodHeaderInfo obj;
             Dish d;
@@ -110,7 +110,7 @@ namespace Restaurant.ViewModels
                         {
                             OrderDetailUIId = Guid.NewGuid().ToString("N"),
                             OrderId = ListOrders[i].Id,
-                            OrderDetail = e,
+                            OrderDetail = e.Clone() as OrderDetail,
                             NameDish = d.Name,
                             ImageUrl = d.DishImage,
                             Status = e.OrderDetailStatus,
