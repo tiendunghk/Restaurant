@@ -1,5 +1,6 @@
 ﻿using Restaurant.Models;
 using Restaurant.Mvvm.Command;
+using Restaurant.Services;
 using Restaurant.Services.Navigation;
 using Restaurant.ViewModels.Base;
 using System;
@@ -14,14 +15,28 @@ namespace Restaurant.ViewModels
 {
     public class KitchenListFoodViewModel : ViewModelBase
     {
+        string _foodSearch;
+        public string FoodSearch
+        {
+            get => _foodSearch;
+            set
+            {
+                SetProperty(ref _foodSearch, value);
+                if (string.IsNullOrEmpty(value))
+                    ListItems = new ObservableCollection<FoodHeaderInfo>(ListItemsBackup.Clone());
+            }
+        }
+        DelegateCommand _searchCommand;
         DelegateCommand<OrderDetailUI> _callWaiterCommand;
         public DelegateCommand<OrderDetailUI> CallWaiterCommand => _callWaiterCommand ??= new DelegateCommand<OrderDetailUI>(CallWaiter);
+        public DelegateCommand SearchCommand => _searchCommand ??= new DelegateCommand(Search);
         ObservableCollection<FoodHeaderInfo> _listItems;
         public ObservableCollection<FoodHeaderInfo> ListItems
         {
             get => _listItems;
             set => SetProperty(ref _listItems, value);
         }
+        public ObservableCollection<FoodHeaderInfo> ListItemsBackup;
         public KitchenListFoodViewModel()
         {
             Title = "Danh sách đang chờ";
@@ -106,6 +121,25 @@ namespace Restaurant.ViewModels
                 }
                 ListItems.Add(obj);
             }
+            ListItemsBackup = new ObservableCollection<FoodHeaderInfo>(ListItems.Clone());
+        }
+        async void Search()
+        {
+            var unicodeKeyword = Helpers.RemoveSign4VietnameseString(FoodSearch).ToLower();
+            var lists = ListItemsBackup.ToList().Clone().ToList();
+            for (int i = 0; i < lists.Count; i++)
+            {
+                for (int j = 0; j < lists[i].Count; j++)
+                {
+                    if (!Helpers.RemoveSign4VietnameseString(lists[i][j].Dish.Name).ToLower().Contains(unicodeKeyword))
+                    {
+                        lists[i].RemoveAt(j);
+                    }
+                }
+                if (lists[i].Count == 0)
+                    lists.RemoveAt(i);
+            }
+            ListItems = new ObservableCollection<FoodHeaderInfo>(lists);
         }
     }
 }

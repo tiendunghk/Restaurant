@@ -5,8 +5,13 @@ using System.Text;
 
 namespace Restaurant.Models
 {
-    public class FoodHeaderInfo: ObservableCollection<OrderDetailUI>
+    public class FoodHeaderInfo : ObservableCollection<OrderDetailUI>, ICloneable
     {
         public string Header { get; set; }
+
+        public object Clone()
+        {
+            return MemberwiseClone();
+        }
     }
 }

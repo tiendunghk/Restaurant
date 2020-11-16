@@ -12,7 +12,10 @@
                 IsRunning="{Binding IsLoadingData}"
                 IsVisible="{Binding IsLoadingData}"
                 WidthRequest="35" />
-            <SearchBar Placeholder="Type here" />
+            <SearchBar
+                Placeholder="Type here"
+                SearchCommand="{Binding SearchCommand}"
+                Text="{Binding FoodSearch}" />
             <ScrollView IsVisible="{Binding IsLoadingData, Converter={x:StaticResource InverseBoolConverter}}">
                 <StackLayout Margin="10" BindableLayout.ItemsSource="{Binding ListItems}">
                     <BindableLayout.ItemTemplate>
