@@ -5,81 +5,83 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     NavigationPage.HasNavigationBar="False">
     <ContentPage.Content>
-        <StackLayout BackgroundColor="#E7F6FE">
-            <StackLayout Margin="20,15,20,0">
-                <Image
-                    Aspect="AspectFit"
-                    HeightRequest="150"
-                    Source="logo_login"
-                    WidthRequest="150" />
-                <StackLayout Margin="10,70,10,0">
-                    <Label
-                        Margin="5,0,0,-5"
-                        FontAttributes="Bold"
-                        FontSize="19"
-                        Text="Tài khoản"
-                        TextColor="Gray" />
-                    <Entry
-                        FontSize="20"
-                        HeightRequest="50"
-                        HorizontalOptions="FillAndExpand"
-                        Placeholder="Username"
-                        Text="{Binding UserName}" />
-                </StackLayout>
-                <StackLayout Margin="10,5,10,0" Spacing="0">
-                    <Label
-                        Margin="5,0,0,-5"
-                        FontAttributes="Bold"
-                        FontSize="19"
-                        Text="Mật khẩu"
-                        TextColor="Gray" />
-                    <StackLayout Orientation="Horizontal">
+        <Grid>
+            <StackLayout BackgroundColor="#E7F6FE">
+                <StackLayout Margin="20,15,20,0">
+                    <Image
+                        Aspect="AspectFit"
+                        HeightRequest="120"
+                        Source="logo_login"
+                        WidthRequest="120" />
+                    <StackLayout Margin="10,70,10,0">
+                        <Label
+                            Margin="5,0,0,-5"
+                            FontAttributes="Bold"
+                            FontSize="19"
+                            Text="Tài khoản"
+                            TextColor="Gray" />
                         <Entry
-                            x:Name="password"
                             FontSize="20"
                             HeightRequest="50"
                             HorizontalOptions="FillAndExpand"
-                            IsPassword="{Binding Hide}"
-                            Placeholder="Password"
-                            Text="{Binding PassWord}" />
-                        <Image
-                            HeightRequest="30"
-                            Source="{Binding Hide, Converter={x:StaticResource ShowPassWordConverter}}"
-                            WidthRequest="30">
-                            <Image.GestureRecognizers>
-                                <TapGestureRecognizer Command="{Binding HideImageTapped}" />
-                            </Image.GestureRecognizers>
-                        </Image>
+                            Placeholder="Username"
+                            Text="{Binding UserName}" />
                     </StackLayout>
+                    <StackLayout Margin="10,5,10,0" Spacing="0">
+                        <Label
+                            Margin="5,0,0,-5"
+                            FontAttributes="Bold"
+                            FontSize="19"
+                            Text="Mật khẩu"
+                            TextColor="Gray" />
+                        <StackLayout Orientation="Horizontal">
+                            <Entry
+                                x:Name="password"
+                                FontSize="20"
+                                HeightRequest="50"
+                                HorizontalOptions="FillAndExpand"
+                                IsPassword="{Binding Hide}"
+                                Placeholder="Password"
+                                Text="{Binding PassWord}" />
+                            <Image
+                                HeightRequest="30"
+                                Source="{Binding Hide, Converter={x:StaticResource ShowPassWordConverter}}"
+                                WidthRequest="30">
+                                <Image.GestureRecognizers>
+                                    <TapGestureRecognizer Command="{Binding HideImageTapped}" />
+                                </Image.GestureRecognizers>
+                            </Image>
+                        </StackLayout>
+                    </StackLayout>
+                    <Label
+                        Margin="0,0,15,0"
+                        HorizontalOptions="EndAndExpand"
+                        Text="Quên mật khẩu?"
+                        TextDecorations="Underline" />
+
+                    <Button
+                        Margin="10,20,10,0"
+                        BackgroundColor="#2196F3"
+                        Command="{Binding LoginCommand}"
+                        CornerRadius="5"
+                        FontSize="20"
+                        HeightRequest="50"
+                        Text="Đăng nhập"
+                        TextColor="White"
+                        WidthRequest="300" />
+                    <ActivityIndicator
+                        HeightRequest="25"
+                        IsEnabled="{Binding IsVisible}"
+                        IsRunning="{Binding IsVisible}"
+                        WidthRequest="25" />
                 </StackLayout>
                 <Label
-                    Margin="0,0,15,0"
-                    HorizontalOptions="EndAndExpand"
-                    Text="Quên mật khẩu?"
-                    TextDecorations="Underline" />
-
-                <Button
-                    Margin="10,20,10,0"
-                    BackgroundColor="#2196F3"
-                    Command="{Binding LoginCommand}"
-                    CornerRadius="5"
-                    FontSize="20"
-                    HeightRequest="50"
-                    Text="Đăng nhập"
-                    TextColor="White"
-                    WidthRequest="300" />
-                <ActivityIndicator
-                    HeightRequest="25"
-                    IsEnabled="{Binding IsVisible}"
-                    IsRunning="{Binding IsVisible}"
-                    WidthRequest="25" />
+                    Margin="25"
+                    HorizontalOptions="Center"
+                    Opacity=".7"
+                    Text="SE109.L11"
+                    VerticalOptions="End" />
             </StackLayout>
-            <Label
-                Margin="25"
-                HorizontalOptions="Center"
-                Opacity=".7"
-                Text="SE109.L11"
-                VerticalOptions="End" />
-        </StackLayout>
+        </Grid>
     </ContentPage.Content>
 </ContentPage>
