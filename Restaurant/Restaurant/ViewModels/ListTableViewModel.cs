@@ -38,7 +38,7 @@ namespace Restaurant.ViewModels
         {
             var parameters = new NavigationParameters();
             parameters.Add("title", table.TableName);
-            parameters.Add("tableId", table.Id);
+            parameters.Add("table", table);
             await NavigationService.NavigateToAsync<TableDetailViewModel>(parameters);
         }
     }

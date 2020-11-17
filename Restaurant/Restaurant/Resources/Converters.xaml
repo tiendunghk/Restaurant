@@ -11,4 +11,5 @@
     <converters:ShowDeleteButtonConverter x:Key="ShowDeleteButtonConverter" />
     <converters:KitchenButtonTextConverter x:Key="KitchenButtonTextConverter" />
     <converters:StatusActiveConverter x:Key="StatusActiveConverter" />
+    <converters:TableStatusToTextConverter x:Key="TableStatusToTextConverter" />
 </ResourceDictionary>
