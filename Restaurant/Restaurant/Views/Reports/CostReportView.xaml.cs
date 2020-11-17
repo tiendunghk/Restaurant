@@ -25,6 +25,7 @@ namespace Restaurant.Views.Reports
             var dialog = ServiceLocator.Instance.Resolve<IDialogService>();
             var path = await FileService.PickImageAsync(dialog);
             img.Source = ImageSource.FromFile(path);
+            var xxx = await FileService.UploadImageCloudinary(path);
         }
     }
 }

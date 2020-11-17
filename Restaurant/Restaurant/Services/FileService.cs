@@ -1,4 +1,8 @@
-﻿using Plugin.Media;
+﻿using Acr.UserDialogs;
+using CloudinaryDotNet;
+using CloudinaryDotNet.Actions;
+using Newtonsoft.Json;
+using Plugin.Media;
 using Plugin.Media.Abstractions;
 using Restaurant.Services.Dialog;
 using System;
@@ -78,6 +82,34 @@ namespace Restaurant.Services
             }
 
             return true;
+        }
+        public static async Task<string> UploadImageCloudinary(string imgPath)
+        {
+            string output = string.Empty;
+            Account account = new Account(
+                        "ungdung-grocery-xamarin-by-dk",
+                        "378791526477571",
+                        "scsyCxQS_C74MbAGdOutpwrzlnU"
+                        );
+
+            Cloudinary cloudinary = new Cloudinary(account);
+            var uploadParams = new ImageUploadParams()
+            {
+                File = new FileDescription(imgPath)
+            };
+            try
+            {
+                using (UserDialogs.Instance.Loading("Saving.."))
+                {
+                    var uploadResult = await cloudinary.UploadAsync(uploadParams);
+                    output = uploadResult.SecureUri.ToString();
+                }
+            }
+            catch (Exception)
+            {
+
+            }
+            return output;
         }
     }
 }
