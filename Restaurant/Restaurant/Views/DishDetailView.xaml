@@ -15,17 +15,26 @@
                         <Label HorizontalOptions="StartAndExpand" Text="Tên" />
                         <Label HorizontalOptions="FillAndExpand" Text="{Binding Obj.Name}" />
                     </StackLayout>
-                    <BoxView BackgroundColor="Gray" HeightRequest="1" />
+                    <BoxView
+                        BackgroundColor="Gray"
+                        HeightRequest="1"
+                        Opacity=".3" />
                     <StackLayout Orientation="Horizontal">
                         <Label HorizontalOptions="StartAndExpand" Text="Giá" />
                         <Label HorizontalOptions="FillAndExpand" Text="{Binding Obj.Price}" />
                     </StackLayout>
-                    <BoxView BackgroundColor="Gray" HeightRequest="1" />
+                    <BoxView
+                        BackgroundColor="Gray"
+                        HeightRequest="1"
+                        Opacity=".3" />
                     <StackLayout Orientation="Horizontal">
                         <Label HorizontalOptions="StartAndExpand" Text="Loại" />
                         <Label HorizontalOptions="EndAndExpand" Text="Món chính" />
                     </StackLayout>
-                    <BoxView BackgroundColor="Gray" HeightRequest="1" />
+                    <BoxView
+                        BackgroundColor="Gray"
+                        HeightRequest="1"
+                        Opacity=".3" />
                     <StackLayout Orientation="Horizontal">
                         <Label HorizontalOptions="StartAndExpand" Text="Hình minh họa" />
                         <Frame
@@ -44,7 +53,10 @@
                             </StackLayout>
                         </Frame>
                     </StackLayout>
-                    <BoxView BackgroundColor="Gray" HeightRequest="1" />
+                    <BoxView
+                        BackgroundColor="Gray"
+                        HeightRequest="1"
+                        Opacity=".3" />
                     <StackLayout>
                         <Label Text="Mô tả" />
                         <Label HorizontalOptions="FillAndExpand" Text="{Binding Obj.Description}" />

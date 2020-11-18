@@ -22,11 +22,13 @@ namespace Restaurant.ViewModels
         DelegateCommand<object> _tappedCommand;
         DelegateCommand<Dish> _detailCommand;
         DelegateCommand _submitStatusCommand;
+        DelegateCommand<OrderDetailUI> _viewDishCommand;
         public DelegateCommand<object> TappedCommand => _tappedCommand ??= new DelegateCommand<object>(Tapped);
         public DelegateCommand<Dish> DetailCommand => _detailCommand ??= new DelegateCommand<Dish>(ShowDetail);
         public DelegateCommand SearchCommand => _searchCommand ??= new DelegateCommand(Search);
         public DelegateCommand SubmitStatusCommand => _submitStatusCommand ??= new DelegateCommand(SubmitStatus, () => CanSave()).ObservesProperty(() => App.Context.CurrentStaff);
         public DelegateCommand ChangeTableStatusCommand => _changeTableStatusCommand ??= new DelegateCommand(ChangeTableStatus);
+        public DelegateCommand<OrderDetailUI> ViewDishCommand => _viewDishCommand ??= new DelegateCommand<OrderDetailUI>(ViewDish);
 
         ObservableCollection<Dish> _tests;
         public ObservableCollection<Dish> BackupDish { get; set; }
@@ -117,7 +119,7 @@ namespace Restaurant.ViewModels
         {
             var a = Tests;
             if (order == null) order = new OrderModel { Id = Guid.NewGuid().ToString("N") };
-            foreach (var elem in Tests)
+            foreach (var elem in BackupDish)
             {
                 if (elem.SoLuong > 0)
                 {
@@ -129,13 +131,14 @@ namespace Restaurant.ViewModels
                             OrderDetail = new OrderDetail
                             {
                                 OrderDetailId = Guid.NewGuid().ToString("N"),
-                                DishId = elem.Id
+                                DishId = elem.Id,
+                                OrderDetail_OrderID = order.Id,
                             },
                             NameDish = elem.Name,
                             ImageUrl = elem.DishImage,
-                            Status = OrderDetailStatus.WAITING
+                            Status = OrderDetailStatus.WAITING,
+                            Dish = elem,
                         });
-
                     }
                     elem.SoLuong = 0;
                 }
@@ -211,6 +214,13 @@ namespace Restaurant.ViewModels
                 await DialogService.ShowAlertAsync("Trạng thái bàn đã chuyển từ CLEAN sang OCCUPIED", "Thông báo", "OK");
                 return;
             }
+        }
+        async void ViewDish(OrderDetailUI ui)
+        {
+            await NavigationService.NavigateToAsync<DishDetailViewModel>(new NavigationParameters
+            {
+                {"Food",ui.Dish }
+            });
         }
     }
 }

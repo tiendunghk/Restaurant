@@ -40,20 +40,13 @@
                                                     CornerRadius="5"
                                                     HasShadow="True">
                                                     <StackLayout Orientation="Horizontal">
+                                                        <StackLayout.GestureRecognizers>
+                                                            <TapGestureRecognizer Command="{Binding BindingContext.DetailCommand, Source={x:Reference Root}}" CommandParameter="{Binding .}" />
+                                                        </StackLayout.GestureRecognizers>
                                                         <StackLayout HorizontalOptions="StartAndExpand" Orientation="Vertical">
                                                             <Label Text="{Binding Name}" />
                                                             <Label Text="{Binding Price}" />
                                                         </StackLayout>
-                                                        <Image
-                                                            Aspect="AspectFill"
-                                                            HeightRequest="60"
-                                                            HorizontalOptions="CenterAndExpand"
-                                                            Source="com_tam"
-                                                            WidthRequest="60">
-                                                            <Image.GestureRecognizers>
-                                                                <TapGestureRecognizer Command="{Binding BindingContext.DetailCommand, Source={x:Reference Root}}" CommandParameter="{Binding .}" />
-                                                            </Image.GestureRecognizers>
-                                                        </Image>
                                                         <StackLayout HorizontalOptions="EndAndExpand" Orientation="Vertical">
                                                             <Label>
                                                                 <Label.FormattedText>
@@ -110,6 +103,9 @@
                                         <BindableLayout.ItemTemplate>
                                             <DataTemplate>
                                                 <StackLayout Spacing="5">
+                                                    <StackLayout.GestureRecognizers>
+                                                        <TapGestureRecognizer Command="{Binding BindingContext.ViewDishCommand, Source={x:Reference Root}}" CommandParameter="{Binding .}" />
+                                                    </StackLayout.GestureRecognizers>
                                                     <Frame CornerRadius="5">
                                                         <StackLayout Orientation="Horizontal">
                                                             <StackLayout HorizontalOptions="StartAndExpand">
@@ -120,6 +116,7 @@
                                                                 Aspect="AspectFill"
                                                                 HeightRequest="30"
                                                                 HorizontalOptions="CenterAndExpand"
+                                                                IsVisible="False"
                                                                 Source="{Binding ImageUrl}"
                                                                 WidthRequest="30" />
                                                             <Button

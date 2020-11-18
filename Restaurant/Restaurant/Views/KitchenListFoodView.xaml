@@ -13,6 +13,7 @@
                 IsVisible="{Binding IsLoadingData}"
                 WidthRequest="35" />
             <SearchBar
+                IsVisible="False"
                 Placeholder="Type here"
                 SearchCommand="{Binding SearchCommand}"
                 Text="{Binding FoodSearch}" />
