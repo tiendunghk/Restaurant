@@ -36,12 +36,11 @@
                                                 <StackLayout>
                                                     <Label HorizontalOptions="StartAndExpand" Text="{Binding NameDish}" />
                                                     <Image
-                                                        Margin="0,0,8,0"
-                                                        Aspect="AspectFill"
-                                                        HeightRequest="50"
+                                                        Aspect="AspectFit"
+                                                        HeightRequest="60"
                                                         HorizontalOptions="CenterAndExpand"
                                                         Source="{Binding ImageUrl}"
-                                                        WidthRequest="50" />
+                                                        WidthRequest="80" />
                                                 </StackLayout>
                                                 <Button
                                                     BackgroundColor="{x:StaticResource FacebookBlue}"
