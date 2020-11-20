@@ -152,14 +152,8 @@ namespace Restaurant.ViewModels
         }
         bool CanSubmit()
         {
-            int c = 0;
-            foreach (var e in Tests)
-            {
-                if (e.SoLuong > 0) c++;
-            }
-            if (c > 0) return true;
-            else
-                return false;
+            var count = Tests.Where(x => x.SoLuong > 0).Count();
+            return count > 0 ? true : false;
         }
         DelegateCommand _purchaseCommand;
         public DelegateCommand PurchaseCommand => _purchaseCommand ??= new DelegateCommand(Purchase, () => CanPurchase()).ObservesProperty(() => OrderedItems);

@@ -69,28 +69,14 @@
                                     </BindableLayout.ItemTemplate>
                                 </StackLayout>
                             </ScrollView>
-
-                            <AbsoluteLayout>
-                                <Button
-                                    Margin="0,0,0,8"
-                                    AbsoluteLayout.LayoutBounds=".5,.6,70,90"
-                                    AbsoluteLayout.LayoutFlags="PositionProportional"
-                                    BackgroundColor="{x:StaticResource FacebookBlue}"
-                                    Command="{Binding SubmitCommand}"
-                                    CornerRadius="5"
-                                    HorizontalOptions="Center"
-                                    Text="Submit"
-                                    VerticalOptions="End" />
-                                <!--<ImageButton
-                                    AbsoluteLayout.LayoutBounds=".9,.5,60,80"
-                                    AbsoluteLayout.LayoutFlags="PositionProportional"
-                                    BackgroundColor="Transparent"
-                                    Command="{Binding FABCommand}"
-                                    CommandParameter="{Binding Title, Source={x:Reference Root}}"
-                                    HeightRequest="70"
-                                    Source="fab.png"
-                                    WidthRequest="70" />-->
-                            </AbsoluteLayout>
+                            <Button
+                                Margin="5"
+                                BackgroundColor="{x:StaticResource FacebookBlue}"
+                                Command="{Binding SubmitCommand}"
+                                CornerRadius="5"
+                                HorizontalOptions="Center"
+                                Text="Submit"
+                                VerticalOptions="End" />
                         </StackLayout>
                     </tabView:SfTabItem.Content>
                 </tabView:SfTabItem>
