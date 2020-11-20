@@ -42,7 +42,7 @@
                         <Label.FormattedText>
                             <FormattedString>
                                 <Span Text="Vai trò: " />
-                                <Span Text="{Binding Staff.Role}" />
+                                <Span Text="{Binding Staff.Role, Converter={StaticResource RoleToTextConverter}}" />
                             </FormattedString>
                         </Label.FormattedText>
                     </Label>

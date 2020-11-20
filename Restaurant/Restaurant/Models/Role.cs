@@ -4,7 +4,7 @@ using System.Text;
 
 namespace Restaurant.Models
 {
-    class Role
+    public class Role
     {
         public string RoleId { get; set; }
 

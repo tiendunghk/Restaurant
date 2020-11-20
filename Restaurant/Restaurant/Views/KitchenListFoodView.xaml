@@ -33,21 +33,24 @@
                                     <BindableLayout.ItemTemplate>
                                         <DataTemplate>
                                             <StackLayout Orientation="Horizontal">
-                                                <Label HorizontalOptions="StartAndExpand" Text="{Binding NameDish}" />
-                                                <Image
-                                                    Margin="0,0,8,0"
-                                                    Aspect="AspectFill"
-                                                    HeightRequest="50"
-                                                    HorizontalOptions="CenterAndExpand"
-                                                    Source="{Binding ImageUrl}"
-                                                    WidthRequest="50" />
+                                                <StackLayout>
+                                                    <Label HorizontalOptions="StartAndExpand" Text="{Binding NameDish}" />
+                                                    <Image
+                                                        Margin="0,0,8,0"
+                                                        Aspect="AspectFill"
+                                                        HeightRequest="50"
+                                                        HorizontalOptions="CenterAndExpand"
+                                                        Source="{Binding ImageUrl}"
+                                                        WidthRequest="50" />
+                                                </StackLayout>
                                                 <Button
                                                     BackgroundColor="{x:StaticResource FacebookBlue}"
                                                     Command="{Binding BindingContext.CallWaiterCommand, Source={x:Reference Root}}"
                                                     CommandParameter="{Binding .}"
                                                     CornerRadius="3"
                                                     HorizontalOptions="EndAndExpand"
-                                                    Text="{Binding Status, Converter={x:StaticResource KitchenButtonTextConverter}}" />
+                                                    Text="{Binding Status, Converter={x:StaticResource KitchenButtonTextConverter}}"
+                                                    VerticalOptions="CenterAndExpand" />
                                             </StackLayout>
                                         </DataTemplate>
                                     </BindableLayout.ItemTemplate>

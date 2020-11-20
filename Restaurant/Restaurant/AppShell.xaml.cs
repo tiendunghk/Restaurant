@@ -21,10 +21,12 @@ namespace Restaurant
         public Staff Staff { get; set; }
         DelegateCommand _logoutCommand;
         public DelegateCommand LogoutCommand => _logoutCommand ??= new DelegateCommand(Logout);
+        string staffRole;
         public AppShell()
         {
             InitializeComponent();
             Staff = App.Context.CurrentStaff;
+            staffRole = Datas.Roles.ListRoles.Find(x => x.RoleId == Staff.Role).RoleName;
             BindingContext = this;
             AppShell.SetTabBarIsVisible(this, false);
         }
@@ -35,7 +37,6 @@ namespace Restaurant
             {
                 Application.Current.MainPage = new LoginView();
             }
-
         }
         protected override async void OnNavigating(ShellNavigatingEventArgs args)
         {
@@ -59,7 +60,7 @@ namespace Restaurant
             }
             if (args.Target.Location.OriginalString.Contains("kitchen"))
             {
-                if (App.Context.CurrentStaff.Role != "Kitchen")
+                if (staffRole != "Kitchen")
                 {
                     args.Cancel();
                     await ServiceLocator.Instance.Resolve<IDialogService>().ShowAlertAsync("Bạn không có quyền truy cập", "Cảnh báo", "OK");
@@ -75,7 +76,7 @@ namespace Restaurant
             }
             if (args.Target.Location.OriginalString.Contains("manager"))
             {
-                if (App.Context.CurrentStaff.Role != "Manager")
+                if (staffRole != "Manager")
                 {
                     args.Cancel();
                     await ServiceLocator.Instance.Resolve<IDialogService>().ShowAlertAsync("Bạn không có quyền truy cập", "Cảnh báo", "OK");
@@ -88,7 +89,7 @@ namespace Restaurant
             }
             if (args.Target.Location.OriginalString.Contains("report"))
             {
-                if (App.Context.CurrentStaff.Role != "Manager")
+                if (staffRole != "Manager")
                 {
                     args.Cancel();
                     await ServiceLocator.Instance.Resolve<IDialogService>().ShowAlertAsync("Bạn không có quyền truy cập", "Cảnh báo", "OK");

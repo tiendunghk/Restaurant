@@ -12,4 +12,5 @@
     <converters:KitchenButtonTextConverter x:Key="KitchenButtonTextConverter" />
     <converters:StatusActiveConverter x:Key="StatusActiveConverter" />
     <converters:TableStatusToTextConverter x:Key="TableStatusToTextConverter" />
+    <converters:RoleToTextConverter x:Key="RoleToTextConverter" />
 </ResourceDictionary>

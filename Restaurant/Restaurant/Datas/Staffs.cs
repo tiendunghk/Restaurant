@@ -13,7 +13,7 @@ namespace Restaurant.Datas
             {
                 Id="nv1",
                 Name="Nam",
-                Role="Waiter",
+                Role=Datas.Roles.ListRoles[3].RoleId,
                 UserName="a",
                 PassWord="1",
                 IsActive=false,
@@ -23,7 +23,7 @@ namespace Restaurant.Datas
             {
                 Id="nv2",
                 Name="Bao",
-                Role="Manager",
+                Role=Datas.Roles.ListRoles[1].RoleId,
                 UserName="b",
                 PassWord="1",
                 IsActive=true,
@@ -33,7 +33,7 @@ namespace Restaurant.Datas
             {
                 Id="nv3",
                 Name="An",
-                Role="Busboy",
+                Role=Datas.Roles.ListRoles[0].RoleId,
                 UserName="c",
                 PassWord="1",
                 IsActive=true,
@@ -43,7 +43,7 @@ namespace Restaurant.Datas
             {
                 Id="nv4",
                 Name="Dinh",
-                Role="Cashier",
+                Role=Datas.Roles.ListRoles[4].RoleId,
                 UserName="d",
                 PassWord="1",
                 IsActive=true,
@@ -53,7 +53,7 @@ namespace Restaurant.Datas
             {
                 Id="nv5",
                 Name="Dung",
-                Role="Kitchen",
+                Role=Datas.Roles.ListRoles[2].RoleId,
                 UserName="e",
                 PassWord="1",
                 IsActive=false,
