@@ -24,9 +24,19 @@
                                             <StackLayout.GestureRecognizers>
                                                 <TapGestureRecognizer Command="{Binding BindingContext.TappedCommand, Source={x:Reference Root}}" CommandParameter="{Binding .}" />
                                             </StackLayout.GestureRecognizers>
-                                            <StackLayout HorizontalOptions="StartAndExpand" Orientation="Vertical">
+                                            <StackLayout
+                                                Margin="10,0,0,0"
+                                                HorizontalOptions="StartAndExpand"
+                                                Orientation="Vertical">
                                                 <Label Text="{Binding Name}" />
-                                                <Label Text="{Binding Role}" />
+                                                <Label Text="{Binding Role, Converter={StaticResource RoleToTextConverter}}" />
+                                            </StackLayout>
+                                            <StackLayout VerticalOptions="Center">
+                                                <Image
+                                                    BackgroundColor="Transparent"
+                                                    HeightRequest="25"
+                                                    Source="ic_next"
+                                                    WidthRequest="25" />
                                             </StackLayout>
                                         </StackLayout>
                                     </Frame>

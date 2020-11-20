@@ -59,6 +59,26 @@ namespace Restaurant.Datas
                 IsActive=false,
                 StaffVisa="65478567834567835",
             },
+            new Staff
+            {
+                Id="nv6",
+                Name="Dinh",
+                Role=Datas.Roles.ListRoles[4].RoleId,
+                UserName="d",
+                PassWord="1",
+                IsActive=true,
+                StaffVisa="65478567834567835",
+            },
+            new Staff
+            {
+                Id="nv7",
+                Name="Dung",
+                Role=Datas.Roles.ListRoles[2].RoleId,
+                UserName="e",
+                PassWord="1",
+                IsActive=false,
+                StaffVisa="65478567834567835",
+            },
         };
     }
 }
