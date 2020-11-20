@@ -12,7 +12,10 @@
                 IsRunning="{Binding IsLoadingData}"
                 IsVisible="{Binding IsLoadingData}"
                 WidthRequest="35" />
-            <Picker ItemsSource="{Binding Filters}" SelectedIndex="{Binding SelectedIndex}" />
+            <Picker
+                ItemsSource="{Binding Filters}"
+                SelectedIndex="{Binding SelectedIndex}"
+                SelectedIndexChanged="Picker_SelectedIndexChanged" />
             <ScrollView Padding="8" IsVisible="{Binding IsLoadingData, Converter={x:StaticResource InverseBoolConverter}}">
                 <StackLayout BindableLayout.ItemsSource="{Binding ListOrders}">
                     <BindableLayout.ItemTemplate>

@@ -23,5 +23,11 @@ namespace Restaurant.Views
             var vm = BindingContext as TableDetailViewModel;
             vm.StepperValue();
         }
+
+        private void Picker_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            var vm = BindingContext as TableDetailViewModel;
+            vm.PickerChanged();
+        }
     }
 }

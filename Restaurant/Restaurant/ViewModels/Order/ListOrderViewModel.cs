@@ -8,6 +8,7 @@ using Xamarin.Forms;
 using System.Threading.Tasks;
 using Syncfusion.XForms.EffectsView;
 using Restaurant.Services.Navigation;
+using System.Linq;
 
 namespace Restaurant.ViewModels.Order
 {
@@ -33,13 +34,15 @@ namespace Restaurant.ViewModels.Order
             get => _listOrders;
             set => SetProperty(ref _listOrders, value);
         }
+        public List<OrderModel> ListOrdersBackup { get; set; } = new List<OrderModel>();
         public ListOrderViewModel()
         {
 
-            Filters = new List<string> { "Hôm nay", "Cần thanh toán", "Chưa thanh toán" };
+            Filters = new List<string> { "Tất cả", "Cần thanh toán", "Đã thanh toán" };
             SelectedIndex = 0;
 
             ListOrders = Datas.Orders.ListOrders;
+            ListOrdersBackup = ListOrders;
             MessagingCenter.Subscribe<string>("abc", "LoadDataOrder", async (a) =>
             {
                 IsLoadingData = true;
@@ -73,6 +76,21 @@ namespace Restaurant.ViewModels.Order
                 {"tongtien",obj.OrderTotalAmount },
                 {"orderstatus",obj.Status }
             });
+        }
+        public void PickerChanged()
+        {
+            switch (SelectedIndex)
+            {
+                case 0:
+                    ListOrders = ListOrdersBackup;
+                    break;
+                case 1:
+                    ListOrders = ListOrdersBackup.Where(x => x.Status == OrderStatus.PENDING).ToList();
+                    break;
+                case 2:
+                    ListOrders = ListOrdersBackup.Where(x => x.Status == OrderStatus.COMPLETED).ToList();
+                    break;
+            }
         }
     }
 }

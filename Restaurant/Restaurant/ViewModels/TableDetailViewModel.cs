@@ -67,6 +67,7 @@ namespace Restaurant.ViewModels
             get => _orderedItems;
             set => SetProperty(ref _orderedItems, value);
         }
+        public ObservableCollection<OrderDetailUI> OrderedItemsBackup { get; set; } = new ObservableCollection<OrderDetailUI>();
 
         List<string> _filters;
         public List<string> Filters
@@ -84,7 +85,7 @@ namespace Restaurant.ViewModels
         {
             Filters = new List<string>
             {
-                "Đang nấu","Đã phục vụ","Đang chờ"
+                "Tất cả","Đang nấu","Đã phục vụ","Đang chờ"
             };
             SelectedIndex = 0;
             Tests = new ObservableCollection<Dish>(Datas.Dishs.ListDishs);
@@ -103,6 +104,7 @@ namespace Restaurant.ViewModels
             if (App.Context.ListOrderDetailUI.TryGetValue(Table.Id, out var b))
             {
                 OrderedItems = new ObservableCollection<OrderDetailUI>(b.ToList());
+                OrderedItemsBackup = OrderedItems;
             }
             else
                 OrderedItems = new ObservableCollection<OrderDetailUI>();
@@ -135,7 +137,7 @@ namespace Restaurant.ViewModels
                             },
                             NameDish = elem.Name,
                             ImageUrl = elem.DishImage,
-                            Status = OrderDetailStatus.WAITING,
+                            Status = i / 3 == 0 ? OrderDetailStatus.WAITING : OrderDetailStatus.COMPLETED,
                             Dish = elem,
                         });
                     }
@@ -148,6 +150,8 @@ namespace Restaurant.ViewModels
             }
             else
                 App.Context.ListOrderDetailUI[Table.Id] = OrderedItems;
+            OrderedItemsBackup = OrderedItems;
+            PickerChanged();
             RaisePropertyChanged(nameof(OrderedItems));
         }
         bool CanSubmit()
@@ -228,6 +232,27 @@ namespace Restaurant.ViewModels
         public void StepperValue()
         {
             RaisePropertyChanged(nameof(Tests));
+        }
+        public void PickerChanged()
+        {
+            if (OrderedItemsBackup.Count > 0)
+            {
+                switch (SelectedIndex)
+                {
+                    case 0:
+                        OrderedItems = OrderedItemsBackup;
+                        break;
+                    case 1:
+                        OrderedItems = new ObservableCollection<OrderDetailUI>(OrderedItemsBackup.Where(x => x.Status == OrderDetailStatus.COOKING));
+                        break;
+                    case 2:
+                        OrderedItems = new ObservableCollection<OrderDetailUI>(OrderedItemsBackup.Where(x => x.Status == OrderDetailStatus.COMPLETED));
+                        break;
+                    case 3:
+                        OrderedItems = new ObservableCollection<OrderDetailUI>(OrderedItemsBackup.Where(x => x.Status == OrderDetailStatus.WAITING));
+                        break;
+                }
+            }
         }
     }
 }

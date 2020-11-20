@@ -9,9 +9,9 @@ namespace Restaurant.Datas
     {
         public static List<OrderModel> ListOrders = new List<OrderModel>
         {
-            new OrderModel{Id="order1",TableId=Tables.ListTables[0].Id,OrderDate=DateTime.Now,OrderTotalAmount=90000,TableName="Bàn 1"},
-            new OrderModel{Id="order2",TableId=Tables.ListTables[1].Id,OrderDate=DateTime.Now,OrderTotalAmount=90000,TableName="Bàn 2"},
-            new OrderModel{Id="order3",TableId=Tables.ListTables[5].Id,OrderDate=DateTime.Now,OrderTotalAmount=90000,TableName="Bàn 6"},
+            new OrderModel{Id="order1",TableId=Tables.ListTables[0].Id,OrderDate=DateTime.Now,OrderTotalAmount=90000,TableName="Bàn 1",Status=OrderStatus.COMPLETED},
+            new OrderModel{Id="order2",TableId=Tables.ListTables[1].Id,OrderDate=DateTime.Now,OrderTotalAmount=90000,TableName="Bàn 2",Status=OrderStatus.COMPLETED},
+            new OrderModel{Id="order3",TableId=Tables.ListTables[5].Id,OrderDate=DateTime.Now,OrderTotalAmount=90000,TableName="Bàn 6",Status=OrderStatus.PENDING},
         };
         public static List<OrderDetail> ListOrderDetails = new List<OrderDetail>
         {

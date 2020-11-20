@@ -18,5 +18,11 @@ namespace Restaurant.Views.Order
             InitializeComponent();
             BindingContext = new ListOrderViewModel();
         }
+
+        private void Picker_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            var vm = BindingContext as ListOrderViewModel;
+            vm.PickerChanged();
+        }
     }
 }
