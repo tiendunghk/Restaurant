@@ -21,12 +21,10 @@ namespace Restaurant.ViewModels
         DelegateCommand _searchCommand;
         DelegateCommand<object> _tappedCommand;
         DelegateCommand<Dish> _detailCommand;
-        DelegateCommand _submitStatusCommand;
         DelegateCommand<OrderDetailUI> _viewDishCommand;
         public DelegateCommand<object> TappedCommand => _tappedCommand ??= new DelegateCommand<object>(Tapped);
         public DelegateCommand<Dish> DetailCommand => _detailCommand ??= new DelegateCommand<Dish>(ShowDetail);
         public DelegateCommand SearchCommand => _searchCommand ??= new DelegateCommand(Search);
-        public DelegateCommand SubmitStatusCommand => _submitStatusCommand ??= new DelegateCommand(SubmitStatus, () => CanSave()).ObservesProperty(() => App.Context.CurrentStaff);
         public DelegateCommand ChangeTableStatusCommand => _changeTableStatusCommand ??= new DelegateCommand(ChangeTableStatus);
         public DelegateCommand<OrderDetailUI> ViewDishCommand => _viewDishCommand ??= new DelegateCommand<OrderDetailUI>(ViewDish);
 
@@ -91,6 +89,7 @@ namespace Restaurant.ViewModels
             SelectedIndex = 0;
             Tests = new ObservableCollection<Dish>(Datas.Dishs.ListDishs);
             BackupDish = Tests;
+            OrderedItems = new ObservableCollection<OrderDetailUI>();
         }
         Table _table;
         public Table Table { get => _table; set => SetProperty(ref _table, value); }
@@ -114,7 +113,7 @@ namespace Restaurant.ViewModels
 
         }
         DelegateCommand _submitCommand;
-        public DelegateCommand SubmitCommand => _submitCommand ??= new DelegateCommand(Submit);
+        public DelegateCommand SubmitCommand => _submitCommand ??= new DelegateCommand(Submit, () => CanSubmit()).ObservesProperty(() => Tests);
         void Submit()
         {
             var a = Tests;
@@ -149,9 +148,26 @@ namespace Restaurant.ViewModels
             }
             else
                 App.Context.ListOrderDetailUI[Table.Id] = OrderedItems;
+            RaisePropertyChanged(nameof(OrderedItems));
+        }
+        bool CanSubmit()
+        {
+            int c = 0;
+            foreach (var e in Tests)
+            {
+                if (e.SoLuong > 0) c++;
+            }
+            if (c > 0) return true;
+            else
+                return false;
         }
         DelegateCommand _purchaseCommand;
-        public DelegateCommand PurchaseCommand => _purchaseCommand ??= new DelegateCommand(Purchase);
+        public DelegateCommand PurchaseCommand => _purchaseCommand ??= new DelegateCommand(Purchase, () => CanPurchase()).ObservesProperty(() => OrderedItems);
+        bool CanPurchase()
+        {
+            if (OrderedItems.Count > 0 && OrderedItems != null) return true;
+            return false;
+        }
         void Purchase()
         {
             DialogService.ShowToast("Đã chuyển yêu cầu đến Cashier");
@@ -165,6 +181,7 @@ namespace Restaurant.ViewModels
             OrderedItems.Remove(obj);
             if (App.Context.ListOrderDetailUI.TryGetValue(Table.Id, out var x))
                 App.Context.ListOrderDetailUI[Table.Id] = OrderedItems;
+            RaisePropertyChanged(nameof(OrderedItems));
             DialogService.ShowToast("Đã xóa item");
         }
         async void ShowDetail(Dish dish)
@@ -182,14 +199,6 @@ namespace Restaurant.ViewModels
             await Task.Delay(1500);
             SearchMonAn = false;
             Tests = new ObservableCollection<Dish>(BackupDish.Where(x => Helpers.RemoveSign4VietnameseString(x.Name).ToLower().Contains(unicodeKeyword)));
-        }
-        void SubmitStatus()
-        {
-
-        }
-        bool CanSave()
-        {
-            return /*App.Context.CurrentStaff.Role == "Busboy" ? true :*/ false;
         }
         async void ChangeTableStatus()
         {
@@ -221,6 +230,10 @@ namespace Restaurant.ViewModels
             {
                 {"Food",ui.Dish }
             });
+        }
+        public void StepperValue()
+        {
+            RaisePropertyChanged(nameof(Tests));
         }
     }
 }

@@ -28,7 +28,10 @@ namespace Restaurant.Models
         public int SoLuong
         {
             get => _soLuong;
-            set => SetProperty(ref _soLuong, value);
+            set
+            {
+                SetProperty(ref _soLuong, value);
+            }
         }
         string _dishImage;
         bool _isActive = true;

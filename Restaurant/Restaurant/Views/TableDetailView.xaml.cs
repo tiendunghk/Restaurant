@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Restaurant.ViewModels;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -15,11 +16,12 @@ namespace Restaurant.Views
         public TableDetailView()
         {
             InitializeComponent();
-        }        
+        }
 
-        private void SfRadioGroup_CheckedChanged(object sender, Syncfusion.XForms.Buttons.CheckedChangedEventArgs e)
+        private void stepper_ValueChanged(object sender, ValueChangedEventArgs e)
         {
-
+            var vm = BindingContext as TableDetailViewModel;
+            vm.StepperValue();
         }
     }
 }

@@ -59,6 +59,7 @@
                                                             <Stepper
                                                                 x:Name="stepper"
                                                                 Minimum="0"
+                                                                ValueChanged="stepper_ValueChanged"
                                                                 Value="{Binding SoLuong, Mode=TwoWay}" />
                                                         </StackLayout>
                                                     </StackLayout>
