@@ -8,7 +8,15 @@
     <ContentPage.Content>
         <AbsoluteLayout>
             <StackLayout AbsoluteLayout.LayoutBounds="0,0,1,1" AbsoluteLayout.LayoutFlags="SizeProportional">
-                <SearchBar Placeholder="Nhập món ăn" />
+                <ActivityIndicator
+                    HeightRequest="30"
+                    IsRunning="{Binding IsSearch}"
+                    IsVisible="{Binding IsSearch}"
+                    WidthRequest="30" />
+                <SearchBar
+                    Placeholder="Nhập món ăn"
+                    SearchCommand="{Binding SearchCommand}"
+                    Text="{Binding SearchKeyWord}" />
                 <ScrollView BackgroundColor="{StaticResource Backgroud}">
                     <StackLayout BindableLayout.ItemsSource="{Binding ListFoods}">
                         <BindableLayout.ItemTemplate>

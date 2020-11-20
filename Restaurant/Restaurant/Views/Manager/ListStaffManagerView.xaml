@@ -9,7 +9,15 @@
 
         <AbsoluteLayout>
             <StackLayout AbsoluteLayout.LayoutBounds="0,0,1,1" AbsoluteLayout.LayoutFlags="SizeProportional">
-                <SearchBar Placeholder="Nhập nhân viên" />
+                <ActivityIndicator
+                    HeightRequest="30"
+                    IsRunning="{Binding IsSearch}"
+                    IsVisible="{Binding IsSearch}"
+                    WidthRequest="30" />
+                <SearchBar
+                    Placeholder="Nhập nhân viên"
+                    SearchCommand="{Binding SearchCommand}"
+                    Text="{Binding SearchKeyWord}" />
                 <ScrollView BackgroundColor="{StaticResource Backgroud}">
                     <StackLayout BindableLayout.ItemsSource="{Binding ListStaffs}">
                         <BindableLayout.ItemTemplate>
