@@ -26,7 +26,7 @@ namespace Restaurant
         {
             InitializeComponent();
             Staff = App.Context.CurrentStaff;
-            staffRole = Datas.Roles.ListRoles.Find(x => x.RoleId == Staff.Role).RoleName;
+            //staffRole = Datas.Roles.ListRoles.Find(x => x.RoleId == Staff.Role).RoleName;
             BindingContext = this;
             AppShell.SetTabBarIsVisible(this, false);
         }

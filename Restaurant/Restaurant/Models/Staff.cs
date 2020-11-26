@@ -8,22 +8,23 @@ namespace Restaurant.Models
 {
     public class Staff : BindableBase
     {
+        [JsonProperty("staffId")]
         public string Id { get; set; }
-
+        [JsonProperty("roleId")]
         public string Role { get; set; }
-
+        [JsonProperty("staffVisa")]
         public string StaffVisa { get; set; }
-
+        [JsonProperty("staffName")]
         public string Name { get; set; }
-
+        [JsonProperty("staffUsername")]
         public string UserName { get; set; }
-
+        [JsonProperty("staffPassword")]
         public string PassWord { get; set; }
-
+        [JsonProperty("staffBirthdate")]
         public DateTime? StaffBirthdate { get; set; }
-
+        [JsonProperty("staffSalary")]
         public string StaffSalary { get; set; }
-
+        [JsonProperty("staffIsActive")]
         public bool StaffIsDeleted { get; set; }
 
         public string Token;

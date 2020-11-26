@@ -9,11 +9,11 @@ namespace Restaurant.Datas
     {
         public static List<Role> ListRoles = new List<Role>
         {
-            new Role{RoleId="role1",RoleName="Busboy"},
-            new Role{RoleId="role2",RoleName="Manager"},
-            new Role{RoleId="role3",RoleName="Kitchen"},
-            new Role{RoleId="role4",RoleName="Waiter"},
-            new Role{RoleId="role5",RoleName="Cashier"}
+            new Role{RoleId="3",RoleName="Busboy"},
+            new Role{RoleId="2",RoleName="Manager"},
+            new Role{RoleId="4",RoleName="Kitchen"},
+            new Role{RoleId="1",RoleName="Waiter"},
+            new Role{RoleId="5",RoleName="Cashier"}
         };
     }
 }

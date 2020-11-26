@@ -1,5 +1,7 @@
-﻿using Restaurant.Models;
+﻿using Restaurant.Datas;
+using Restaurant.Models;
 using Restaurant.Mvvm.Command;
+using Restaurant.Services;
 using Restaurant.Services.Navigation;
 using Restaurant.ViewModels.Base;
 using System;
@@ -25,11 +27,13 @@ namespace Restaurant.ViewModels
         public DelegateCommand<Table> TableTapped => _tableTapped ??= new DelegateCommand<Table>(Tapped);
         public ListTableViewModel()
         {
-            Tables = App.Context.Tables;
-            Tables = Datas.Tables.ListTables;
+            //Tables = App.Context.Tables;
+            //Tables = Datas.Tables.ListTables;
             MessagingCenter.Subscribe<string>("abc", "LoadDataTable", async (a) =>
             {
                 IsLoadingData = true;
+                var listTables = await HttpService.GetAsync<List<Table>>(Configuration.Api("table/getall"));
+                Tables = listTables;
                 await Task.Delay(2000);
                 IsLoadingData = false;
             });
