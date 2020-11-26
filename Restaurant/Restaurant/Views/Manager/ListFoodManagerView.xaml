@@ -7,7 +7,10 @@
     Title="Food">
     <ContentPage.Content>
         <AbsoluteLayout>
-            <StackLayout AbsoluteLayout.LayoutBounds="0,0,1,1" AbsoluteLayout.LayoutFlags="SizeProportional">
+            <StackLayout
+                AbsoluteLayout.LayoutBounds="0,0,1,1"
+                AbsoluteLayout.LayoutFlags="SizeProportional"
+                BackgroundColor="{StaticResource Backgroud}">
                 <ActivityIndicator
                     HeightRequest="30"
                     IsRunning="{Binding IsSearch}"
@@ -40,7 +43,7 @@
                                                     Aspect="AspectFit"
                                                     HeightRequest="60"
                                                     HorizontalOptions="CenterAndExpand"
-                                                    Source="com_tam"
+                                                    Source="{Binding DishImage}"
                                                     WidthRequest="80" />
                                             </StackLayout>
                                         </StackLayout>

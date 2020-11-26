@@ -1,4 +1,5 @@
-﻿using Restaurant.Models;
+﻿using Restaurant.Datas;
+using Restaurant.Models;
 using Restaurant.Mvvm.Command;
 using Restaurant.Services;
 using Restaurant.Services.Navigation;
@@ -45,8 +46,12 @@ namespace Restaurant.ViewModels.Manager
         }
         public ListStaffManagerViewModel()
         {
-            ListStaffs = Datas.Staffs.ListStaffs;
-            BackupStaffs = ListStaffs;
+            Task.Run(async () =>
+            {
+                var listStaffs = await HttpService.GetAsync<List<Staff>>(Configuration.Api("staff/getall"));
+                ListStaffs = listStaffs;
+                BackupStaffs = ListStaffs;
+            });
         }
         async void AddNavigate()
         {

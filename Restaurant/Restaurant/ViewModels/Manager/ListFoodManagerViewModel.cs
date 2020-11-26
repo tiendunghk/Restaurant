@@ -1,4 +1,5 @@
-﻿using Restaurant.Models;
+﻿using Restaurant.Datas;
+using Restaurant.Models;
 using Restaurant.Mvvm.Command;
 using Restaurant.Services;
 using Restaurant.Services.Navigation;
@@ -46,8 +47,12 @@ namespace Restaurant.ViewModels.Manager
         }
         public ListFoodManagerViewModel()
         {
-            ListFoods = Datas.Dishs.ListDishs;
-            BackupFood = ListFoods;
+            Task.Run(async () =>
+            {
+                var listDishs = await HttpService.GetAsync<List<Dish>>(Configuration.Api("dish/getall"));
+                ListFoods = listDishs;
+                BackupFood = ListFoods;
+            });
         }
         async void AddFood()
         {
