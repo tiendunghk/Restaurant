@@ -2,8 +2,10 @@
 using System;
 using System.Collections.Generic;
 using System.Net.Http;
+using System.Net.Http.Headers;
 using System.Text;
 using System.Threading.Tasks;
+using Xamarin.Essentials;
 
 namespace Restaurant.Services
 {
@@ -15,6 +17,10 @@ namespace Restaurant.Services
 
             if (content != null)
                 request.Content = content;
+            var token = Preferences.Get("token", null);
+            if (!string.IsNullOrEmpty(token))
+                request.Headers.Authorization =
+                    new AuthenticationHeaderValue("Bearer", token);
 
             using (var client = DefaultHttpClient())
             {

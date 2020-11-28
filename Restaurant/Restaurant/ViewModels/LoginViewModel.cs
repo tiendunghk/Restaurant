@@ -1,17 +1,22 @@
-﻿using Restaurant.Mvvm.Command;
+﻿using Newtonsoft.Json.Linq;
+using Restaurant.Datas;
+using Restaurant.Models;
+using Restaurant.Mvvm.Command;
+using Restaurant.Services;
 using Restaurant.Services.Navigation;
 using Restaurant.ViewModels.Base;
 using System;
 using System.Collections.Generic;
 using System.Text;
 using System.Threading.Tasks;
+using Xamarin.Essentials;
 using Xamarin.Forms;
 
 namespace Restaurant.ViewModels
 {
     public class LoginViewModel : ViewModelBase
     {
-        string _userName = "e";
+        string _userName = "1";
         string _passWord = "1";
         bool _isVisible;
         bool _hide = true;
@@ -40,11 +45,22 @@ namespace Restaurant.ViewModels
         async void Login()
         {
             IsVisible = true;
-            await Task.Delay(2000);
-            var d = Datas.Staffs.ListStaffs.Find(x => x.UserName == UserName && x.PassWord == PassWord);
-            if (d != null)
+            var obj = new
             {
-                App.Context.CurrentStaff = d;
+                StaffUsername = UserName,
+                StaffPassword = PassWord
+            };
+            var output = await HttpService.PostApiAsync<JObject>(Configuration.Api("signin"), obj);
+            if (output != null)
+            {
+                Preferences.Set("token", output["token"].ToString());
+                var userId = output["userId"].ToString();
+                var staff = await HttpService.GetAsync<Staff>(Configuration.Api($"staff/{userId}"));
+                var listDishs = await HttpService.GetAsync<List<Dish>>(Configuration.Api($"dish/getall"));
+                var listRoles = await HttpService.GetAsync<List<Role>>(Configuration.Api($"role/getall"));
+                Datas.Dishs.ListDishs = listDishs;
+                Datas.Roles.ListRoles = listRoles;
+                App.Context.CurrentStaff = staff;
                 Application.Current.MainPage = new AppShell();
             }
             else await DialogService.ShowAlertAsync("Vui lòng kiểm tra lại tài khoản của bạn!", "Error", "OK");

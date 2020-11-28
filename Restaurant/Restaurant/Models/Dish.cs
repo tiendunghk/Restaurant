@@ -8,19 +8,25 @@ namespace Restaurant.Models
 {
     public class Dish : BindableBase
     {
+        [JsonProperty("dishId")]
         public string Id { get; set; }
+        [JsonProperty("dishName")]
         public string Name { get; set; }
+        [JsonProperty("dishDescription")]
         public string Description { get; set; }
+        [JsonProperty("dishIsActive")]
         public bool IsActive
         {
             get => _isActive;
             set => SetProperty(ref _isActive, value);
         }
+        [JsonProperty("dishImage")]
         public string DishImage
         {
             get => _dishImage;
             set => SetProperty(ref _dishImage, value);
         }
+        [JsonProperty("dishPrice")]
         public decimal Price { get; set; }
 
         int _soLuong;

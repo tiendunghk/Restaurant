@@ -10,6 +10,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Xamarin.Forms;
 using Restaurant.Services;
+using Restaurant.Datas;
 
 namespace Restaurant.ViewModels
 {
@@ -88,13 +89,14 @@ namespace Restaurant.ViewModels
                 "Tất cả","Đang nấu","Đã phục vụ","Đang chờ"
             };
             SelectedIndex = 0;
+            var listDishs = HttpService.GetAsync<List<Dish>>(Configuration.Api("dish/getall"));
             Tests = new ObservableCollection<Dish>(Datas.Dishs.ListDishs);
             BackupDish = Tests;
             OrderedItems = new ObservableCollection<OrderDetailUI>();
         }
         Table _table;
         public Table Table { get => _table; set => SetProperty(ref _table, value); }
-        public override Task OnNavigationAsync(NavigationParameters parameters, NavigationType navigationType)
+        public override async Task OnNavigationAsync(NavigationParameters parameters, NavigationType navigationType)
         {
             string v = "";
             parameters.TryGetValue("title", out v);
@@ -108,14 +110,13 @@ namespace Restaurant.ViewModels
             }
             else
                 OrderedItems = new ObservableCollection<OrderDetailUI>();
-            return Task.CompletedTask;
         }
         void Tapped(object o)
         {
 
         }
         DelegateCommand _submitCommand;
-        public DelegateCommand SubmitCommand => _submitCommand ??= new DelegateCommand(Submit, () => CanSubmit()).ObservesProperty(() => Tests);
+        public DelegateCommand SubmitCommand => _submitCommand ??= new DelegateCommand(Submit);
         void Submit()
         {
             var a = Tests;
@@ -160,7 +161,7 @@ namespace Restaurant.ViewModels
             return count > 0 ? true : false;
         }
         DelegateCommand _purchaseCommand;
-        public DelegateCommand PurchaseCommand => _purchaseCommand ??= new DelegateCommand(Purchase, () => CanPurchase()).ObservesProperty(() => OrderedItems);
+        public DelegateCommand PurchaseCommand => _purchaseCommand ??= new DelegateCommand(Purchase);
         bool CanPurchase()
         {
             if (OrderedItems.Count > 0 && OrderedItems != null) return true;
