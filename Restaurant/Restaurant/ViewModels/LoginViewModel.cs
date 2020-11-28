@@ -16,7 +16,7 @@ namespace Restaurant.ViewModels
 {
     public class LoginViewModel : ViewModelBase
     {
-        string _userName = "e";
+        string _userName = "1";
         string _passWord = "1";
         bool _isVisible;
         bool _hide = true;
@@ -56,6 +56,10 @@ namespace Restaurant.ViewModels
                 Preferences.Set("token", output["token"].ToString());
                 var userId = output["userId"].ToString();
                 var staff = await HttpService.GetAsync<Staff>(Configuration.Api($"staff/{userId}"));
+                var listDishs = await HttpService.GetAsync<List<Dish>>(Configuration.Api($"dish/getall"));
+                var listRoles = await HttpService.GetAsync<List<Role>>(Configuration.Api($"role/getall"));
+                Datas.Dishs.ListDishs = listDishs;
+                Datas.Roles.ListRoles = listRoles;
                 App.Context.CurrentStaff = staff;
                 Application.Current.MainPage = new AppShell();
             }

@@ -1,4 +1,6 @@
-﻿using Restaurant.Services;
+﻿using Restaurant.Datas;
+using Restaurant.Models;
+using Restaurant.Services;
 using Restaurant.ViewModels.Manager;
 using Restaurant.ViewModels.Reports;
 using System;
@@ -23,7 +25,11 @@ namespace Restaurant.Views.Reports
 
         private async void Button_Clicked(object sender, EventArgs e)
         {
-            var output = await HttpService.GetAsync<object>("http://192.168.137.1:5001/api/user");
+            var listStaff = HttpService.GetAsync<List<Staff>>(Configuration.Api("staff/getall"));
+            var listDish = HttpService.GetAsync<List<Dish>>(Configuration.Api("dish/getall"));
+            var listOrder = HttpService.GetAsync<List<OrderModel>>(Configuration.Api("order/getall"));
+            var listOrderDetail = HttpService.GetAsync<List<OrderDetail>>(Configuration.Api("orderdetail/getall"));
+            var listTable = HttpService.GetAsync<List<Table>>(Configuration.Api("table/getall"));
         }
     }
 }
