@@ -18,51 +18,51 @@ namespace Restaurant.Datas
             //order 1
             new OrderDetail{
                 OrderDetailId="odt1",
-                DishId=Dishs.ListDishs[0].Id,
+                DishId=Dishs.ListDishs1[0].Id,
                 OrderDetail_OrderID="order1",
                 OrderDetailStatus=OrderDetailStatus.WAITING
             },
             new OrderDetail{
                 OrderDetailId="odt2",
-                DishId=Dishs.ListDishs[0].Id,
+                DishId=Dishs.ListDishs1[0].Id,
                 OrderDetail_OrderID="order1",
                 OrderDetailStatus=OrderDetailStatus.WAITING
             },
             new OrderDetail{
                 OrderDetailId="odt3",
-                DishId=Dishs.ListDishs[3].Id,
+                DishId=Dishs.ListDishs1[3].Id,
                 OrderDetail_OrderID="order1",
                 OrderDetailStatus=OrderDetailStatus.COMPLETED
             },
             //order 2
             new OrderDetail{
                 OrderDetailId="odt4",
-                DishId=Dishs.ListDishs[3].Id,
+                DishId=Dishs.ListDishs1[3].Id,
                 OrderDetail_OrderID="order2",
                 OrderDetailStatus=OrderDetailStatus.WAITING
             },
             new OrderDetail{
                 OrderDetailId="odt5",
-                DishId=Dishs.ListDishs[6].Id,
+                DishId=Dishs.ListDishs1[6].Id,
                 OrderDetail_OrderID="order2",
                 OrderDetailStatus=OrderDetailStatus.WAITING
             },
             //order 3
             new OrderDetail{
                 OrderDetailId="odt6",
-                DishId=Dishs.ListDishs[1].Id,
+                DishId=Dishs.ListDishs1[1].Id,
                 OrderDetail_OrderID="order3",
                 OrderDetailStatus=OrderDetailStatus.COOKING
             },
             new OrderDetail{
                 OrderDetailId="odt7",
-                DishId=Dishs.ListDishs[1].Id,
+                DishId=Dishs.ListDishs1[1].Id,
                 OrderDetail_OrderID="order3",
                 OrderDetailStatus=OrderDetailStatus.WAITING
             },
             new OrderDetail{
                 OrderDetailId="odt8",
-                DishId=Dishs.ListDishs[7].Id,
+                DishId=Dishs.ListDishs1[7].Id,
                 OrderDetail_OrderID="order3",
                 OrderDetailStatus=OrderDetailStatus.COMPLETED
             },

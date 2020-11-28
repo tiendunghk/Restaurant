@@ -6,7 +6,7 @@ using System.Text;
 
 namespace Restaurant.Models
 {
-    public class Staff : BindableBase
+    public class Staff : BindableBase, ICloneable
     {
         [JsonProperty("staffId")]
         public string Id { get; set; }
@@ -23,17 +23,25 @@ namespace Restaurant.Models
         [JsonProperty("staffBirthdate")]
         public DateTime? StaffBirthdate { get; set; }
         [JsonProperty("staffSalary")]
-        public string StaffSalary { get; set; }
-        [JsonProperty("staffIsActive")]
+        public decimal StaffSalary { get; set; }
+        [JsonIgnore]
         public bool StaffIsDeleted { get; set; }
-
+        [JsonProperty("accessToken")]
         public string Token;
         public string ExternalId { get; set; }
         bool _isActive = true;
+        [JsonProperty("staffIsActive")]
         public bool IsActive
         {
             get => _isActive;
             set => SetProperty(ref _isActive, value);
+        }
+        [JsonProperty("refreshToken")]
+        public string RefreshToken { get; set; }
+
+        public object Clone()
+        {
+            return MemberwiseClone();
         }
     }
 }

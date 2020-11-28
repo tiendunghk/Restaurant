@@ -6,7 +6,7 @@ using System.Text;
 
 namespace Restaurant.Models
 {
-    public class Dish : BindableBase
+    public class Dish : BindableBase, ICloneable
     {
         [JsonProperty("dishId")]
         public string Id { get; set; }
@@ -41,5 +41,10 @@ namespace Restaurant.Models
         }
         string _dishImage;
         bool _isActive = true;
+
+        public object Clone()
+        {
+            return MemberwiseClone();
+        }
     }
 }

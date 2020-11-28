@@ -17,7 +17,7 @@
                         VerticalOptions="StartAndExpand" />
                     <StackLayout Orientation="Horizontal">
                         <Label HorizontalOptions="StartAndExpand" Text="Tên đăng nhập" />
-                        <Entry HorizontalOptions="EndAndExpand" Text="tên đăng nhập" />
+                        <Entry HorizontalOptions="EndAndExpand" Text="{Binding Staff.UserName}" />
                     </StackLayout>
                     <StackLayout Orientation="Horizontal">
                         <Label HorizontalOptions="StartAndExpand" Text="Tên" />
@@ -25,7 +25,7 @@
                     </StackLayout>
                     <StackLayout Orientation="Horizontal">
                         <Label HorizontalOptions="StartAndExpand" Text="Visa" />
-                        <Entry HorizontalOptions="EndAndExpand" Text="e5906789457657843" />
+                        <Entry HorizontalOptions="EndAndExpand" Text="{Binding Staff.StaffVisa}" />
                     </StackLayout>
                     <StackLayout Orientation="Horizontal">
                         <Label HorizontalOptions="StartAndExpand" Text="Role" />
@@ -43,10 +43,12 @@
             <StackLayout HorizontalOptions="Center" Orientation="Horizontal">
                 <Button
                     BackgroundColor="{x:StaticResource FacebookBlue}"
+                    Command="{Binding SaveCommand}"
                     CornerRadius="3"
                     Text="Lưu" />
                 <Button
                     BackgroundColor="{x:StaticResource FacebookBlue}"
+                    Command="{Binding CancelCommand}"
                     CornerRadius="3"
                     Text="Hủy" />
             </StackLayout>
