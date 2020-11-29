@@ -46,12 +46,13 @@ namespace Restaurant.ViewModels.Manager
         }
         public ListStaffManagerViewModel()
         {
-            Task.Run(async () =>
-            {
-                var listStaffs = await HttpService.GetAsync<List<Staff>>(Configuration.Api("staff/getall"));
-                ListStaffs = listStaffs;
-                BackupStaffs = ListStaffs;
-            });
+
+        }
+        public override async Task OnNavigationAsync(NavigationParameters parameters, NavigationType navigationType)
+        {
+            var listStaffs = await HttpService.GetAsync<List<Staff>>(Configuration.Api("staff/getall"));
+            ListStaffs = listStaffs;
+            BackupStaffs = ListStaffs;
         }
         async void AddNavigate()
         {

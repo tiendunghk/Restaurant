@@ -17,16 +17,42 @@
                         VerticalOptions="StartAndExpand" />
                     <StackLayout Orientation="Horizontal">
                         <Label HorizontalOptions="StartAndExpand" Text="Tên đăng nhập" />
-                        <Entry HorizontalOptions="EndAndExpand" Placeholder="tên đăng nhập" />
+                        <Entry
+                            HorizontalOptions="EndAndExpand"
+                            Placeholder="tên đăng nhập"
+                            Text="{Binding Staff.UserName}" />
                     </StackLayout>
                     <StackLayout Orientation="Horizontal">
                         <Label HorizontalOptions="StartAndExpand" Text="Tên" />
-                        <Entry HorizontalOptions="FillAndExpand" Placeholder="tên" />
+                        <Entry
+                            HorizontalOptions="FillAndExpand"
+                            Placeholder="tên"
+                            Text="{Binding Staff.Name}" />
                     </StackLayout>
                     <StackLayout Orientation="Horizontal">
                         <Label HorizontalOptions="StartAndExpand" Text="Visa" />
-                        <Entry HorizontalOptions="EndAndExpand" Placeholder="nhập visa" />
+                        <Entry
+                            HorizontalOptions="EndAndExpand"
+                            Placeholder="Nhập visa"
+                            Text="{Binding Staff.StaffVisa}" />
                     </StackLayout>
+
+                    <StackLayout Orientation="Horizontal">
+                        <Label HorizontalOptions="StartAndExpand" Text="Lương" />
+                        <Entry
+                            HorizontalOptions="EndAndExpand"
+                            Placeholder="Nhập lương"
+                            Text="{Binding Staff.StaffSalary}" />
+                    </StackLayout>
+
+                    <StackLayout Orientation="Horizontal">
+                        <Label HorizontalOptions="StartAndExpand" Text="Mật khẩu" />
+                        <Entry
+                            HorizontalOptions="EndAndExpand"
+                            Placeholder="Nhập mật khẩu"
+                            Text="{Binding Staff.PassWord}" />
+                    </StackLayout>
+
                     <StackLayout Orientation="Horizontal">
                         <Label HorizontalOptions="StartAndExpand" Text="Role" />
                         <Picker
@@ -36,17 +62,22 @@
                     </StackLayout>
                     <StackLayout Orientation="Horizontal">
                         <Label HorizontalOptions="StartAndExpand" Text="Ngày sinh" />
-                        <DatePicker HorizontalOptions="EndAndExpand" TextColor="{StaticResource FacebookBlue}" />
+                        <DatePicker
+                            Date="{Binding Staff.StaffBirthdate}"
+                            HorizontalOptions="EndAndExpand"
+                            TextColor="{StaticResource FacebookBlue}" />
                     </StackLayout>
                 </StackLayout>
             </Frame>
             <StackLayout HorizontalOptions="Center" Orientation="Horizontal">
                 <Button
                     BackgroundColor="{x:StaticResource FacebookBlue}"
+                    Command="{Binding SaveCommand}"
                     CornerRadius="3"
                     Text="Lưu" />
                 <Button
                     BackgroundColor="{x:StaticResource FacebookBlue}"
+                    Command="{Binding CancelCommand}"
                     CornerRadius="3"
                     Text="Hủy" />
             </StackLayout>

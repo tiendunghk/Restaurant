@@ -127,7 +127,7 @@ namespace Restaurant.Services.Navigation
 
                 return view;
             }
-            catch (Exception)
+            catch (Exception ex)
             {
                 Debugger.Break();
 

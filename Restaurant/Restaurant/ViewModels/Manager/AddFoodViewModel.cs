@@ -58,6 +58,8 @@ namespace Restaurant.ViewModels.Manager
             var url = await FileService.UploadImageCloudinary(Obj.DishImage);
             Obj.DishImage = url;
             await HttpService.PostApiAsync<object>(Configuration.Api("dish/add"), Obj);
+            DialogService.ShowToast("Đã thêm thành công");
+            //lúc thêm backend chưa trả về id được thêm
             await NavigationService.NavigateBackAsync();
         }
         async void Cancel()
