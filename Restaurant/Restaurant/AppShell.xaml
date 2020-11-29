@@ -68,24 +68,28 @@
         <ShellContent
             Title="List Order"
             Icon="ic_order"
+            IsVisible="{Binding Staff.Role, Converter={StaticResource IsManagerCashierConverter}}"
             Route="order">
             <views1:ListOrderView />
         </ShellContent>
         <ShellContent
             Title="Kitchen"
             Icon="ic_kitchen"
+            IsVisible="{Binding Staff.Role, Converter={StaticResource IsManagerKitchenConverter}}"
             Route="kitchen">
             <views:KitchenListFoodView />
         </ShellContent>
         <ShellContent
             Title="Quản lý"
             Icon="ic_manager"
+            IsVisible="{Binding Staff.Role, Converter={StaticResource IsManagerConverter}}"
             Route="manager">
             <tabs:ManagerTabView />
         </ShellContent>
         <ShellContent
             Title="Báo cáo"
             Icon="ic_report"
+            IsVisible="{Binding Staff.Role, Converter={StaticResource IsManagerConverter}}"
             Route="report">
             <tabs:ReportTabView />
         </ShellContent>

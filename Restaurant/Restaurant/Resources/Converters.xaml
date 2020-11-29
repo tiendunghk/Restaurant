@@ -13,4 +13,7 @@
     <converters:StatusActiveConverter x:Key="StatusActiveConverter" />
     <converters:TableStatusToTextConverter x:Key="TableStatusToTextConverter" />
     <converters:RoleToTextConverter x:Key="RoleToTextConverter" />
+    <converters:IsManagerConverter x:Key="IsManagerConverter" />
+    <converters:IsManagerCashierConverter x:Key="IsManagerCashierConverter" />
+    <converters:IsManagerKitchenConverter x:Key="IsManagerKitchenConverter" />
 </ResourceDictionary>
