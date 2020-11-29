@@ -6,6 +6,7 @@ using Restaurant.Services.Navigation;
 using Restaurant.ViewModels.Base;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -51,8 +52,7 @@ namespace Restaurant.ViewModels.Manager
         public override async Task OnNavigationAsync(NavigationParameters parameters, NavigationType navigationType)
         {
             var listStaffs = await HttpService.GetAsync<List<Staff>>(Configuration.Api("staff/getall"));
-            ListStaffs = listStaffs;
-            BackupStaffs = ListStaffs;
+            ListStaffs = BackupStaffs = listStaffs;
         }
         async void AddNavigate()
         {
@@ -72,6 +72,7 @@ namespace Restaurant.ViewModels.Manager
             await Task.Delay(1000);
             IsSearch = false;
             ListStaffs = new List<Staff>(BackupStaffs.Where(x => Helpers.RemoveSign4VietnameseString(x.Name).ToLower().Contains(unicodeKeyword)));
+            RaisePropertyChanged(nameof(ListStaffs));
         }
     }
 }

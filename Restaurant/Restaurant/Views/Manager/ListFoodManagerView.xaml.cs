@@ -16,7 +16,6 @@ namespace Restaurant.Views.Manager
         public ListFoodManagerView()
         {
             InitializeComponent();
-            BindingContext = new ListFoodManagerViewModel();
         }
     }
 }
