@@ -1,13 +1,14 @@
 ﻿using Restaurant.Models;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Text;
 
 namespace Restaurant.Datas
 {
     public static class Dishs
     {
-        public static List<Dish> ListDishs;
+        public static ObservableCollection<Dish> ListDishs;
         public static List<Dish> ListDishs1 = new List<Dish>
         {
             new Dish{Id="d1",Name="Cơm gà",DishImage="com_tam",Description="Cơm gà hấp dẫn nè",Price=30000,IsActive=true},

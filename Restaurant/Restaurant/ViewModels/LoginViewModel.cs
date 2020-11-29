@@ -7,6 +7,7 @@ using Restaurant.Services.Navigation;
 using Restaurant.ViewModels.Base;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Text;
 using System.Threading.Tasks;
 using Xamarin.Essentials;
@@ -58,7 +59,7 @@ namespace Restaurant.ViewModels
                 var staff = await HttpService.GetAsync<Staff>(Configuration.Api($"staff/{userId}"));
                 var listDishs = await HttpService.GetAsync<List<Dish>>(Configuration.Api($"dish/getall"));
                 var listRoles = await HttpService.GetAsync<List<Role>>(Configuration.Api($"role/getall"));
-                Datas.Dishs.ListDishs = listDishs;
+                Datas.Dishs.ListDishs = new ObservableCollection<Dish>(listDishs);
                 Datas.Roles.ListRoles = listRoles;
                 App.Context.CurrentStaff = staff;
                 Application.Current.MainPage = new AppShell();

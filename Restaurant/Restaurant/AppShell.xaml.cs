@@ -48,14 +48,14 @@ namespace Restaurant
             {
                 //Table
                 App.Context.TableClickCount++;
-                if (App.Context.TableClickCount <= 1)
+                //if (App.Context.TableClickCount <= 1)
                     MessagingCenter.Send("abc", "LoadDataTable");
             }
             if (args.Target.Location.OriginalString.Contains("order"))
             {
                 //order
                 App.Context.OrderClickCount++;
-                if (App.Context.OrderClickCount <= 1)
+                //if (App.Context.OrderClickCount <= 1)
                     MessagingCenter.Send("abc", "LoadDataOrder");
             }
             if (args.Target.Location.OriginalString.Contains("kitchen"))
@@ -69,7 +69,7 @@ namespace Restaurant
                 {
                     //kitchen
                     App.Context.KitchenClickCount++;
-                    if (App.Context.KitchenClickCount <= 1)
+                    //if (App.Context.KitchenClickCount <= 1)
                         MessagingCenter.Send("abc", "LoadDataKitchen");
                 }
 

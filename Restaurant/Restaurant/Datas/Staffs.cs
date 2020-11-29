@@ -1,13 +1,14 @@
 ﻿using Restaurant.Models;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Text;
 
 namespace Restaurant.Datas
 {
     public static class Staffs
     {
-        public static List<Staff> ListStaffs = new List<Staff>
+        public static ObservableCollection<Staff> ListStaffs = new ObservableCollection<Staff>
         {
             new Staff
             {

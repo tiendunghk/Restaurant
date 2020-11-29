@@ -1,4 +1,5 @@
-﻿using Restaurant.Models;
+﻿using Restaurant.Datas;
+using Restaurant.Models;
 using Restaurant.Mvvm.Command;
 using Restaurant.Services;
 using Restaurant.Services.Navigation;
@@ -15,6 +16,7 @@ namespace Restaurant.ViewModels.Manager
         DelegateCommand<Dish> _removeCommand;
         DelegateCommand<Dish> _pickCommand;
         DelegateCommand _saveCommand;
+        DelegateCommand _cancelCommand;
         Dish _dish;
         public Dish Obj
         {
@@ -30,6 +32,7 @@ namespace Restaurant.ViewModels.Manager
         public DelegateCommand<Dish> RemoveCommand => _removeCommand ??= new DelegateCommand<Dish>(Remove);
         public DelegateCommand<Dish> PickCommand => _pickCommand ??= new DelegateCommand<Dish>(Pick);
         public DelegateCommand SaveCommand => _saveCommand ??= new DelegateCommand(Save);
+        public DelegateCommand CancelCommand => _cancelCommand ??= new DelegateCommand(Cancel);
         public AddFoodViewModel()
         {
             Obj = new Dish();
@@ -50,9 +53,16 @@ namespace Restaurant.ViewModels.Manager
             dish.DishImage = path;
             NullImage = false;
         }
-        void Save()
+        async void Save()
         {
-
+            var url = await FileService.UploadImageCloudinary(Obj.DishImage);
+            Obj.DishImage = url;
+            await HttpService.PostApiAsync<object>(Configuration.Api("dish/add"), Obj);
+            await NavigationService.NavigateBackAsync();
+        }
+        async void Cancel()
+        {
+            await NavigationService.NavigateBackAsync();
         }
     }
 }

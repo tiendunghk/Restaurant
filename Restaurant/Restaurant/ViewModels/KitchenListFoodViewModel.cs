@@ -106,7 +106,7 @@ namespace Restaurant.ViewModels
                 {
                     if (e.OrderDetail_OrderID == ListOrders[i].Id)
                     {
-                        d = Datas.Dishs.ListDishs.Find(x => x.Id == e.DishId);
+                        d = Datas.Dishs.ListDishs.ToList().Find(x => x.Id == e.DishId);
                         obj.Add(new OrderDetailUI
                         {
                             OrderDetailUIId = Guid.NewGuid().ToString("N"),

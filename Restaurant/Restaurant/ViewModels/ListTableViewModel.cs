@@ -34,7 +34,6 @@ namespace Restaurant.ViewModels
                 IsLoadingData = true;
                 var listTables = await HttpService.GetAsync<List<Table>>(Configuration.Api("table/getall"));
                 Tables = listTables;
-                await Task.Delay(2000);
                 IsLoadingData = false;
             });
         }

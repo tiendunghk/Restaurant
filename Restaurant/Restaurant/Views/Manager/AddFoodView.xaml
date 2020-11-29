@@ -17,18 +17,25 @@
                         VerticalOptions="StartAndExpand" />
                     <StackLayout Orientation="Horizontal">
                         <Label HorizontalOptions="StartAndExpand" Text="Tên" />
-                        <Entry HorizontalOptions="FillAndExpand" Placeholder="Tên món" />
+                        <Entry
+                            HorizontalOptions="FillAndExpand"
+                            Placeholder="Tên món"
+                            Text="{Binding Obj.Name}" />
                     </StackLayout>
                     <StackLayout Orientation="Horizontal">
                         <Label HorizontalOptions="StartAndExpand" Text="Giá" />
                         <Entry
                             HorizontalOptions="FillAndExpand"
                             Keyboard="Numeric"
-                            Placeholder="Giá món" />
+                            Placeholder="Giá món"
+                            Text="{Binding Obj.Price}" />
                     </StackLayout>
                     <StackLayout Orientation="Horizontal">
-                        <Label HorizontalOptions="StartAndExpand" Text="Loại" />
-                        <Entry HorizontalOptions="EndAndExpand" Placeholder="Món chính" />
+                        <Label HorizontalOptions="StartAndExpand" Text="Mô tả" />
+                        <Entry
+                            HorizontalOptions="EndAndExpand"
+                            Placeholder="Mô tả"
+                            Text="{Binding Obj.Description}" />
                     </StackLayout>
                     <StackLayout Orientation="Horizontal">
                         <Label HorizontalOptions="StartAndExpand" Text="Hình minh họa" />
@@ -82,6 +89,7 @@
                     Text="Lưu" />
                 <Button
                     BackgroundColor="{x:StaticResource FacebookBlue}"
+                    Command="{Binding CancelCommand}"
                     CornerRadius="3"
                     Text="Hủy" />
             </StackLayout>
