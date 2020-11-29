@@ -7,8 +7,7 @@ namespace Restaurant.Datas
 {
     public static class Dishs
     {
-        public static List<Dish> ListDishs;
-        public static List<Dish> ListDishs1 = new List<Dish>
+        public static List<Dish> ListDishs = new List<Dish>
         {
             new Dish{Id="d1",Name="Cơm gà",DishImage="com_tam",Description="Cơm gà hấp dẫn nè",Price=30000,IsActive=true},
             new Dish{Id="d2",Name="Cơm chiên",DishImage="com_tam",Description="Cơm chiên dương châu số 1",Price=28000,IsActive=true},

@@ -89,10 +89,13 @@ namespace Restaurant.ViewModels
                 "Tất cả","Đang nấu","Đã phục vụ","Đang chờ"
             };
             SelectedIndex = 0;
-            var listDishs = HttpService.GetAsync<List<Dish>>(Configuration.Api("dish/getall"));
-            Tests = new ObservableCollection<Dish>(Datas.Dishs.ListDishs);
-            BackupDish = Tests;
-            OrderedItems = new ObservableCollection<OrderDetailUI>();
+            Task.Run(async () =>
+            {
+                var listDishs = await HttpService.GetAsync<List<Dish>>(Configuration.Api("dish/getall"));
+                Tests = new ObservableCollection<Dish>(listDishs);
+                BackupDish = Tests;
+                OrderedItems = new ObservableCollection<OrderDetailUI>();
+            });
         }
         Table _table;
         public Table Table { get => _table; set => SetProperty(ref _table, value); }
@@ -116,7 +119,7 @@ namespace Restaurant.ViewModels
 
         }
         DelegateCommand _submitCommand;
-        public DelegateCommand SubmitCommand => _submitCommand ??= new DelegateCommand(Submit);
+        public DelegateCommand SubmitCommand => _submitCommand ??= new DelegateCommand(Submit, () => CanSubmit()).ObservesProperty(() => Tests);
         void Submit()
         {
             var a = Tests;
@@ -161,7 +164,7 @@ namespace Restaurant.ViewModels
             return count > 0 ? true : false;
         }
         DelegateCommand _purchaseCommand;
-        public DelegateCommand PurchaseCommand => _purchaseCommand ??= new DelegateCommand(Purchase);
+        public DelegateCommand PurchaseCommand => _purchaseCommand ??= new DelegateCommand(Purchase, () => CanPurchase()).ObservesProperty(() => OrderedItems);
         bool CanPurchase()
         {
             if (OrderedItems.Count > 0 && OrderedItems != null) return true;
