@@ -17,26 +17,39 @@
                         VerticalOptions="StartAndExpand" />
                     <StackLayout Orientation="Horizontal">
                         <Label HorizontalOptions="StartAndExpand" Text="Tên đăng nhập" />
-                        <Entry HorizontalOptions="EndAndExpand" Text="{Binding Staff.UserName}" />
+                        <Editor
+                            AutoSize="TextChanges"
+                            HorizontalOptions="EndAndExpand"
+                            Text="{Binding Staff.UserName}" />
                     </StackLayout>
                     <StackLayout Orientation="Horizontal">
                         <Label HorizontalOptions="StartAndExpand" Text="Tên" />
-                        <Entry HorizontalOptions="FillAndExpand" Text="{Binding Staff.Name}" />
+                        <Editor
+                            AutoSize="TextChanges"
+                            HorizontalOptions="EndAndExpand"
+                            Text="{Binding Staff.Name}" />
                     </StackLayout>
                     <StackLayout Orientation="Horizontal">
                         <Label HorizontalOptions="StartAndExpand" Text="Visa" />
-                        <Entry HorizontalOptions="EndAndExpand" Text="{Binding Staff.StaffVisa}" />
+                        <Editor
+                            AutoSize="TextChanges"
+                            HorizontalOptions="EndAndExpand"
+                            Text="{Binding Staff.StaffVisa}" />
                     </StackLayout>
                     <StackLayout Orientation="Horizontal">
                         <Label HorizontalOptions="StartAndExpand" Text="Role" />
                         <Picker
+                            Margin="0,0,5,0"
                             HorizontalOptions="EndAndExpand"
                             ItemsSource="{Binding Roles}"
                             SelectedIndex="{Binding SelectedItem}" />
                     </StackLayout>
                     <StackLayout Orientation="Horizontal">
                         <Label HorizontalOptions="StartAndExpand" Text="Ngày sinh" />
-                        <DatePicker HorizontalOptions="EndAndExpand" TextColor="{StaticResource FacebookBlue}" />
+                        <DatePicker
+                            Date="{Binding Staff.StaffBirthdate}"
+                            HorizontalOptions="EndAndExpand"
+                            TextColor="{StaticResource FacebookBlue}" />
                     </StackLayout>
                 </StackLayout>
             </Frame>

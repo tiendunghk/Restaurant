@@ -68,8 +68,9 @@ namespace Restaurant.ViewModels.Manager
             _referenceObj.StaffVisa = Staff.StaffVisa;
             _referenceObj.Role = Staff.Role = Datas.Roles.ListRoles[SelectedItem].RoleId;
             _referenceObj.StaffSalary = Staff.StaffSalary;
+            _referenceObj.StaffBirthdate = Staff.StaffBirthdate;
             var url = JsonConvert.SerializeObject(_referenceObj);
-            await HttpService.PostApiAsync<object>(Configuration.Api("staff/update"), _referenceObj);
+            var output = await HttpService.PostApiAsync<object>(Configuration.Api("staff/update"), _referenceObj);
             await NavigationService.NavigateBackAsync();
         }
     }

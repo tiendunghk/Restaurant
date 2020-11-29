@@ -11,6 +11,7 @@ using System.Threading.Tasks;
 using Xamarin.Forms;
 using Restaurant.Services;
 using Restaurant.Datas;
+using Newtonsoft.Json;
 
 namespace Restaurant.ViewModels
 {
@@ -89,7 +90,7 @@ namespace Restaurant.ViewModels
                 "Tất cả","Đang nấu","Đã phục vụ","Đang chờ"
             };
             SelectedIndex = 0;
-            var listDishs = HttpService.GetAsync<List<Dish>>(Configuration.Api("dish/getall"));
+            var listDishs = HttpService.GetAsync<List<Dish>>(Configuration.Api("dish/getall/true"));
             Tests = new ObservableCollection<Dish>(Datas.Dishs.ListDishs);
             BackupDish = Tests;
             OrderedItems = new ObservableCollection<OrderDetailUI>();
@@ -201,27 +202,34 @@ namespace Restaurant.ViewModels
         }
         async void ChangeTableStatus()
         {
-            if (Table.Status == TableStatus.OCCUPIED)
+            int count = 0;
+            if (Table.Status == TableStatus.OCCUPIED && count < 1)
             {
+                count++;
                 Table.Status = TableStatus.DIRTY;
                 RaisePropertyChanged(nameof(Table));
-                await DialogService.ShowAlertAsync("Trạng thái bàn đã chuyển từ OCCUPIED sang DIRTY", "Thông báo", "OK");
-                return;
+                //await DialogService.ShowAlertAsync("Trạng thái bàn đã chuyển từ OCCUPIED sang DIRTY", "Thông báo", "OK");
+                //return;
             }
-            if (Table.Status == TableStatus.DIRTY)
+            if (Table.Status == TableStatus.DIRTY && count < 1)
             {
+                count++;
                 Table.Status = TableStatus.CLEAN;
                 RaisePropertyChanged(nameof(Table));
-                await DialogService.ShowAlertAsync("Trạng thái bàn đã chuyển từ DIRTY sang CLEAN", "Thông báo", "OK");
-                return;
+                //await DialogService.ShowAlertAsync("Trạng thái bàn đã chuyển từ DIRTY sang CLEAN", "Thông báo", "OK");
+                //return;
             }
-            if (Table.Status == TableStatus.CLEAN)
+            if (Table.Status == TableStatus.CLEAN && count < 1)
             {
+                count++;
                 Table.Status = TableStatus.OCCUPIED;
                 RaisePropertyChanged(nameof(Table));
-                await DialogService.ShowAlertAsync("Trạng thái bàn đã chuyển từ CLEAN sang OCCUPIED", "Thông báo", "OK");
-                return;
+                //await DialogService.ShowAlertAsync("Trạng thái bàn đã chuyển từ CLEAN sang OCCUPIED", "Thông báo", "OK");
+                //return;
             }
+            var json = JsonConvert.SerializeObject(Table);
+            await HttpService.PostApiAsync<object>(Configuration.Api("table/updatestatus"), Table);
+            //await NavigationService.NavigateBackAsync();
         }
         async void ViewDish(OrderDetailUI ui)
         {

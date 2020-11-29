@@ -57,7 +57,7 @@ namespace Restaurant.ViewModels
                 Preferences.Set("token", output["token"].ToString());
                 var userId = output["userId"].ToString();
                 var staff = await HttpService.GetAsync<Staff>(Configuration.Api($"staff/{userId}"));
-                var listDishs = await HttpService.GetAsync<List<Dish>>(Configuration.Api($"dish/getall"));
+                var listDishs = await HttpService.GetAsync<List<Dish>>(Configuration.Api($"dish/getall/true"));
                 var listRoles = await HttpService.GetAsync<List<Role>>(Configuration.Api($"role/getall"));
                 Datas.Dishs.ListDishs = new ObservableCollection<Dish>(listDishs);
                 Datas.Roles.ListRoles = listRoles;

@@ -51,7 +51,7 @@ namespace Restaurant.ViewModels.Manager
         }
         public override async Task OnNavigationAsync(NavigationParameters parameters, NavigationType navigationType)
         {
-            var listDishs = await HttpService.GetAsync<List<Dish>>(Configuration.Api("dish/getall"));
+            var listDishs = await HttpService.GetAsync<List<Dish>>(Configuration.Api("dish/getall/true"));
             ListFoods = listDishs;
             BackupFood = ListFoods;
         }

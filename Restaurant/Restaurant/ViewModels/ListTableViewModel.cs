@@ -32,7 +32,7 @@ namespace Restaurant.ViewModels
             MessagingCenter.Subscribe<string>("abc", "LoadDataTable", async (a) =>
             {
                 IsLoadingData = true;
-                var listTables = await HttpService.GetAsync<List<Table>>(Configuration.Api("table/getall"));
+                var listTables = await HttpService.GetAsync<List<Table>>(Configuration.Api("table/getall/true"));
                 Tables = listTables;
                 IsLoadingData = false;
             });

@@ -15,11 +15,11 @@ namespace Restaurant.Converters
             switch (status)
             {
                 case TableStatus.OCCUPIED:
-                    return App.Current.Resources["OccupiedTable"];
+                    return App.Current.Resources["OccupiedTable"];//vàng
                 case TableStatus.CLEAN:
-                    return App.Current.Resources["CleanTable"];
+                    return App.Current.Resources["CleanTable"];//xanh
                 default:
-                    return App.Current.Resources["DirtyTable"];
+                    return App.Current.Resources["DirtyTable"];//đỏ
             }
         }
 
