@@ -117,14 +117,9 @@ namespace Restaurant.ViewModels
         }
         DelegateCommand _submitCommand;
         public DelegateCommand SubmitCommand => _submitCommand ??= new DelegateCommand(Submit);
-        async void Submit()
+        void Submit()
         {
-            var b = BackupDish.Where(x => x.SoLuong > 0).Count() > 0 ? true : false;
-            if (!b)
-            {
-                await DialogService.ShowAlertAsync("Vui lòng kiểm tra lại số lượng", "Thông báo", "OK");
-                return;
-            }
+            var a = Tests;
             if (order == null) order = new OrderModel { Id = Guid.NewGuid().ToString("N") };
             foreach (var elem in BackupDish)
             {
@@ -143,7 +138,7 @@ namespace Restaurant.ViewModels
                             },
                             NameDish = elem.Name,
                             ImageUrl = elem.DishImage,
-                            Status = OrderDetailStatus.WAITING,
+                            Status = i / 3 == 0 ? OrderDetailStatus.WAITING : OrderDetailStatus.COMPLETED,
                             Dish = elem,
                         });
                     }
@@ -160,15 +155,20 @@ namespace Restaurant.ViewModels
             PickerChanged();
             RaisePropertyChanged(nameof(OrderedItems));
         }
+        bool CanSubmit()
+        {
+            var count = Tests.Where(x => x.SoLuong > 0).Count();
+            return count > 0 ? true : false;
+        }
         DelegateCommand _purchaseCommand;
         public DelegateCommand PurchaseCommand => _purchaseCommand ??= new DelegateCommand(Purchase);
-        async void Purchase()
+        bool CanPurchase()
         {
-            if (OrderedItems.Count < 1)
-            {
-                await DialogService.ShowAlertAsync("Vui lòng kiểm tra lại số lượng", "Thông báo", "OK");
-                return;
-            }
+            if (OrderedItems.Count > 0 && OrderedItems != null) return true;
+            return false;
+        }
+        void Purchase()
+        {
             DialogService.ShowToast("Đã chuyển yêu cầu đến Cashier");
             OrderedItems = new ObservableCollection<OrderDetailUI>();
             App.Context.ListOrderDetailUI[Table.Id] = OrderedItems;

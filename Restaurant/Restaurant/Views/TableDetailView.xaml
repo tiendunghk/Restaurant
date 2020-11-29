@@ -20,10 +20,7 @@
                 <tabView:SfTabItem Title="Đặt món">
                     <tabView:SfTabItem.Content>
                         <StackLayout BackgroundColor="{x:StaticResource Backgroud}" VerticalOptions="StartAndExpand">
-                            <Label
-                                Margin="10"
-                                IsVisible="False"
-                                Text="Thực đơn (VND)" />
+                            <Label Margin="10" Text="Thực đơn (VND)" />
                             <ActivityIndicator
                                 HeightRequest="35"
                                 IsRunning="{Binding SearchMonAn}"

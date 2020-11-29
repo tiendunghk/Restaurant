@@ -60,12 +60,12 @@ namespace Restaurant
             }
             if (args.Target.Location.OriginalString.Contains("kitchen"))
             {
-                //if (staffRole != "Kitchen")
-                //{
-                //    args.Cancel();
-                //    await ServiceLocator.Instance.Resolve<IDialogService>().ShowAlertAsync("Bạn không có quyền truy cập", "Cảnh báo", "OK");
-                //}
-                //else
+                if (staffRole != "Kitchen")
+                {
+                    args.Cancel();
+                    await ServiceLocator.Instance.Resolve<IDialogService>().ShowAlertAsync("Bạn không có quyền truy cập", "Cảnh báo", "OK");
+                }
+                else
                 {
                     //kitchen
                     App.Context.KitchenClickCount++;
@@ -76,28 +76,28 @@ namespace Restaurant
             }
             if (args.Target.Location.OriginalString.Contains("manager"))
             {
-                //if (staffRole != "Manager")
-                //{
-                //    args.Cancel();
-                //    await ServiceLocator.Instance.Resolve<IDialogService>().ShowAlertAsync("Bạn không có quyền truy cập", "Cảnh báo", "OK");
-                //}
-                //else
-                //{
-                //    //manager
-                //}
+                if (staffRole != "Manager")
+                {
+                    args.Cancel();
+                    await ServiceLocator.Instance.Resolve<IDialogService>().ShowAlertAsync("Bạn không có quyền truy cập", "Cảnh báo", "OK");
+                }
+                else
+                {
+                    //manager
+                }
 
             }
             if (args.Target.Location.OriginalString.Contains("report"))
             {
-                //if (staffRole != "Manager")
-                //{
-                //    args.Cancel();
-                //    await ServiceLocator.Instance.Resolve<IDialogService>().ShowAlertAsync("Bạn không có quyền truy cập", "Cảnh báo", "OK");
-                //}
-                //else
-                //{
-                //    //report
-                //}
+                if (staffRole != "Manager")
+                {
+                    args.Cancel();
+                    await ServiceLocator.Instance.Resolve<IDialogService>().ShowAlertAsync("Bạn không có quyền truy cập", "Cảnh báo", "OK");
+                }
+                else
+                {
+                    //report
+                }
 
             }
         }

@@ -77,7 +77,6 @@
                     BackgroundColor="{x:StaticResource FacebookBlue}"
                     Command="{Binding CancelCommand}"
                     CornerRadius="3"
-                    IsVisible="False"
                     Text="Xóa" />
                 <Button
                     BackgroundColor="{x:StaticResource FacebookBlue}"

@@ -1,5 +1,4 @@
-﻿using Restaurant.Datas;
-using Restaurant.Models;
+﻿using Restaurant.Models;
 using Restaurant.Mvvm.Command;
 using Restaurant.Services;
 using Restaurant.Services.Navigation;
@@ -23,7 +22,7 @@ namespace Restaurant.ViewModels.Manager
         DelegateCommand _saveCommand;
         DelegateCommand<Dish> _removeCommand;
         DelegateCommand<Dish> _pickCommand;
-        Dish _obj, _referenceObj;
+        Dish _obj;
         public Dish Obj
         {
             get => _obj;
@@ -40,8 +39,9 @@ namespace Restaurant.ViewModels.Manager
         }
         public override Task OnNavigationAsync(NavigationParameters parameters, NavigationType navigationType)
         {
-            parameters.TryGetValue("Food", out _referenceObj);
-            Obj = _referenceObj.Clone() as Dish;
+            Dish obj;
+            parameters.TryGetValue("Food", out obj);
+            Obj = obj;
             return Task.CompletedTask;
         }
         async void Cancel()
@@ -50,15 +50,6 @@ namespace Restaurant.ViewModels.Manager
         }
         async void Save()
         {
-            _referenceObj.IsActive = Obj.IsActive;
-            _referenceObj.Name = Obj.Name;
-            if (!Obj.DishImage.Contains("http"))
-            {
-                var urlImage = await FileService.UploadImageCloudinary(Obj.DishImage);
-                _referenceObj.DishImage = urlImage;
-            }
-
-            await HttpService.PostApiAsync<object>(Configuration.Api("dish/update"), _referenceObj);
             await NavigationService.NavigateBackAsync();
         }
         void Remove(Dish dish)

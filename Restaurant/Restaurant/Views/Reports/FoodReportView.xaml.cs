@@ -1,5 +1,4 @@
-﻿using Newtonsoft.Json;
-using Restaurant.Datas;
+﻿using Restaurant.Datas;
 using Restaurant.Models;
 using Restaurant.Services;
 using Restaurant.ViewModels.Manager;
@@ -7,8 +6,6 @@ using Restaurant.ViewModels.Reports;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Net.Http;
-using System.Net.Http.Headers;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -28,13 +25,11 @@ namespace Restaurant.Views.Reports
 
         private async void Button_Clicked(object sender, EventArgs e)
         {
-            var _referenceObj = App.Context.CurrentStaff.Clone() as Staff;
-            _referenceObj.Name = "fucker";
-            //await HttpService.PostApiAsync<object>(Configuration.Api("staff/update"), _referenceObj);
-            HttpClient httpClient = new HttpClient();
-            httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", _referenceObj.Token);
-            var json = JsonConvert.SerializeObject(_referenceObj);
-            var a = await httpClient.PostAsJsonAsync(Configuration.Api("staff/update"), _referenceObj);
+            var listStaff = HttpService.GetAsync<List<Staff>>(Configuration.Api("staff/getall"));
+            var listDish = HttpService.GetAsync<List<Dish>>(Configuration.Api("dish/getall"));
+            var listOrder = HttpService.GetAsync<List<OrderModel>>(Configuration.Api("order/getall"));
+            var listOrderDetail = HttpService.GetAsync<List<OrderDetail>>(Configuration.Api("orderdetail/getall"));
+            var listTable = HttpService.GetAsync<List<Table>>(Configuration.Api("table/getall"));
         }
     }
 }
