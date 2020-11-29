@@ -90,7 +90,6 @@ namespace Restaurant.ViewModels
                 "Tất cả","Đang nấu","Đã phục vụ","Đang chờ"
             };
             SelectedIndex = 0;
-            var listDishs = HttpService.GetAsync<List<Dish>>(Configuration.Api("dish/getall/true"));
             Tests = new ObservableCollection<Dish>(Datas.Dishs.ListDishs);
             BackupDish = Tests;
             OrderedItems = new ObservableCollection<OrderDetailUI>();

@@ -40,6 +40,8 @@ namespace Restaurant.ViewModels
         async void Tapped(Table table)
         {
             var parameters = new NavigationParameters();
+            var listDishs = await HttpService.GetAsync<List<Dish>>(Configuration.Api("dish/getall/true"));
+            Datas.Dishs.ListDishs = new ObservableCollection<Dish>(listDishs);
             parameters.Add("title", table.TableName);
             parameters.Add("table", table);
             await NavigationService.NavigateToAsync<TableDetailViewModel>(parameters);
