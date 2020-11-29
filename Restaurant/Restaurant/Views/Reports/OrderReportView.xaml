@@ -2,14 +2,44 @@
 <ContentPage
     x:Class="Restaurant.Views.Reports.OrderReportView"
     xmlns="http://xamarin.com/schemas/2014/forms"
-    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml">
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    Title="Order">
     <ContentPage.Content>
         <StackLayout BackgroundColor="{x:StaticResource Backgroud}">
             <Label
-                HorizontalOptions="CenterAndExpand"
-                Text="Order Report View"
-                VerticalOptions="CenterAndExpand" />
-            <Button Clicked="Button_Clicked" Text="abc" />
+                Margin="5"
+                FontSize="15"
+                Text="Báo cáo order" />
+            <DatePicker />
+            <Picker ItemsSource="{Binding Pickers}" SelectedIndex="{Binding SelectedIndex}" />
+            <ListView ItemsSource="{Binding ListOrders}" SelectionMode="None">
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <ViewCell>
+                            <StackLayout Orientation="Horizontal">
+                                <Label
+                                    HorizontalOptions="StartAndExpand"
+                                    Text="{Binding TableName}"
+                                    VerticalOptions="CenterAndExpand" />
+                                <StackLayout>
+                                    <Label
+                                        Margin="5"
+                                        HorizontalOptions="StartAndExpand"
+                                        Text="{Binding OrderDate, StringFormat='{0:MM/dd/yyyy h:mm tt}'}" />
+                                    <Label Margin="5" VerticalOptions="EndAndExpand">
+                                        <Label.FormattedText>
+                                            <FormattedString>
+                                                <Span Text="Tổng tiền: " />
+                                                <Span Text="{Binding OrderTotalAmount}" />
+                                            </FormattedString>
+                                        </Label.FormattedText>
+                                    </Label>
+                                </StackLayout>
+                            </StackLayout>
+                        </ViewCell>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>

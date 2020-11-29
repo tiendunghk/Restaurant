@@ -58,7 +58,7 @@ namespace Restaurant.ViewModels.Order
             {
                 if (e.OrderDetail_OrderID == obj.Id)
                 {
-                    d = Datas.Dishs.ListDishs.ToList().Find(x => x.Id == e.DishId);
+                    d = Datas.Dishs.ListDishs1.ToList().Find(x => x.Id == e.DishId);
                     orderDetailUIs.Add(new OrderDetailUI
                     {
                         OrderDetail = e,
