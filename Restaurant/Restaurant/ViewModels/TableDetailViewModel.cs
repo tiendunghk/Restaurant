@@ -125,7 +125,9 @@ namespace Restaurant.ViewModels
                 await DialogService.ShowAlertAsync("Vui lòng kiểm tra lại số lượng", "Thông báo", "OK");
                 return;
             }
-            if (order == null) order = new OrderModel { Id = Guid.NewGuid().ToString("N") };
+            if (order == null) order = new OrderModel { Id = Guid.NewGuid().ToString("N"), TableId = Table.Id, StaffId = App.Context.CurrentStaff.Id, TableName = Table.TableName };
+            Table.TableIdOrderServing = order.Id;
+            await HttpService.PostApiAsync<object>(Configuration.Api("table/update"), Table);
             foreach (var elem in BackupDish)
             {
                 if (elem.SoLuong > 0)
@@ -227,7 +229,7 @@ namespace Restaurant.ViewModels
                 //return;
             }
             var json = JsonConvert.SerializeObject(Table);
-            await HttpService.PostApiAsync<object>(Configuration.Api("table/updatestatus"), Table);
+            await HttpService.PostApiAsync<object>(Configuration.Api("table/update"), Table);
             //await NavigationService.NavigateBackAsync();
         }
         async void ViewDish(OrderDetailUI ui)

@@ -28,14 +28,6 @@
                         HeightRequest="1"
                         Opacity=".3" />
                     <StackLayout Orientation="Horizontal">
-                        <Label HorizontalOptions="StartAndExpand" Text="Loại" />
-                        <Label HorizontalOptions="EndAndExpand" Text="Món chính" />
-                    </StackLayout>
-                    <BoxView
-                        BackgroundColor="Gray"
-                        HeightRequest="1"
-                        Opacity=".3" />
-                    <StackLayout Orientation="Horizontal">
                         <Label HorizontalOptions="StartAndExpand" Text="Hình minh họa" />
                         <Frame
                             BackgroundColor="WhiteSmoke"
