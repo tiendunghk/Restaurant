@@ -61,6 +61,11 @@ namespace Restaurant.ViewModels
                 var listRoles = await HttpService.GetAsync<List<Role>>(Configuration.Api($"role/getall"));
                 Datas.Dishs.ListDishs = new ObservableCollection<Dish>(listDishs);
                 Datas.Roles.ListRoles = listRoles;
+                foreach (var e in Datas.Roles.ListRoles)
+                {
+                    if (staff.Role == e.RoleId)
+                        staff.RoleName = e.RoleName;
+                }
                 App.Context.CurrentStaff = staff;
                 Application.Current.MainPage = new AppShell();
             }

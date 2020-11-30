@@ -38,7 +38,8 @@ namespace Restaurant.Models
         }
         [JsonProperty("refreshToken")]
         public string RefreshToken { get; set; }
-
+        [JsonIgnore]
+        public string RoleName { get; set; }
         public object Clone()
         {
             return MemberwiseClone();

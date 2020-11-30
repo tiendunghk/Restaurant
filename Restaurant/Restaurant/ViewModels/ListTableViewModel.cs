@@ -39,6 +39,11 @@ namespace Restaurant.ViewModels
         }
         async void Tapped(Table table)
         {
+            if (App.Context.CurrentStaff.RoleName == "Cashier" || App.Context.CurrentStaff.RoleName == "Kitchen")
+            {
+                await DialogService.ShowAlertAsync("Bạn không có quyền truy cập", "Thông báo", "OK");
+                return;
+            }
             var parameters = new NavigationParameters();
             var listDishs = await HttpService.GetAsync<List<Dish>>(Configuration.Api("dish/getall/true"));
             Datas.Dishs.ListDishs = new ObservableCollection<Dish>(listDishs);
