@@ -1,5 +1,8 @@
 ﻿using Com.OneSignal;
 using Com.OneSignal.Abstractions;
+using Microsoft.AppCenter;
+using Microsoft.AppCenter.Analytics;
+using Microsoft.AppCenter.Crashes;
 using Restaurant.Models;
 using Restaurant.Services;
 using Restaurant.Services.Dialog;
@@ -52,6 +55,8 @@ namespace Restaurant
 
         protected override void OnStart()
         {
+            AppCenter.Start("android=6013ff7e-83fa-4364-9319-0cbec3acebb5;",
+                  typeof(Analytics), typeof(Crashes));
         }
 
         protected override void OnSleep()
