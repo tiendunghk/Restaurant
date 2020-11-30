@@ -55,7 +55,7 @@ namespace Restaurant
 
         protected override void OnStart()
         {
-            AppCenter.Start("android=6013ff7e-83fa-4364-9319-0cbec3acebb5;",
+            AppCenter.Start("android=b607b36d-19ae-4416-949e-cece5515e5a5;",
                   typeof(Analytics), typeof(Crashes));
         }
 
