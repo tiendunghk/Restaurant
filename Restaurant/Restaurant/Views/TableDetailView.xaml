@@ -6,7 +6,8 @@
     xmlns:syncfusion="clr-namespace:Syncfusion.XForms.Buttons;assembly=Syncfusion.Buttons.XForms"
     xmlns:tabView="clr-namespace:Syncfusion.XForms.TabView;assembly=Syncfusion.SfTabView.XForms"
     x:Name="Root"
-    Title="{Binding Title}">
+    Title="{Binding Title}"
+    Shell.BackgroundColor="{Binding Table.Status, Converter={StaticResource TableColorConverter}}">
     <ContentPage.ToolbarItems>
         <ToolbarItem Command="{Binding ChangeTableStatusCommand}" Text="Sửa trạng thái" />
     </ContentPage.ToolbarItems>
