@@ -152,8 +152,9 @@ namespace Restaurant.ViewModels
                     elem.SoLuong = 0;
                 }
             }
-            order.OrderTotalAmount = cost;
+            order.OrderTotalAmount += cost;
 
+            //chưa có order nào với bàn này
             if (!App.Context.CurrentOrder.TryGetValue(Table.Id, out var op) || !App.Context.CurrentOrder.ContainsKey(Table.Id))
             {
                 var output = await HttpService.PostApiAsync<JObject>(Configuration.Api("order/add"), order);
@@ -163,6 +164,12 @@ namespace Restaurant.ViewModels
                     App.Context.CurrentOrder[Table.Id] = order;
                 else
                     App.Context.CurrentOrder.Add(Table.Id, order);
+            }
+            //đã có order với bàn
+            else
+            {
+                await HttpService.PostApiAsync<object>(Configuration.Api("order/update"), order);
+                App.Context.CurrentOrder[Table.Id] = order;
             }
 
             await HttpService.PostApiAsync<object>(Configuration.Api("table/update"), Table);
@@ -186,16 +193,20 @@ namespace Restaurant.ViewModels
                 return;
             }
             DialogService.ShowToast("Đã chuyển yêu cầu đến Cashier");
-            OrderedItems = new ObservableCollection<OrderDetailUI>();
-            App.Context.ListOrderDetailUI[Table.Id] = OrderedItems;
+            OrderedItems = OrderedItemsBackup = new ObservableCollection<OrderDetailUI>();
+            Table.TableIdOrderServing = null;
+            App.Context.CurrentOrder.Remove(Table.Id);
+            await HttpService.PostApiAsync<object>(Configuration.Api("table/update"), Table);
+            await NavigationService.NavigateBackAsync();
         }
         DelegateCommand<OrderDetailUI> _deleteDetailCommand;
         public DelegateCommand<OrderDetailUI> DeleteDetailCommand => _deleteDetailCommand ??= new DelegateCommand<OrderDetailUI>(DeleteDetail);
-        void DeleteDetail(OrderDetailUI obj)
+        async void DeleteDetail(OrderDetailUI obj)
         {
             OrderedItems.Remove(obj);
-            if (App.Context.ListOrderDetailUI.TryGetValue(Table.Id, out var x))
-                App.Context.ListOrderDetailUI[Table.Id] = OrderedItems;
+            OrderedItemsBackup.Remove(obj);
+            var idOrderDetail = obj.OrderDetail.OrderDetailId;
+            await HttpService.PostApiAsync<object>(Configuration.Api($"orderdetail/{idOrderDetail}"), new { });
             RaisePropertyChanged(nameof(OrderedItems));
             DialogService.ShowToast("Đã xóa item");
         }
@@ -295,6 +306,8 @@ namespace Restaurant.ViewModels
                     Dish = Dishs.ListDishs.ToList().Find(x => x.Id == e.DishId),
                 });
             }
+            OrderedItemsBackup = OrderedItems;
+            //RaisePropertyChanged(nameof(OrderedItemsBackup));
         }
     }
 }
