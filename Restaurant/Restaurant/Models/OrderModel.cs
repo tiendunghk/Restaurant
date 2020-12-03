@@ -14,13 +14,13 @@ namespace Restaurant.Models
         [JsonProperty("tableId")]
         public string TableId { get; set; }
         [JsonProperty("orderDate")]
-        public DateTime OrderDate { get; set; }
+        public DateTime? OrderDate { get; set; }
         [JsonProperty("orderTotal")]
         public Decimal OrderTotalAmount { get; set; }
         [JsonProperty("orderStarttime")]
-        public DateTime OrderStart { get; set; }
+        public DateTime? OrderStart { get; set; }
         [JsonProperty("orderEndtime")]
-        public DateTime OrderEnd { get; set; }
+        public DateTime? OrderEnd { get; set; }
         [JsonProperty("orderStatus")]
         public OrderStatus Status { get; set; }
         [JsonIgnore]

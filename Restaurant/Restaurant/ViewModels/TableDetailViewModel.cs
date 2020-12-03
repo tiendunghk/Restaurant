@@ -12,6 +12,7 @@ using Xamarin.Forms;
 using Restaurant.Services;
 using Restaurant.Datas;
 using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
 
 namespace Restaurant.ViewModels
 {
@@ -102,14 +103,19 @@ namespace Restaurant.ViewModels
             parameters.TryGetValue("title", out v);
             parameters.TryGetValue("table", out var table);
             Table = table as Table;
-            Title = v;
-            if (App.Context.ListOrderDetailUI.TryGetValue(Table.Id, out var b))
+            if (!string.IsNullOrEmpty(Table.TableIdOrderServing))
             {
-                OrderedItems = new ObservableCollection<OrderDetailUI>(b.ToList());
-                OrderedItemsBackup = OrderedItems;
+                order = await HttpService.GetAsync<OrderModel>(Configuration.Api($"order/{Table.TableIdOrderServing}"));
+                if (App.Context.CurrentOrder.ContainsKey(Table.Id))
+                {
+                    App.Context.CurrentOrder[Table.Id] = order;
+                }
+                else
+                {
+                    App.Context.CurrentOrder.Add(Table.Id, order);
+                }
             }
-            else
-                OrderedItems = new ObservableCollection<OrderDetailUI>();
+            Title = v;
         }
         void Tapped(object o)
         {
@@ -125,39 +131,47 @@ namespace Restaurant.ViewModels
                 await DialogService.ShowAlertAsync("Vui lòng kiểm tra lại số lượng", "Thông báo", "OK");
                 return;
             }
-            if (order == null) order = new OrderModel { Id = Guid.NewGuid().ToString("N"), TableId = Table.Id, StaffId = App.Context.CurrentStaff.Id, TableName = Table.TableName };
-            Table.TableIdOrderServing = order.Id;
-            await HttpService.PostApiAsync<object>(Configuration.Api("table/update"), Table);
+            if (order == null) order = new OrderModel { TableId = Table.Id, StaffId = App.Context.CurrentStaff.Id, TableName = Table.TableName };
+
+            decimal cost = 0;
+            List<OrderDetail> orderDetails = new List<OrderDetail>();
             foreach (var elem in BackupDish)
             {
                 if (elem.SoLuong > 0)
                 {
                     for (int i = 0; i < elem.SoLuong; i++)
                     {
-                        OrderedItems.Add(new OrderDetailUI
+                        var OrderDetail = new OrderDetail
                         {
-                            OrderDetailUIId = Guid.NewGuid().ToString("N"),
-                            OrderDetail = new OrderDetail
-                            {
-                                OrderDetailId = Guid.NewGuid().ToString("N"),
-                                DishId = elem.Id,
-                                OrderDetail_OrderID = order.Id,
-                            },
-                            NameDish = elem.Name,
-                            ImageUrl = elem.DishImage,
-                            Status = OrderDetailStatus.WAITING,
-                            Dish = elem,
-                        });
+                            DishId = elem.Id,
+                            OrderDetailStatus = OrderDetailStatus.WAITING,
+                        };
+                        cost += Datas.Dishs.ListDishs.ToList().Find(x => x.Id == elem.Id).Price;
+                        orderDetails.Add(OrderDetail);
                     }
                     elem.SoLuong = 0;
                 }
             }
-            if (!App.Context.ListOrderDetailUI.TryGetValue(Table.Id, out var x))
+            order.OrderTotalAmount = cost;
+
+            if (!App.Context.CurrentOrder.TryGetValue(Table.Id, out var op) || !App.Context.CurrentOrder.ContainsKey(Table.Id))
             {
-                App.Context.ListOrderDetailUI.Add(Table.Id, OrderedItems);
+                var output = await HttpService.PostApiAsync<JObject>(Configuration.Api("order/add"), order);
+                order.Id = output["id"].ToString();
+                Table.TableIdOrderServing = order.Id;
+                if (App.Context.CurrentOrder.ContainsKey(Table.Id))
+                    App.Context.CurrentOrder[Table.Id] = order;
+                else
+                    App.Context.CurrentOrder.Add(Table.Id, order);
             }
-            else
-                App.Context.ListOrderDetailUI[Table.Id] = OrderedItems;
+
+            await HttpService.PostApiAsync<object>(Configuration.Api("table/update"), Table);
+            foreach (var e in orderDetails)
+            {
+                e.OrderDetail_OrderID = order.Id;
+                await HttpService.PostApiAsync<object>(Configuration.Api("orderdetail/add"), e);
+            }
+
             OrderedItemsBackup = OrderedItems;
             PickerChanged();
             RaisePropertyChanged(nameof(OrderedItems));
@@ -262,6 +276,24 @@ namespace Restaurant.ViewModels
                         OrderedItems = new ObservableCollection<OrderDetailUI>(OrderedItemsBackup.Where(x => x.Status == OrderDetailStatus.WAITING));
                         break;
                 }
+            }
+        }
+        public async Task LoadOrderDetailData()
+        {
+            if (string.IsNullOrEmpty(Table.TableIdOrderServing)) return;
+            OrderedItems = new ObservableCollection<OrderDetailUI>();
+            var orderdetails = await HttpService.GetAsync<List<OrderDetail>>(Configuration.Api($"orderdetail/byorder/{Table.TableIdOrderServing}"));
+            foreach (var e in orderdetails)
+            {
+                OrderedItems.Add(new OrderDetailUI
+                {
+                    OrderDetailUIId = Guid.NewGuid().ToString("N"),
+                    OrderDetail = e,
+                    NameDish = Dishs.ListDishs.ToList().Find(x => x.Id == e.DishId).Name,
+                    ImageUrl = Dishs.ListDishs.ToList().Find(x => x.Id == e.DishId).DishImage,
+                    Status = e.OrderDetailStatus,
+                    Dish = Dishs.ListDishs.ToList().Find(x => x.Id == e.DishId),
+                });
             }
         }
     }

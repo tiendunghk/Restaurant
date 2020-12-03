@@ -17,6 +17,7 @@
                 x:Name="tabView"
                 BackgroundColor="WhiteSmoke"
                 EnableSwiping="False"
+                TabItemTapped="tabView_TabItemTapped"
                 VisibleHeaderCount="2">
                 <tabView:SfTabItem Title="Đặt món">
                     <tabView:SfTabItem.Content>

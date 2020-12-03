@@ -29,5 +29,14 @@ namespace Restaurant.Views
             var vm = BindingContext as TableDetailViewModel;
             vm.PickerChanged();
         }
+
+        private async void  tabView_TabItemTapped(object sender, Syncfusion.XForms.TabView.TabItemTappedEventArgs e)
+        {
+            if (e.TabItem.Title == "Món đã đặt")
+            {
+                var vm = BindingContext as TableDetailViewModel;
+                await vm.LoadOrderDetailData();
+            }
+        }
     }
 }

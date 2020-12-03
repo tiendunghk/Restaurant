@@ -25,6 +25,7 @@ namespace Restaurant
         {
             Connectivity.ConnectivityChanged -= Connectivity_ConnectivityChanged;
         }
+        public Dictionary<string, OrderModel> CurrentOrder = new Dictionary<string, OrderModel>();
         public Staff CurrentStaff { get; set; } = new Staff();
         public List<Table> Tables = new List<Table>();
         public int KitchenClickCount = 0;
