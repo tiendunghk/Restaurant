@@ -9,6 +9,8 @@ using System.Threading.Tasks;
 using Syncfusion.XForms.EffectsView;
 using Restaurant.Services.Navigation;
 using System.Linq;
+using Restaurant.Services;
+using Restaurant.Datas;
 
 namespace Restaurant.ViewModels.Order
 {
@@ -40,13 +42,16 @@ namespace Restaurant.ViewModels.Order
 
             Filters = new List<string> { "Tất cả", "Cần thanh toán", "Đã thanh toán" };
             SelectedIndex = 0;
-
-            ListOrders = Datas.Orders.ListOrders;
-            ListOrdersBackup = ListOrders;
             MessagingCenter.Subscribe<string>("abc", "LoadDataOrder", async (a) =>
             {
                 IsLoadingData = true;
-                await Task.Delay(2000);
+                var orders = await HttpService.GetAsync<List<OrderModel>>(Configuration.Api("order/getall"));
+                foreach (var e in orders)
+                {
+                    e.TableName = Tables.ListTables.Find(x => x.Id == e.TableId).TableName;
+                }
+                ListOrders = orders;
+                ListOrdersBackup = ListOrders;
                 IsLoadingData = false;
             });
         }
@@ -54,11 +59,13 @@ namespace Restaurant.ViewModels.Order
         {
             Dish d;
             List<OrderDetailUI> orderDetailUIs = new List<OrderDetailUI>();
-            foreach (var e in Datas.Orders.ListOrderDetails)
+
+            var orderdetails = await HttpService.GetAsync<List<OrderDetail>>(Configuration.Api($"orderdetail/byorder/{obj.Id}"));
+            foreach (var e in orderdetails)
             {
                 if (e.OrderDetail_OrderID == obj.Id)
                 {
-                    d = Datas.Dishs.ListDishs1.ToList().Find(x => x.Id == e.DishId);
+                    d = Datas.Dishs.ListDishs.ToList().Find(x => x.Id == e.DishId);
                     orderDetailUIs.Add(new OrderDetailUI
                     {
                         OrderDetail = e,

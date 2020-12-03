@@ -8,6 +8,7 @@ using Android.Widget;
 using Android.OS;
 using Xamarin.Forms;
 using Acr.UserDialogs;
+using FFImageLoading.Forms.Platform;
 
 namespace Restaurant.Droid
 {
@@ -24,6 +25,7 @@ namespace Restaurant.Droid
             Forms.SetFlags("RadioButton_Experimental", "Brush_Experimental");
 
             UserDialogs.Init(this);
+            CachedImageRenderer.Init(true);
 
             Xamarin.Essentials.Platform.Init(this, savedInstanceState);
             global::Xamarin.Forms.Forms.Init(this, savedInstanceState);

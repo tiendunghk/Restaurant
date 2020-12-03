@@ -59,8 +59,10 @@ namespace Restaurant.ViewModels
                 var staff = await HttpService.GetAsync<Staff>(Configuration.Api($"staff/{userId}"));
                 var listDishs = await HttpService.GetAsync<List<Dish>>(Configuration.Api($"dish/getall/true"));
                 var listRoles = await HttpService.GetAsync<List<Role>>(Configuration.Api($"role/getall"));
+                var listTables = await HttpService.GetAsync<List<Table>>(Configuration.Api($"table/getall/true"));
                 Datas.Dishs.ListDishs = new ObservableCollection<Dish>(listDishs);
                 Datas.Roles.ListRoles = listRoles;
+                Tables.ListTables = listTables;
                 foreach (var e in Datas.Roles.ListRoles)
                 {
                     if (staff.Role == e.RoleId)

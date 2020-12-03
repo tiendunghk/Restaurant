@@ -19,8 +19,7 @@ namespace Restaurant.ViewModels.Order
             set => SetProperty(ref _orderStatus, value);
         }
         DelegateCommand _purchaseCommand;
-        public DelegateCommand PurchaseCommand => _purchaseCommand ??= new DelegateCommand(Purchase, () =>
-        OrderStatus >= 1).ObservesProperty(() => OrderStatus);
+        public DelegateCommand PurchaseCommand => _purchaseCommand ??= new DelegateCommand(Purchase);
         public OrderDetailViewModel()
         {
 

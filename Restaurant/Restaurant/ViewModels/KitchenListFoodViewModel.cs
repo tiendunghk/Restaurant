@@ -1,4 +1,5 @@
-﻿using Restaurant.Models;
+﻿using Restaurant.Datas;
+using Restaurant.Models;
 using Restaurant.Mvvm.Command;
 using Restaurant.Services;
 using Restaurant.Services.Navigation;
@@ -43,11 +44,10 @@ namespace Restaurant.ViewModels
             MessagingCenter.Subscribe<string>("abc", "LoadDataKitchen", async (a) =>
             {
                 IsLoadingData = true;
-                await Task.Delay(2000);
-                FakeData();
+                await LoadData();
                 IsLoadingData = false;
             });
-            MessagingCenter.Subscribe<string, string>("a", "OnNotificationReceived", (a, b) =>
+            MessagingCenter.Subscribe<string, string>("a", "OnNtificationReceived", (a, b) =>
              {
                  Title = b;
              });
@@ -81,8 +81,7 @@ namespace Restaurant.ViewModels
         public override async Task OnNavigationAsync(NavigationParameters parameters, NavigationType navigationType)
         {
             IsLoadingData = true;
-            await Task.Delay(2000);
-            FakeData();
+            await LoadData();
             IsLoadingData = false;
         }
         List<OrderModel> _listOrders;
@@ -91,9 +90,14 @@ namespace Restaurant.ViewModels
             get => _listOrders;
             set => SetProperty(ref _listOrders, value);
         }
-        void FakeData()
+        async Task LoadData()
         {
-            ListOrders = Datas.Orders.ListOrders;
+            var orders = await HttpService.GetAsync<List<OrderModel>>(Configuration.Api("order/getall"));
+            foreach (var e in orders)
+            {
+                e.TableName = Tables.ListTables.Find(x => x.Id == e.TableId).TableName;
+            }
+            ListOrders = orders;
             ListItems = new ObservableCollection<FoodHeaderInfo>();
             FoodHeaderInfo obj;
             Dish d;
@@ -102,11 +106,12 @@ namespace Restaurant.ViewModels
             {
                 obj = new FoodHeaderInfo();
                 obj.Header = ListOrders[i].TableName;
-                foreach (var e in Datas.Orders.ListOrderDetails)
+                var orderdetails = await HttpService.GetAsync<List<OrderDetail>>(Configuration.Api($"orderdetail/byorder/{ListOrders[i].Id}"));
+                foreach (var e in orderdetails)
                 {
                     if (e.OrderDetail_OrderID == ListOrders[i].Id)
                     {
-                        d = Datas.Dishs.ListDishs1.ToList().Find(x => x.Id == e.DishId);
+                        d = Datas.Dishs.ListDishs.ToList().Find(x => x.Id == e.DishId);
                         obj.Add(new OrderDetailUI
                         {
                             OrderDetailUIId = Guid.NewGuid().ToString("N"),
