@@ -53,7 +53,7 @@ namespace Restaurant.Services.Navigation
             //    await customNavigation.PushAsync(view);
             //}
             //else
-            if (view is LoginView || NavigationRoot == null)
+            if (view is LoginView || view is SplashView || NavigationRoot == null)
             {
                 CurrentApplication.MainPage = view;
                 _navigationRoot = null;

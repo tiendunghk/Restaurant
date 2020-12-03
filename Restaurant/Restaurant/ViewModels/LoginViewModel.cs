@@ -69,6 +69,9 @@ namespace Restaurant.ViewModels
                         staff.RoleName = e.RoleName;
                 }
                 App.Context.CurrentStaff = staff;
+                Preferences.Set("islogined", true);
+                Preferences.Set("username", UserName);
+                Preferences.Set("password", PassWord);
                 Application.Current.MainPage = new AppShell();
             }
             else await DialogService.ShowAlertAsync("Vui lòng kiểm tra lại tài khoản của bạn!", "Error", "OK");

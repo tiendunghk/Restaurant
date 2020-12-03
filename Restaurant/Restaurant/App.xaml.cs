@@ -50,7 +50,7 @@ namespace Restaurant
         void InitNavigation()
         {
             ServiceLocator.Instance.Resolve<Services.Navigation.INavigationService>()
-                .NavigateToAsync<LoginViewModel>();
+                .NavigateToAsync<SplashViewModel>();
         }
 
         protected override void OnStart()

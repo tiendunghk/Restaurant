@@ -12,7 +12,7 @@ using FFImageLoading.Forms.Platform;
 
 namespace Restaurant.Droid
 {
-    [Activity(Label = "Restaurant", Icon = "@mipmap/ic_app", Theme = "@style/MainTheme", MainLauncher = true, ConfigurationChanges = ConfigChanges.ScreenSize | ConfigChanges.Orientation)]
+    [Activity(Label = "Restaurant", Icon = "@mipmap/ic_app", Theme = "@style/MainTheme", MainLauncher = true, ConfigurationChanges = ConfigChanges.ScreenSize | ConfigChanges.Orientation, ScreenOrientation = ScreenOrientation.Portrait)]
     public class MainActivity : global::Xamarin.Forms.Platform.Android.FormsAppCompatActivity
     {
         internal static MainActivity Instance { get; private set; }

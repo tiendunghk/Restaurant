@@ -9,7 +9,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-
+using Xamarin.Essentials;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
@@ -35,6 +35,9 @@ namespace Restaurant
             var answer = await ServiceLocator.Instance.Resolve<IDialogService>().ShowConfirmDialog("Warning", "Bạn có chắc chắn muốn thoát ứng dụng?", "OK", "Cancel");
             if (answer)
             {
+                Preferences.Set("islogined", false);
+                Preferences.Set("username", null);
+                Preferences.Set("password", null);
                 Application.Current.MainPage = new LoginView();
             }
         }
@@ -49,14 +52,14 @@ namespace Restaurant
                 //Table
                 App.Context.TableClickCount++;
                 //if (App.Context.TableClickCount <= 1)
-                    MessagingCenter.Send("abc", "LoadDataTable");
+                MessagingCenter.Send("abc", "LoadDataTable");
             }
             if (args.Target.Location.OriginalString.Contains("order"))
             {
                 //order
                 App.Context.OrderClickCount++;
                 //if (App.Context.OrderClickCount <= 1)
-                    MessagingCenter.Send("abc", "LoadDataOrder");
+                MessagingCenter.Send("abc", "LoadDataOrder");
             }
             if (args.Target.Location.OriginalString.Contains("kitchen"))
             {
@@ -70,7 +73,7 @@ namespace Restaurant
                     //kitchen
                     App.Context.KitchenClickCount++;
                     //if (App.Context.KitchenClickCount <= 1)
-                        MessagingCenter.Send("abc", "LoadDataKitchen");
+                    MessagingCenter.Send("abc", "LoadDataKitchen");
                 }
 
             }
