@@ -38,13 +38,17 @@ namespace Restaurant.ViewModels
             set => SetProperty(ref _listItems, value);
         }
         public ObservableCollection<FoodHeaderInfo> ListItemsBackup;
+        bool _isNoData;
+        public bool IsNoData { get => _isNoData; set => SetProperty(ref _isNoData, value); }
         public KitchenListFoodViewModel()
         {
+            IsNoData = true;
             Title = "Danh sách đang chờ";
             MessagingCenter.Subscribe<string>("abc", "LoadDataKitchen", async (a) =>
             {
                 IsLoadingData = true;
                 await LoadData();
+                if (ListOrders.Count > 0) IsNoData = false;
                 IsLoadingData = false;
             });
             MessagingCenter.Subscribe<string, string>("a", "OnNtificationReceived", (a, b) =>
@@ -93,6 +97,7 @@ namespace Restaurant.ViewModels
         async Task LoadData()
         {
             var orders = await HttpService.GetAsync<List<OrderModel>>(Configuration.Api("order/getall"));
+            orders = orders.Where(or => or.OrderDate?.Date == DateTime.Now.Date).ToList();
             foreach (var e in orders)
             {
                 e.TableName = Tables.ListTables.Find(x => x.Id == e.TableId).TableName;

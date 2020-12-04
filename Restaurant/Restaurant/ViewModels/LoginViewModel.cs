@@ -23,8 +23,10 @@ namespace Restaurant.ViewModels
         bool _hide = true;
         DelegateCommand _loginCommand;
         DelegateCommand _hideImageTapped;
+        DelegateCommand _forgotPasswordCommand;
         public DelegateCommand LoginCommand => _loginCommand ??= new DelegateCommand(Login);
         public DelegateCommand HideImageTapped => _hideImageTapped ??= new DelegateCommand(Tapped);
+        public DelegateCommand ForgotPasswordCommand => _forgotPasswordCommand ??= new DelegateCommand(Reset);
         public string UserName
         {
             get => _userName;
@@ -90,6 +92,10 @@ namespace Restaurant.ViewModels
         void Tapped()
         {
             Hide = !Hide;
+        }
+        async void Reset()
+        {
+            await DialogService.ShowAlertAsync("Vui lòng liên hệ quản trị viên để được giúp đỡ", "Thông báo", "OK");
         }
     }
 }

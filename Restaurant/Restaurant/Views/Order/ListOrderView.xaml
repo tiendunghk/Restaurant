@@ -12,6 +12,10 @@
                 IsRunning="{Binding IsLoadingData}"
                 IsVisible="{Binding IsLoadingData}"
                 WidthRequest="35" />
+            <Label
+                HorizontalOptions="Center"
+                IsVisible="{Binding IsNoData}"
+                Text="No Data" />
             <Picker
                 ItemsSource="{Binding Filters}"
                 SelectedIndex="{Binding SelectedIndex}"

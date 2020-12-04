@@ -57,7 +57,11 @@
                         Margin="0,0,15,0"
                         HorizontalOptions="EndAndExpand"
                         Text="Quên mật khẩu?"
-                        TextDecorations="Underline" />
+                        TextDecorations="Underline">
+                        <Label.GestureRecognizers>
+                            <TapGestureRecognizer Command="{Binding ForgotPasswordCommand}" />
+                        </Label.GestureRecognizers>
+                    </Label>
 
                     <Button
                         Margin="10,20,10,0"

@@ -36,9 +36,12 @@ namespace Restaurant.ViewModels.Order
             get => _listOrders;
             set => SetProperty(ref _listOrders, value);
         }
+        bool _isNoData;
+        public bool IsNoData { get => _isNoData; set => SetProperty(ref _isNoData, value); }
         public List<OrderModel> ListOrdersBackup { get; set; } = new List<OrderModel>();
         public ListOrderViewModel()
         {
+            IsNoData = true;
 
             Filters = new List<string> { "Tất cả", "Cần thanh toán", "Đã thanh toán" };
             SelectedIndex = 0;
@@ -46,12 +49,14 @@ namespace Restaurant.ViewModels.Order
             {
                 IsLoadingData = true;
                 var orders = await HttpService.GetAsync<List<OrderModel>>(Configuration.Api("order/getall"));
+                orders = orders.Where(or => or.OrderDate?.Date == DateTime.Now.Date).ToList();
                 foreach (var e in orders)
                 {
                     e.TableName = Tables.ListTables.Find(x => x.Id == e.TableId).TableName;
                 }
                 ListOrders = orders;
                 ListOrdersBackup = ListOrders;
+                if (ListOrders.Count > 0) IsNoData = false;
                 IsLoadingData = false;
             });
         }
