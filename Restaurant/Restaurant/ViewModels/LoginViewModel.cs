@@ -1,4 +1,5 @@
-﻿using Newtonsoft.Json.Linq;
+﻿using Com.OneSignal;
+using Newtonsoft.Json.Linq;
 using Restaurant.Datas;
 using Restaurant.Models;
 using Restaurant.Mvvm.Command;
@@ -70,6 +71,11 @@ namespace Restaurant.ViewModels
                     if (staff.Role == e.RoleId)
                         staff.RoleName = e.RoleName;
                 }
+                var externalId = Guid.NewGuid().ToString("N");
+                OneSignal.Current.SetExternalUserId(externalId);
+                Preferences.Set("extId", externalId);
+                staff.ExternalId = Preferences.Get("extId", null);
+                await HttpService.PostApiAsync<object>(Configuration.Api("staff/update"), staff);
                 App.Context.CurrentStaff = staff;
                 Preferences.Set("islogined", true);
                 Preferences.Set("username", UserName);

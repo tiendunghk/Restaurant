@@ -19,6 +19,7 @@ namespace Restaurant.Models
     public enum OrderStatus
     {
         PENDING,
-        COMPLETED
+        COMPLETED,
+        REQUESTPAYMENT
     }
 }

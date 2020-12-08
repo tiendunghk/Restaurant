@@ -10,6 +10,7 @@ using Restaurant.ViewModels;
 using Restaurant.ViewModels.Manager;
 using Restaurant.ViewModels.Order;
 using System;
+using Xamarin.Essentials;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 

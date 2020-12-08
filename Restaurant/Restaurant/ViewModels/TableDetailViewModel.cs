@@ -131,6 +131,11 @@ namespace Restaurant.ViewModels
                 await DialogService.ShowAlertAsync("Vui lòng kiểm tra lại số lượng", "Thông báo", "OK");
                 return;
             }
+            if (order != null && order.Status == OrderStatus.REQUESTPAYMENT)
+            {
+                await DialogService.ShowAlertAsync("Không thể order thêm, đang chờ thanh toán", "Thông báo", "OK");
+                return;
+            }
             if (order == null) order = new OrderModel { OrderDate = DateTime.Now, TableId = Table.Id, StaffId = App.Context.CurrentStaff.Id, TableName = Table.TableName };
 
             decimal cost = 0;
