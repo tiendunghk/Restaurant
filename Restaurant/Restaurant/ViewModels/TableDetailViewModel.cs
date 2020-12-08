@@ -13,6 +13,7 @@ using Restaurant.Services;
 using Restaurant.Datas;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
+using static Restaurant.Services.Notification;
 
 namespace Restaurant.ViewModels
 {
@@ -197,6 +198,9 @@ namespace Restaurant.ViewModels
                 await DialogService.ShowAlertAsync("Vui lòng kiểm tra lại số lượng", "Thông báo", "OK");
                 return;
             }
+            order.Status = OrderStatus.REQUESTPAYMENT;
+            await HttpService.PostApiAsync<object>(Configuration.Api("order/update"), order);
+            await PushNotiCashier();
             DialogService.ShowToast("Đã chuyển yêu cầu đến Cashier");
             OrderedItems = OrderedItemsBackup = new ObservableCollection<OrderDetailUI>();
             Table.TableIdOrderServing = null;
@@ -315,6 +319,13 @@ namespace Restaurant.ViewModels
             }
             OrderedItemsBackup = OrderedItems;
             //RaisePropertyChanged(nameof(OrderedItemsBackup));
+        }
+        async Task PushNotiCashier()
+        {
+            var listStaffs = await HttpService.GetAsync<List<Staff>>(Configuration.Api("staff/getall/true"));
+            listStaffs = listStaffs.Where(x => x.Role == "5").ToList();
+            var externalIds = listStaffs.Select(x => x.ExternalId).ToList();
+            Notification.PushExternalID(new { flag = NotiFlag.SENDTOCASHIER }, externalIds, "Có yêu cầu thanh toán mới.");
         }
     }
 }

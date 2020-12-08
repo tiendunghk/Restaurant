@@ -1,10 +1,13 @@
-﻿using Restaurant.Models;
+﻿using Restaurant.Datas;
+using Restaurant.Models;
 using Restaurant.Mvvm.Command;
+using Restaurant.Services;
 using Restaurant.Services.Navigation;
 using Restaurant.ViewModels.Base;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -56,9 +59,13 @@ namespace Restaurant.ViewModels.Order
             OrderStatus = (int)status;
             return Task.CompletedTask;
         }
-        void Purchase()
+        async void Purchase()
         {
-
+            var order = await HttpService.GetAsync<OrderModel>(Configuration.Api($"order/{OrderDetailUIs[0].OrderDetail.OrderDetail_OrderID}"));
+            var staffs = await HttpService.GetAsync<List<Staff>>(Configuration.Api("staff/getall/true"));
+            var idpush = staffs.Where(x => x.Id == order.StaffId).Select(x => x.ExternalId).ToList();
+            order.Status = Models.OrderStatus.COMPLETED;
+            Notification.PushExternalID(null, idpush, "Yêu cầu thanh toán đã được chấp nhận");
         }
     }
 }

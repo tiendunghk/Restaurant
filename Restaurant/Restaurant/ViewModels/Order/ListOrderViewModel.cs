@@ -47,18 +47,26 @@ namespace Restaurant.ViewModels.Order
             SelectedIndex = 0;
             MessagingCenter.Subscribe<string>("abc", "LoadDataOrder", async (a) =>
             {
-                IsLoadingData = true;
-                var orders = await HttpService.GetAsync<List<OrderModel>>(Configuration.Api("order/getall"));
-                orders = orders.Where(or => or.OrderDate?.Date == DateTime.Now.Date).ToList();
-                foreach (var e in orders)
-                {
-                    e.TableName = Tables.ListTables.Find(x => x.Id == e.TableId).TableName;
-                }
-                ListOrders = orders;
-                ListOrdersBackup = ListOrders;
-                if (ListOrders.Count > 0) IsNoData = false;
-                IsLoadingData = false;
+                await LoadData();
             });
+        }
+        async Task LoadData()
+        {
+            IsLoadingData = true;
+            var orders = await HttpService.GetAsync<List<OrderModel>>(Configuration.Api("order/getall"));
+            orders = orders.Where(or => or.OrderDate?.Date == DateTime.Now.Date).ToList();
+            foreach (var e in orders)
+            {
+                e.TableName = Tables.ListTables.Find(x => x.Id == e.TableId).TableName;
+            }
+            ListOrders = orders;
+            ListOrdersBackup = ListOrders;
+            if (ListOrders.Count > 0) IsNoData = false;
+            IsLoadingData = false;
+        }
+        public override async Task OnNavigationAsync(NavigationParameters parameters, NavigationType navigationType)
+        {
+            await LoadData();
         }
         async void Tapped(OrderModel obj)
         {
@@ -97,7 +105,7 @@ namespace Restaurant.ViewModels.Order
                     ListOrders = ListOrdersBackup;
                     break;
                 case 1:
-                    ListOrders = ListOrdersBackup.Where(x => x.Status == OrderStatus.PENDING).ToList();
+                    ListOrders = ListOrdersBackup.Where(x => x.Status == OrderStatus.REQUESTPAYMENT).ToList();
                     break;
                 case 2:
                     ListOrders = ListOrdersBackup.Where(x => x.Status == OrderStatus.COMPLETED).ToList();
