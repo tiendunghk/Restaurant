@@ -2,6 +2,7 @@
 using Restaurant.Mvvm;
 using Restaurant.Mvvm.Command;
 using Restaurant.Services.Dialog;
+using Restaurant.Services.Navigation;
 using Restaurant.ViewModels;
 using Restaurant.Views;
 using System;
@@ -38,7 +39,7 @@ namespace Restaurant
                 Preferences.Set("islogined", false);
                 Preferences.Set("username", null);
                 Preferences.Set("password", null);
-                Application.Current.MainPage = new LoginView();
+                await ServiceLocator.Instance.Resolve<INavigationService>().NavigateToAsync<LoginViewModel>();
             }
         }
         protected override async void OnNavigating(ShellNavigatingEventArgs args)

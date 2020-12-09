@@ -35,24 +35,6 @@ namespace Restaurant.Services.Navigation
         public async Task NavigateToAsync(Type viewModelType, NavigationParameters parameters)
         {
             var view = FindViewByViewModel(viewModelType);
-
-            //if (view is SplashView)
-            //{
-            //    CurrentApplication.MainPage = new CustomNavigationPage(view);
-            //}
-            //else if (view is LoginView)
-            //{
-            //    CurrentApplication.MainPage = new CustomNavigationPage(view);
-            //}
-            //else if (view is DashboardView)
-            //{
-            //    CurrentApplication.MainPage = new CustomNavigationPage(view);
-            //}
-            //else if (CurrentApplication.MainPage is CustomNavigationPage customNavigation)
-            //{
-            //    await customNavigation.PushAsync(view);
-            //}
-            //else
             if (view is LoginView || view is SplashView || NavigationRoot == null)
             {
                 CurrentApplication.MainPage = view;
