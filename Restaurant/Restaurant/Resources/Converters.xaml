@@ -16,4 +16,5 @@
     <converters:IsManagerConverter x:Key="IsManagerConverter" />
     <converters:IsManagerCashierConverter x:Key="IsManagerCashierConverter" />
     <converters:IsManagerKitchenConverter x:Key="IsManagerKitchenConverter" />
+    <converters:ShowPurchaseCommandConverter x:Key="ShowPurchaseCommandConverter" />
 </ResourceDictionary>

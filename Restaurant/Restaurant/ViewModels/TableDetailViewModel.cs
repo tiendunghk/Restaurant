@@ -198,6 +198,7 @@ namespace Restaurant.ViewModels
                 await DialogService.ShowAlertAsync("Vui lòng kiểm tra lại số lượng", "Thông báo", "OK");
                 return;
             }
+            if (order.Status == OrderStatus.REQUESTPAYMENT || order.Status == OrderStatus.COMPLETED) return;
             order.Status = OrderStatus.REQUESTPAYMENT;
             await HttpService.PostApiAsync<object>(Configuration.Api("order/update"), order);
             await PushNotiCashier();

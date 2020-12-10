@@ -1,13 +1,18 @@
 ﻿using Com.OneSignal.Abstractions;
 using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
+using Restaurant.Datas;
+using Restaurant.Models;
 using Restaurant.Services.Navigation;
 using Restaurant.ViewModels;
 using Restaurant.ViewModels.Order;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.IO;
 using System.Net;
 using System.Text;
+using Xamarin.Essentials;
 using Xamarin.Forms;
 
 namespace Restaurant.Services
@@ -26,6 +31,7 @@ namespace Restaurant.Services
         }
         public static async void HandleNotificationOpened(OSNotificationOpenedResult result)
         {
+            //Login();
             var data = result.notification.payload.additionalData;
             if (data.TryGetValue("flag", out var flag))
             {
@@ -131,6 +137,45 @@ namespace Restaurant.Services
             }
 
             System.Diagnostics.Debug.WriteLine(responseContent);
+        }
+        static async void Login()
+        {
+            if (CheckLogin())
+            {
+                var obj = new
+                {
+                    StaffUsername = Preferences.Get("username", null),
+                    StaffPassword = Preferences.Get("password", null)
+                };
+                var output = await HttpService.PostApiAsync<JObject>(Configuration.Api("signin"), obj);
+                if (output != null)
+                {
+                    Preferences.Set("token", output["token"].ToString());
+                    var userId = output["userId"].ToString();
+                    var staff = await HttpService.GetAsync<Staff>(Configuration.Api($"staff/{userId}"));
+                    var listDishs = await HttpService.GetAsync<List<Dish>>(Configuration.Api($"dish/getall/true"));
+                    var listRoles = await HttpService.GetAsync<List<Role>>(Configuration.Api($"role/getall"));
+                    var listTables = await HttpService.GetAsync<List<Table>>(Configuration.Api($"table/getall/true"));
+                    Datas.Dishs.ListDishs = new ObservableCollection<Dish>(listDishs);
+                    Datas.Roles.ListRoles = listRoles;
+                    Tables.ListTables = listTables;
+                    foreach (var e in Datas.Roles.ListRoles)
+                    {
+                        if (staff.Role == e.RoleId)
+                            staff.RoleName = e.RoleName;
+                    }
+                    App.Context.CurrentStaff = staff;
+
+                    Application.Current.MainPage = new AppShell();
+                }
+            }
+        }
+        static bool CheckLogin()
+        {
+            var islogined = Preferences.Get("islogined", false);
+            if (islogined)
+                return true;
+            return false;
         }
     }
 }

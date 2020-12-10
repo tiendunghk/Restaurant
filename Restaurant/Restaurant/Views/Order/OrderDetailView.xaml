@@ -47,6 +47,7 @@
                 </Label.FormattedText>
             </Label>
             <Button
+                IsVisible="{Binding OrderStatus,Converter={StaticResource ShowPurchaseCommandConverter}}"
                 Margin="0,0,0,5"
                 BackgroundColor="{x:StaticResource FacebookBlue}"
                 Command="{Binding PurchaseCommand}"
