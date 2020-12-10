@@ -29,14 +29,18 @@ namespace Restaurant.ViewModels
         }
         DelegateCommand _searchCommand;
         DelegateCommand<OrderDetailUI> _callWaiterCommand;
+        DelegateCommand _refreshCommand;
         public DelegateCommand<OrderDetailUI> CallWaiterCommand => _callWaiterCommand ??= new DelegateCommand<OrderDetailUI>(CallWaiter);
         public DelegateCommand SearchCommand => _searchCommand ??= new DelegateCommand(Search);
+        public DelegateCommand RefreshCommand => _refreshCommand ??= new DelegateCommand(Refresh);
         ObservableCollection<FoodHeaderInfo> _listItems;
         public ObservableCollection<FoodHeaderInfo> ListItems
         {
             get => _listItems;
             set => SetProperty(ref _listItems, value);
         }
+        bool _isRefreshing;
+        public bool IsRefreshing { get => _isRefreshing; set => SetProperty(ref _isRefreshing, value); }
         public ObservableCollection<FoodHeaderInfo> ListItemsBackup;
         bool _isNoData;
         public bool IsNoData { get => _isNoData; set => SetProperty(ref _isNoData, value); }
@@ -97,7 +101,7 @@ namespace Restaurant.ViewModels
         async Task LoadData()
         {
             var orders = await HttpService.GetAsync<List<OrderModel>>(Configuration.Api("order/getall"));
-            orders = orders.Where(or => or.OrderDate?.Date == DateTime.Now.Date).ToList();
+            orders = orders.Where(or => or.OrderDate?.Date == DateTime.Now.Date && or.Status == OrderStatus.PENDING).ToList();
             foreach (var e in orders)
             {
                 e.TableName = Tables.ListTables.Find(x => x.Id == e.TableId).TableName;
@@ -112,9 +116,12 @@ namespace Restaurant.ViewModels
                 obj = new FoodHeaderInfo();
                 obj.Header = ListOrders[i].TableName;
                 var orderdetails = await HttpService.GetAsync<List<OrderDetail>>(Configuration.Api($"orderdetail/byorder/{ListOrders[i].Id}"));
+                orderdetails = orderdetails.Where(x => string.IsNullOrEmpty(x.OrderDetail_CookID) || x.OrderDetail_CookID == App.Context.CurrentStaff.Id).ToList();
+                if (orderdetails.Count == 0)
+                    continue;
                 foreach (var e in orderdetails)
                 {
-                    if (e.OrderDetail_OrderID == ListOrders[i].Id)
+                    if (e.OrderDetail_OrderID == ListOrders[i].Id && (e.OrderDetail_CookID == null || e.OrderDetail_CookID == App.Context.CurrentStaff.Id))
                     {
                         d = Datas.Dishs.ListDishs.ToList().Find(x => x.Id == e.DishId);
                         obj.Add(new OrderDetailUI
@@ -157,6 +164,12 @@ namespace Restaurant.ViewModels
                 }
             }
             ListItems = pivot;
+        }
+        async void Refresh()
+        {
+            IsRefreshing = true;
+            await LoadData();
+            IsRefreshing = false;
         }
     }
 }
