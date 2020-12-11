@@ -60,9 +60,9 @@ namespace Restaurant.ViewModels
                  Title = b;
              });
         }
-        void CallWaiter(OrderDetailUI str)
+        async void CallWaiter(OrderDetailUI str)
         {
-            if (str.Status != OrderDetailStatus.WAITING)
+            if (str.Status == OrderDetailStatus.COOKING)
             {
                 foreach (var elem in ListItems)
                 {
@@ -70,11 +70,21 @@ namespace Restaurant.ViewModels
                     {
                         if (e.OrderDetailUIId == str.OrderDetailUIId)
                         {
+                            var od = str.OrderDetail;
+                            od.OrderDetailStatus = OrderDetailStatus.COMPLETED;
+                            await HttpService.PostApiAsync<object>(Configuration.Api("orderdetail/update"), od);
+
+                            DialogService.ShowToast("Đã thông báo cho waiter!");
+                            string content = $"Món ăn {e.NameDish}, {elem.Header} đã nấu xong!\nĐầu bếp {App.Context.CurrentStaff.Name}";
+                            var staffs = await HttpService.GetAsync<List<Staff>>(Configuration.Api("staff/getall/true"));
+                            var order = await HttpService.GetAsync<OrderModel>(Configuration.Api($"order/{e.OrderId}"));
+                            var externalIds = new List<string> { staffs.Where(x => x.Id == order.StaffId).FirstOrDefault().ExternalId };
+                            Notification.PushExternalID(null, externalIds, content);
+
                             Datas.Orders.ListOrderDetails.Remove(e.OrderDetail);
                             elem.Remove(e);
                             if (elem.Count == 0)
                                 ListItems.Remove(elem);
-                            DialogService.ShowToast("Đã thông báo cho waiter!");
                             return;
                         }
                     }
@@ -83,8 +93,14 @@ namespace Restaurant.ViewModels
             else
             {
                 str.Status = OrderDetailStatus.COOKING;
+                str.OrderDetail.OrderDetailStatus = OrderDetailStatus.COOKING;
+                await HttpService.PostApiAsync<object>(Configuration.Api("orderdetail/update"), str.OrderDetail);
+                string content = $"Món ăn đang được nấu!\nĐầu bếp {App.Context.CurrentStaff.Name}";
+                var staffs = await HttpService.GetAsync<List<Staff>>(Configuration.Api("staff/getall/true"));
+                var order = await HttpService.GetAsync<OrderModel>(Configuration.Api($"order/{str.OrderId}"));
+                var externalIds = new List<string> { staffs.Where(x => x.Id == order.StaffId).FirstOrDefault().ExternalId };
+                Notification.PushExternalID(null, externalIds, content);
             }
-
         }
         public override async Task OnNavigationAsync(NavigationParameters parameters, NavigationType navigationType)
         {
@@ -121,21 +137,20 @@ namespace Restaurant.ViewModels
                     continue;
                 foreach (var e in orderdetails)
                 {
-                    if (e.OrderDetail_OrderID == ListOrders[i].Id && (e.OrderDetail_CookID == null || e.OrderDetail_CookID == App.Context.CurrentStaff.Id))
+                    if (e.OrderDetailStatus == OrderDetailStatus.COMPLETED)
+                        continue;
+                    d = Datas.Dishs.ListDishs.ToList().Find(x => x.Id == e.DishId);
+                    obj.Add(new OrderDetailUI
                     {
-                        d = Datas.Dishs.ListDishs.ToList().Find(x => x.Id == e.DishId);
-                        obj.Add(new OrderDetailUI
-                        {
-                            OrderDetailUIId = Guid.NewGuid().ToString("N"),
-                            OrderId = ListOrders[i].Id,
-                            OrderDetail = e,
-                            NameDish = d.Name,
-                            ImageUrl = d.DishImage,
-                            Status = e.OrderDetailStatus,
-                            Price = d.Price,
-                            Dish = d,
-                        });
-                    }
+                        OrderDetailUIId = Guid.NewGuid().ToString("N"),
+                        OrderId = ListOrders[i].Id,
+                        OrderDetail = e,
+                        NameDish = d.Name,
+                        ImageUrl = d.DishImage,
+                        Status = e.OrderDetailStatus,
+                        Price = d.Price,
+                        Dish = d,
+                    });
                 }
                 ListItems.Add(obj);
             }

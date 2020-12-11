@@ -107,7 +107,7 @@ namespace Restaurant.Services
                 app_id = "511f254e-f0fe-4353-856d-1ac41bee6027",
                 contents = new { en = content },
                 include_external_user_ids = externalIds.ToArray(),
-                small_icon = "ic_noti.png",
+                small_icon = "ic_noti",
                 data = addData
             };
             var param = JsonConvert.SerializeObject(obj);
