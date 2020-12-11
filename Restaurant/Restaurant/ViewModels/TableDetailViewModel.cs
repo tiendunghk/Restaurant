@@ -14,6 +14,7 @@ using Restaurant.Datas;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using static Restaurant.Services.Notification;
+using Acr.UserDialogs;
 
 namespace Restaurant.ViewModels
 {
@@ -199,15 +200,18 @@ namespace Restaurant.ViewModels
                 return;
             }
             if (order.Status == OrderStatus.REQUESTPAYMENT || order.Status == OrderStatus.COMPLETED) return;
-            order.Status = OrderStatus.REQUESTPAYMENT;
-            await HttpService.PostApiAsync<object>(Configuration.Api("order/update"), order);
-            await PushNotiCashier();
-            DialogService.ShowToast("Đã chuyển yêu cầu đến Cashier");
-            OrderedItems = OrderedItemsBackup = new ObservableCollection<OrderDetailUI>();
-            Table.TableIdOrderServing = null;
-            App.Context.CurrentOrder.Remove(Table.Id);
-            await HttpService.PostApiAsync<object>(Configuration.Api("table/update"), Table);
-            await NavigationService.NavigateBackAsync();
+            using (UserDialogs.Instance.Loading("Waiting..."))
+            {
+                order.Status = OrderStatus.REQUESTPAYMENT;
+                await HttpService.PostApiAsync<object>(Configuration.Api("order/update"), order);
+                await PushNotiCashier();
+                DialogService.ShowToast("Đã chuyển yêu cầu đến Cashier");
+                OrderedItems = OrderedItemsBackup = new ObservableCollection<OrderDetailUI>();
+                //Table.TableIdOrderServing = null;
+                App.Context.CurrentOrder.Remove(Table.Id);
+                //await HttpService.PostApiAsync<object>(Configuration.Api("table/update"), Table);
+                await NavigationService.NavigateBackAsync();
+            }
         }
         DelegateCommand<OrderDetailUI> _deleteDetailCommand;
         public DelegateCommand<OrderDetailUI> DeleteDetailCommand => _deleteDetailCommand ??= new DelegateCommand<OrderDetailUI>(DeleteDetail);

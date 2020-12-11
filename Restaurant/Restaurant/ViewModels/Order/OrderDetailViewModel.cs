@@ -1,4 +1,5 @@
-﻿using Restaurant.Datas;
+﻿using Acr.UserDialogs;
+using Restaurant.Datas;
 using Restaurant.Models;
 using Restaurant.Mvvm.Command;
 using Restaurant.Services;
@@ -10,6 +11,7 @@ using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Xamarin.Forms;
 
 namespace Restaurant.ViewModels.Order
 {
@@ -61,11 +63,23 @@ namespace Restaurant.ViewModels.Order
         }
         async void Purchase()
         {
-            var order = await HttpService.GetAsync<OrderModel>(Configuration.Api($"order/{OrderDetailUIs[0].OrderDetail.OrderDetail_OrderID}"));
-            var staffs = await HttpService.GetAsync<List<Staff>>(Configuration.Api("staff/getall/true"));
-            var idpush = staffs.Where(x => x.Id == order.StaffId).Select(x => x.ExternalId).ToList();
-            order.Status = Models.OrderStatus.COMPLETED;
-            Notification.PushExternalID(null, idpush, "Yêu cầu thanh toán đã được chấp nhận");
+            using (UserDialogs.Instance.Loading("Waiting..."))
+            {
+                var order = await HttpService.GetAsync<OrderModel>(Configuration.Api($"order/{OrderDetailUIs[0].OrderDetail.OrderDetail_OrderID}"));
+                var staffs = await HttpService.GetAsync<List<Staff>>(Configuration.Api("staff/getall/true"));
+                var idpush = staffs.Where(x => x.Id == order.StaffId).Select(x => x.ExternalId).ToList();
+                order.Status = Models.OrderStatus.COMPLETED;
+                OrderStatus = (int)Models.OrderStatus.COMPLETED;
+                await HttpService.PostApiAsync<object>(Configuration.Api("order/update"), order);
+                Notification.PushExternalID(null, idpush, "Yêu cầu thanh toán đã được chấp nhận");
+
+                //var table = order.TableId;
+                var tables = await HttpService.GetAsync<List<Table>>(Configuration.Api($"table/getall/true"));
+                var table = tables.Where(t => t.Id == order.TableId).FirstOrDefault();
+                table.TableIdOrderServing = null;
+                await HttpService.PostApiAsync<object>(Configuration.Api("table/update"), table);
+                MessagingCenter.Send("abc", "LoadDataOrder");
+            }
         }
     }
 }
