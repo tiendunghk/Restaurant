@@ -97,7 +97,7 @@ namespace Restaurant.ViewModels
             BackupDish = Tests;
             OrderedItems = new ObservableCollection<OrderDetailUI>();
 
-            
+
         }
         Table _table;
         public Table Table { get => _table; set => SetProperty(ref _table, value); }
@@ -133,6 +133,12 @@ namespace Restaurant.ViewModels
         public DelegateCommand SubmitCommand => _submitCommand ??= new DelegateCommand(Submit);
         async void Submit()
         {
+            if (App.Context.CurrentStaff.Role == "3" || App.Context.CurrentStaff.Role == "4" || App.Context.CurrentStaff.Role == "5")
+            {
+                await DialogService.ShowAlertAsync("Bạn không có quyền đặt món", "Thông báo", "OK");
+                return;
+            }
+
             var b = BackupDish.Where(x => x.SoLuong > 0).Count() > 0 ? true : false;
             if (!b)
             {
@@ -200,6 +206,11 @@ namespace Restaurant.ViewModels
         public DelegateCommand PurchaseCommand => _purchaseCommand ??= new DelegateCommand(Purchase);
         async void Purchase()
         {
+            if (App.Context.CurrentStaff.Role == "3" || App.Context.CurrentStaff.Role == "4" || App.Context.CurrentStaff.Role == "5")
+            {
+                await DialogService.ShowAlertAsync("Bạn không có quyền đặt món", "Thông báo", "OK");
+                return;
+            }
             if (OrderedItems.Count < 1)
             {
                 await DialogService.ShowAlertAsync("Vui lòng kiểm tra lại số lượng", "Thông báo", "OK");

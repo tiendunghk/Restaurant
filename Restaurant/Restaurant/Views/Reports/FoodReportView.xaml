@@ -13,8 +13,11 @@
                 FontSize="18"
                 HorizontalOptions="CenterAndExpand"
                 Text="Báo cáo món ăn" />
-            <DatePicker />
-            <Picker ItemsSource="{Binding Pickers}" SelectedIndex="{Binding SelectedIndex}" />
+            <DatePicker Date="{Binding Date}" DateSelected="DatePicker_DateSelected" />
+            <Picker
+                ItemsSource="{Binding Pickers}"
+                SelectedIndex="{Binding SelectedIndex}"
+                SelectedIndexChanged="Picker_SelectedIndexChanged" />
             <ListView ItemsSource="{Binding ListDishs}" SelectionMode="None">
                 <ListView.ItemTemplate>
                     <DataTemplate>

@@ -36,5 +36,17 @@ namespace Restaurant.Views.Reports
             var json = JsonConvert.SerializeObject(_referenceObj);
             var a = await httpClient.PostAsJsonAsync(Configuration.Api("staff/update"), _referenceObj);
         }
+
+        private void DatePicker_DateSelected(object sender, DateChangedEventArgs e)
+        {
+            var vm = BindingContext as FoodReportViewModel;
+            vm.DateChanged();
+        }
+
+        private void Picker_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            var vm = BindingContext as FoodReportViewModel;
+            vm.ComboBoxChanged();
+        }
     }
 }
