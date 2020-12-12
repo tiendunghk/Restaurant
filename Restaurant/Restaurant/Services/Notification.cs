@@ -14,6 +14,7 @@ using System.Collections.ObjectModel;
 using System.IO;
 using System.Net;
 using System.Text;
+using System.Threading.Tasks;
 using Xamarin.Essentials;
 using Xamarin.Forms;
 
@@ -59,7 +60,13 @@ namespace Restaurant.Services
                 switch (notiflag)
                 {
                     case NotiFlag.SENDTOCASHIER:
-                        await ServiceLocator.Instance.Resolve<INavigationService>().NavigateToAsync<ListOrderViewModel>();
+                        if (Application.Current.MainPage is Shell)
+                            await ServiceLocator.Instance.Resolve<INavigationService>().NavigateToAsync<ListOrderViewModel>();
+                        //else
+                        //{
+                        //    await Login();
+                        //    await ServiceLocator.Instance.Resolve<INavigationService>().NavigateToAsync<ListOrderViewModel>();
+                        //}
                         break;
                     default:
                         break;
@@ -158,7 +165,7 @@ namespace Restaurant.Services
 
             System.Diagnostics.Debug.WriteLine(responseContent);
         }
-        static async void Login()
+        static async Task Login()
         {
             if (CheckLogin())
             {

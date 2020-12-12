@@ -8,7 +8,10 @@
         <StackLayout BackgroundColor="{x:StaticResource Backgroud}">
             <Label
                 Margin="5"
-                FontSize="15"
+                FontAttributes="Bold"
+                FontFamily="{StaticResource AvoBold}"
+                FontSize="18"
+                HorizontalOptions="CenterAndExpand"
                 Text="Báo cáo món ăn" />
             <DatePicker />
             <Picker ItemsSource="{Binding Pickers}" SelectedIndex="{Binding SelectedIndex}" />

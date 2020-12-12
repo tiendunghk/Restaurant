@@ -1,5 +1,6 @@
 ﻿using Newtonsoft.Json;
 using Restaurant.Services;
+using Restaurant.ViewModels.Reports;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -19,21 +20,16 @@ namespace Restaurant.Views.Reports
             InitializeComponent();
         }
 
-        private async void Button_Clicked(object sender, EventArgs e)
+        private void Picker_SelectedIndexChanged(object sender, EventArgs e)
         {
-            //var output = await HttpService.GetAsync<Todo>("https://jsonplaceholder.typicode.com/todos/1");
-            Notification.Push();
+            var vm = BindingContext as OrderReportViewModel;
+            vm.ComboBoxChanged();
         }
-        internal class Todo
+
+        private void DatePicker_DateSelected(object sender, DateChangedEventArgs e)
         {
-            [JsonProperty("userId")]
-            public int UserId { get; set; }
-            [JsonProperty("id")]
-            public int Id { get; set; }
-            [JsonProperty("title")]
-            public string Title { get; set; }
-            [JsonProperty("completed")]
-            public bool Completed { get; set; }
+            var vm = BindingContext as OrderReportViewModel;
+            vm.DateChanged();
         }
     }
 }
