@@ -3,9 +3,10 @@
     x:Class="Restaurant.Views.Reports.OrderReportView"
     xmlns="http://xamarin.com/schemas/2014/forms"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:microcharts="clr-namespace:Microcharts.Forms;assembly=Microcharts.Forms"
     Title="Order">
     <ContentPage.Content>
-        <StackLayout BackgroundColor="{x:StaticResource Backgroud}">
+        <!--<StackLayout BackgroundColor="{x:StaticResource Backgroud}">
             <Label
                 Margin="5"
                 FontAttributes="Bold"
@@ -48,6 +49,36 @@
                     </DataTemplate>
                 </ListView.ItemTemplate>
             </ListView>
+        </StackLayout>-->
+
+        <StackLayout Padding="15">
+            <Label
+                Margin="5"
+                FontAttributes="Bold"
+                FontFamily="{StaticResource AvoBold}"
+                FontSize="18"
+                HorizontalOptions="CenterAndExpand"
+                Text="Báo cáo order" />
+            <Picker
+                ItemsSource="{Binding Pickers}"
+                SelectedIndex="{Binding SelectedIndex}"
+                SelectedIndexChanged="Picker_SelectedIndexChanged" />
+            <microcharts:ChartView
+                Margin="10,0,10,10"
+                Chart="{Binding BarChartOrders}"
+                HeightRequest="300"
+                HorizontalOptions="Fill"
+                IsVisible="{Binding IsVisible0}"
+                Rotation="90"
+                VerticalOptions="Start" />
+            <microcharts:ChartView
+                Margin="10,0,10,10"
+                Chart="{Binding BarChartRevenues}"
+                HeightRequest="300"
+                HorizontalOptions="Fill"
+                IsVisible="{Binding IsVisible1}"
+                Rotation="90"
+                VerticalOptions="Start" />
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>

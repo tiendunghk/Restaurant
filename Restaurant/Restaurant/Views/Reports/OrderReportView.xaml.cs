@@ -31,5 +31,10 @@ namespace Restaurant.Views.Reports
             var vm = BindingContext as OrderReportViewModel;
             vm.DateChanged();
         }
+
+        private void Picker_SelectedIndexChanged_1(object sender, EventArgs e)
+        {
+
+        }
     }
 }

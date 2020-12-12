@@ -18,8 +18,8 @@ namespace Restaurant.ViewModels
 {
     public class LoginViewModel : ViewModelBase
     {
-        string _userName = "1";
-        string _passWord = "1";
+        string _userName = "4";
+        string _passWord = "4";
         bool _isVisible;
         bool _hide = true;
         DelegateCommand _loginCommand;

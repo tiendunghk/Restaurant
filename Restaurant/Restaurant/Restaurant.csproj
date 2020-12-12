@@ -15,6 +15,7 @@
     <PackageReference Include="Autofac" Version="5.1.0" />
     <PackageReference Include="Cloudinary.Core" Version="1.31.0" />
     <PackageReference Include="Com.OneSignal" Version="3.10.2" />
+    <PackageReference Include="Microcharts.Forms" Version="0.9.5.9" />
     <PackageReference Include="Microsoft.AppCenter.Analytics" Version="4.0.0" />
     <PackageReference Include="Microsoft.AppCenter.Crashes" Version="4.0.0" />
     <PackageReference Include="Microsoft.AspNet.WebApi.Client" Version="5.2.7" />
@@ -90,6 +91,9 @@
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
     <EmbeddedResource Update="Views\Reports\OrderReportView.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Views\Reports\TestChartView.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
     <EmbeddedResource Update="Views\SplashView.xaml">

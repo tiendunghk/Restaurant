@@ -1,0 +1,17 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage
+    x:Class="Restaurant.Views.Reports.TestChartView"
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:microcharts="clr-namespace:Microcharts.Forms;assembly=Microcharts.Forms">
+    <ContentPage.Content>
+        <Grid>
+            <microcharts:ChartView
+                Margin="10,0,10,10"
+                Chart="{Binding BarChart}"
+                HeightRequest="300"
+                HorizontalOptions="Fill"
+                VerticalOptions="Start" />
+        </Grid>
+    </ContentPage.Content>
+</ContentPage>
