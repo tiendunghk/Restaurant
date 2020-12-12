@@ -6,6 +6,8 @@ using Restaurant.Models;
 using Restaurant.Services.Navigation;
 using Restaurant.ViewModels;
 using Restaurant.ViewModels.Order;
+using Restaurant.Views;
+using Restaurant.Views.Order;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -19,15 +21,33 @@ namespace Restaurant.Services
 {
     public static class Notification
     {
-        public enum NotiFlag
-        {
-            SENDTOCASHIER,
-            PAYDONE
-        }
+
         public static void HandleNotificationReceived(OSNotification notification)
         {
-            var a = notification.payload.body;
-            MessagingCenter.Send("a", "OnNotificationReceived", a);
+            var data = notification.payload.additionalData;
+            //MessagingCenter.Send("a", "OnNotificationReceived", a);
+            var d = (Shell.Current?.CurrentItem.CurrentItem as IShellSectionController).PresentedPage.GetType();
+            if (data.TryGetValue("flag", out var flag))
+            {
+                var notiflag = (NotiFlag)int.Parse(flag.ToString());
+                switch (notiflag)
+                {
+                    case NotiFlag.SENDTOCASHIER:
+                        if (d == typeof(ListOrderView))
+                            MessagingCenter.Send("abc", "LoadDataOrder"); ;
+                        break;
+                    case NotiFlag.KITCHEN:
+                        if (d == typeof(KitchenListFoodView))
+                            MessagingCenter.Send("abc", "LoadDataKitchen");
+                        break;
+                    case NotiFlag.TABLEDETAILORDER:
+                        if (d == typeof(TableDetailView))
+                            MessagingCenter.Send("abc", "KitchenSelectedCook");
+                        break;
+                    default:
+                        break;
+                }
+            }
         }
         public static async void HandleNotificationOpened(OSNotificationOpenedResult result)
         {

@@ -96,6 +96,8 @@ namespace Restaurant.ViewModels
             Tests = new ObservableCollection<Dish>(Datas.Dishs.ListDishs);
             BackupDish = Tests;
             OrderedItems = new ObservableCollection<OrderDetailUI>();
+
+            
         }
         Table _table;
         public Table Table { get => _table; set => SetProperty(ref _table, value); }
@@ -118,6 +120,10 @@ namespace Restaurant.ViewModels
                 }
             }
             Title = v;
+            MessagingCenter.Subscribe<string>("abc", "KitchenSelectedCook", async (args) =>
+            {
+                await LoadOrderDetailData();
+            });
         }
         void Tapped(object o)
         {

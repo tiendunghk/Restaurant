@@ -22,4 +22,11 @@ namespace Restaurant.Models
         COMPLETED,
         REQUESTPAYMENT
     }
+    public enum NotiFlag
+    {
+        SENDTOCASHIER,
+        PAYDONE,
+        TABLEDETAILORDER,
+        KITCHEN
+    }
 }
