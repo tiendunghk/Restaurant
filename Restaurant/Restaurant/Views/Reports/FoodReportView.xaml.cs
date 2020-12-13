@@ -23,8 +23,7 @@ namespace Restaurant.Views.Reports
         public FoodReportView()
         {
             InitializeComponent();
-            BindingContext = new FoodReportViewModel();
-            lblMonth.Text = $"Tháng {DateTime.Now.Month}";
+            lblMonth.Text = $"Tháng {DateTime.Now.Month} năm {DateTime.Now.Year}";
         }
         private void Picker_SelectedIndexChanged(object sender, EventArgs e)
         {

@@ -6,6 +6,8 @@ using Restaurant.Services.Navigation;
 using Restaurant.ViewModels.Base;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -33,6 +35,10 @@ namespace Restaurant.ViewModels.Reports
         public List<Dish> ListDishsRevenue { get => _listDishsRevenue; set => SetProperty(ref _listDishsRevenue, value); }
         List<Dish> _listDishsOrder;
         public List<Dish> ListDishsOrder { get => _listDishsOrder; set => SetProperty(ref _listDishsOrder, value); }
+
+
+        public ObservableCollection<Dish> ListOrderes = new ObservableCollection<Dish>();
+        public ObservableCollection<Dish> ListRevenues = new ObservableCollection<Dish>();
         public FoodReportViewModel()
         {
             Pickers = new List<string>
@@ -42,15 +48,13 @@ namespace Restaurant.ViewModels.Reports
             };
             SelectedIndex = 0;
             Date = DateTime.Now;
-            ListDishsRevenue = new List<Dish>();
-            ListDishsOrder = new List<Dish>();
             Orders = true;
             Revenue = false;
         }
         public override async Task OnNavigationAsync(NavigationParameters parameters, NavigationType navigationType)
         {
-            ListDishsRevenue = await HttpService.GetAsync<List<Dish>>(Configuration.Api("dish/getall/true"));
             await FilterDatas();
+            //ListDishsOrder = await HttpService.GetAsync<List<Dish>>(Configuration.Api($"dish/getall/false"));
         }
         public void ComboBoxChanged()
         {
@@ -66,6 +70,12 @@ namespace Restaurant.ViewModels.Reports
                     break;
             }
         }
+        async Task<List<OrderDetail>> GetOrderDetails(string orderId, string dishId)
+        {
+            var orderDetails = await HttpService.GetAsync<List<OrderDetail>>(Configuration.Api($"orderdetail/byorder/{orderId}"));
+            orderDetails = orderDetails.Where(x => x.DishId == dishId).ToList();
+            return orderDetails;
+        }
         async Task FilterDatas()
         {
             using (UserDialogs.Instance.Loading("Wating..."))
@@ -79,27 +89,37 @@ namespace Restaurant.ViewModels.Reports
                 {
                     decimal doanhthu = 0;
                     int count = 0;
-                    foreach (var elem in orders)
+                    var tasks = new List<Task<List<OrderDetail>>>();
+                    for (int i = 0; i < orders.Count; i++)
                     {
-                        var orderDetails = await HttpService.GetAsync<List<OrderDetail>>($"orderdetail/byorder/{elem.Id}");
-                        doanhthu += orderDetails.Where(x => x.DishId == e.Id).Sum(x => e.Price);
-                        count += orderDetails.Where(x => x.DishId == e.Id).Count();
+                        tasks.Add(GetOrderDetails(orders[i].Id, e.Id));
+                    }
+                    foreach (var task in await Task.WhenAll(tasks))
+                    {
+                        doanhthu += task.Sum(x => e.Price);
+                        count += task.Where(x => x.DishId == e.Id).Count();
                     }
                     mostRevenue.Add(e, doanhthu);
                     mostOrders.Add(e, count);
                 }
+                var c = mostOrders.Count();
+                var cc = mostOrders.Count();
                 var revenue = mostRevenue.OrderBy(x => x.Value).ToDictionary(x => x.Key, x => x.Value);
                 var morders = mostOrders.OrderBy(x => x.Value).ToDictionary(x => x.Key, x => x.Value);
+                var _LRevenues = new List<Dish>();
+                var _LOrders = new List<Dish>();
                 foreach (var p in revenue)
                 {
                     p.Key.TotalAmount = p.Value;
-                    ListDishsRevenue.Add(p.Key);
+                    _LRevenues.Add(p.Key);
                 }
                 foreach (var p in morders)
                 {
                     p.Key.SoLuong = p.Value;
-                    ListDishsOrder.Add(p.Key);
+                    _LOrders.Add(p.Key);
                 }
+                ListDishsOrder = _LOrders.OrderByDescending(x => x.SoLuong).ToList();
+                ListDishsRevenue = _LRevenues.OrderByDescending(x => x.TotalAmount).ToList();
             }
         }
     }

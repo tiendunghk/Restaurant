@@ -13,11 +13,15 @@
                 FontSize="18"
                 HorizontalOptions="CenterAndExpand"
                 Text="Báo cáo món ăn" />
-            <Label x:Name="lblMonth" Margin="5" />
+            <Label
+                x:Name="lblMonth"
+                Margin="8,0,0,0"
+                FontSize="12" />
             <Picker
                 ItemsSource="{Binding Pickers}"
                 SelectedIndex="{Binding SelectedIndex}"
                 SelectedIndexChanged="Picker_SelectedIndexChanged" />
+            <Label Text="{Binding ListDishsOrder.Count}" />
             <ListView
                 IsVisible="{Binding Orders}"
                 ItemsSource="{Binding ListDishsOrder}"
@@ -25,9 +29,9 @@
                 <ListView.ItemTemplate>
                     <DataTemplate>
                         <ViewCell>
-                            <StackLayout Margin="8" Orientation="Horizontal">
-                                <Label Text="{Binding Name}" />
-                                <Label Text="{Binding SoLuong}" />
+                            <StackLayout Margin="10" Orientation="Horizontal">
+                                <Label HorizontalOptions="StartAndExpand" Text="{Binding Name}" />
+                                <Label HorizontalOptions="EndAndExpand" Text="{Binding SoLuong}" />
                             </StackLayout>
                         </ViewCell>
                     </DataTemplate>
@@ -41,8 +45,8 @@
                     <DataTemplate>
                         <ViewCell>
                             <StackLayout Margin="8" Orientation="Horizontal">
-                                <Label Text="{Binding Name}" />
-                                <Label Text="{Binding TotalAmount}" />
+                                <Label HorizontalOptions="StartAndExpand" Text="{Binding Name}" />
+                                <Label HorizontalOptions="EndAndExpand" Text="{Binding TotalAmount}" />
                             </StackLayout>
                         </ViewCell>
                     </DataTemplate>
