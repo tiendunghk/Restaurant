@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Restaurant.Services;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -15,6 +16,12 @@ namespace Restaurant.Views.Reports
         public TestChartView()
         {
             InitializeComponent();
+        }
+
+        private void Button_Clicked(object sender, EventArgs e)
+        {
+            var externalIds = new List<string> { App.Context.CurrentStaff.ExternalId };
+            Notification.SilentPush(externalIds);
         }
     }
 }

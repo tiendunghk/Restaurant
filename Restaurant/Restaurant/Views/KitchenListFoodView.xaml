@@ -16,7 +16,7 @@
                     WidthRequest="35" />
                 <Label
                     HorizontalOptions="Center"
-                    IsVisible="{Binding IsNoData}"
+                    IsVisible="False"
                     Text="No Data" />
                 <SearchBar
                     IsVisible="False"

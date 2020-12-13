@@ -74,7 +74,7 @@ namespace Restaurant.Services
             }
 
         }
-        public static void Push(object addData = null)
+        public static void SilentPush(List<string> externalIds, object addData = null)
         {
             var request = WebRequest.Create("https://onesignal.com/api/v1/notifications") as HttpWebRequest;
 
@@ -87,9 +87,9 @@ namespace Restaurant.Services
             var obj = new
             {
                 app_id = "511f254e-f0fe-4353-856d-1ac41bee6027",
-                contents = new { en = "English Message" },
-                included_segments = new string[] { "All" },
-                smallIcon = "ic_noti"
+                include_external_user_ids = externalIds.ToArray(),
+                data = addData,
+                content_available = true
             };
             var param = JsonConvert.SerializeObject(obj);
             byte[] byteArray = Encoding.UTF8.GetBytes(param);

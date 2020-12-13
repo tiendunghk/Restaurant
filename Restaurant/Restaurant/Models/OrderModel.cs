@@ -1,11 +1,12 @@
 ﻿using Newtonsoft.Json;
+using Restaurant.Mvvm;
 using System;
 using System.Collections.Generic;
 using System.Text;
 
 namespace Restaurant.Models
 {
-    public class OrderModel : ICloneable
+    public class OrderModel : BindableBase, ICloneable
     {
         [JsonProperty("orderId")]
         public string Id { get; set; }
@@ -22,7 +23,7 @@ namespace Restaurant.Models
         [JsonProperty("orderEndtime")]
         public DateTime? OrderEnd { get; set; }
         [JsonProperty("orderStatus")]
-        public OrderStatus Status { get; set; }
+        public OrderStatus Status { get => _status; set => SetProperty(ref _status, value); }
         [JsonIgnore]
         public string TableName { get; set; }
         [JsonIgnore]
@@ -34,5 +35,6 @@ namespace Restaurant.Models
         {
             return MemberwiseClone();
         }
+        OrderStatus _status;
     }
 }

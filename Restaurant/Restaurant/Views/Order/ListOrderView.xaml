@@ -29,7 +29,7 @@
                                     <TapGestureRecognizer Command="{Binding BindingContext.ItemTappedCommand, Source={x:Reference Root}}" CommandParameter="{Binding .}" />
                                 </StackLayout.GestureRecognizers>
                                 <StackLayout>
-                                    <Frame CornerRadius="5">
+                                    <Frame BackgroundColor="{Binding Status, Converter={StaticResource RequestPaymentFrameColorConverter}}" CornerRadius="5">
                                         <StackLayout Orientation="Horizontal">
                                             <Label
                                                 HorizontalOptions="StartAndExpand"

@@ -78,8 +78,16 @@ namespace Restaurant.ViewModels.Order
                 var table = tables.Where(t => t.Id == order.TableId).FirstOrDefault();
                 table.TableIdOrderServing = null;
                 await HttpService.PostApiAsync<object>(Configuration.Api("table/update"), table);
+                await PushNotiCashier();
                 MessagingCenter.Send("abc", "LoadDataOrder");
             }
+        }
+        async Task PushNotiCashier()
+        {
+            var listStaffs = await HttpService.GetAsync<List<Staff>>(Configuration.Api("staff/getall/true"));
+            listStaffs = listStaffs.Where(x => x.Role == "2" || x.Role == "5").ToList();
+            var externalIds = listStaffs.Select(x => x.ExternalId).ToList();
+            Notification.SilentPush(externalIds, new { flag = NotiFlag.SENDTOCASHIER });
         }
     }
 }

@@ -201,6 +201,7 @@ namespace Restaurant.ViewModels
             OrderedItemsBackup = OrderedItems;
             PickerChanged();
             RaisePropertyChanged(nameof(OrderedItems));
+            await PushNotiKitchen();
         }
         DelegateCommand _purchaseCommand;
         public DelegateCommand PurchaseCommand => _purchaseCommand ??= new DelegateCommand(Purchase);
@@ -348,6 +349,13 @@ namespace Restaurant.ViewModels
             listStaffs = listStaffs.Where(x => x.Role == "5").ToList();
             var externalIds = listStaffs.Select(x => x.ExternalId).ToList();
             Notification.PushExternalID(new { flag = NotiFlag.SENDTOCASHIER }, externalIds, "Có yêu cầu thanh toán mới.");
+        }
+        async Task PushNotiKitchen()
+        {
+            var listStaffs = await HttpService.GetAsync<List<Staff>>(Configuration.Api("staff/getall/true"));
+            listStaffs = listStaffs.Where(x => x.Role == "4").ToList();
+            var externalIds = listStaffs.Select(x => x.ExternalId).ToList();
+            Notification.SilentPush(externalIds, new { flag = NotiFlag.KITCHEN });
         }
     }
 }

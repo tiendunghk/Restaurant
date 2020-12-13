@@ -50,10 +50,13 @@ namespace Restaurant.ViewModels
             Title = "Danh sách đang chờ";
             MessagingCenter.Subscribe<string>("abc", "LoadDataKitchen", async (a) =>
             {
-                IsLoadingData = true;
-                await LoadData();
-                if (ListOrders.Count > 0) IsNoData = false;
-                IsLoadingData = false;
+                Device.BeginInvokeOnMainThread(async () =>
+                {
+                    IsLoadingData = true;
+                    await LoadData();
+                    if (ListOrders.Count > 0) IsNoData = false;
+                    IsLoadingData = false;
+                });
             });
             MessagingCenter.Subscribe<string, string>("a", "OnNtificationReceived", (a, b) =>
              {
@@ -99,7 +102,7 @@ namespace Restaurant.ViewModels
                 var staffs = await HttpService.GetAsync<List<Staff>>(Configuration.Api("staff/getall/true"));
                 var order = await HttpService.GetAsync<OrderModel>(Configuration.Api($"order/{str.OrderId}"));
                 var externalIds = new List<string> { staffs.Where(x => x.Id == order.StaffId).FirstOrDefault().ExternalId };
-                Notification.PushExternalID(null, externalIds, content);
+                Notification.PushExternalID(new { flag = NotiFlag.TABLEDETAILORDER }, externalIds, content);
             }
         }
         public override async Task OnNavigationAsync(NavigationParameters parameters, NavigationType navigationType)
