@@ -1,4 +1,5 @@
-﻿using Com.OneSignal;
+﻿using Acr.UserDialogs;
+using Com.OneSignal;
 using Newtonsoft.Json.Linq;
 using Restaurant.Datas;
 using Restaurant.Models;
@@ -48,42 +49,45 @@ namespace Restaurant.ViewModels
         }
         async void Login()
         {
-            IsVisible = true;
-            var obj = new
+            using (UserDialogs.Instance.Loading("Login..."))
             {
-                StaffUsername = UserName,
-                StaffPassword = PassWord
-            };
-            var output = await HttpService.PostApiAsync<JObject>(Configuration.Api("signin"), obj);
-            if (output != null)
-            {
-                Preferences.Set("token", output["token"].ToString());
-                var userId = output["userId"].ToString();
-                var staff = await HttpService.GetAsync<Staff>(Configuration.Api($"staff/{userId}"));
-                var listDishs = await HttpService.GetAsync<List<Dish>>(Configuration.Api($"dish/getall/true"));
-                var listRoles = await HttpService.GetAsync<List<Role>>(Configuration.Api($"role/getall"));
-                var listTables = await HttpService.GetAsync<List<Table>>(Configuration.Api($"table/getall/true"));
-                Datas.Dishs.ListDishs = new ObservableCollection<Dish>(listDishs);
-                Datas.Roles.ListRoles = listRoles;
-                Tables.ListTables = listTables;
-                foreach (var e in Datas.Roles.ListRoles)
+                IsVisible = true;
+                var obj = new
                 {
-                    if (staff.Role == e.RoleId)
-                        staff.RoleName = e.RoleName;
+                    StaffUsername = UserName,
+                    StaffPassword = PassWord
+                };
+                var output = await HttpService.PostApiAsync<JObject>(Configuration.Api("signin"), obj);
+                if (output != null)
+                {
+                    Preferences.Set("token", output["token"].ToString());
+                    var userId = output["userId"].ToString();
+                    var staff = await HttpService.GetAsync<Staff>(Configuration.Api($"staff/{userId}"));
+                    var listDishs = await HttpService.GetAsync<List<Dish>>(Configuration.Api($"dish/getall/true"));
+                    var listRoles = await HttpService.GetAsync<List<Role>>(Configuration.Api($"role/getall"));
+                    var listTables = await HttpService.GetAsync<List<Table>>(Configuration.Api($"table/getall/true"));
+                    Datas.Dishs.ListDishs = new ObservableCollection<Dish>(listDishs);
+                    Datas.Roles.ListRoles = listRoles;
+                    Tables.ListTables = listTables;
+                    foreach (var e in Datas.Roles.ListRoles)
+                    {
+                        if (staff.Role == e.RoleId)
+                            staff.RoleName = e.RoleName;
+                    }
+                    var externalId = Guid.NewGuid().ToString("N");
+                    OneSignal.Current.SetExternalUserId(externalId);
+                    Preferences.Set("extId", externalId);
+                    staff.ExternalId = Preferences.Get("extId", null);
+                    await HttpService.PostApiAsync<object>(Configuration.Api("staff/update"), staff);
+                    App.Context.CurrentStaff = staff;
+                    Preferences.Set("islogined", true);
+                    Preferences.Set("username", UserName);
+                    Preferences.Set("password", PassWord);
+                    Application.Current.MainPage = new AppShell();
                 }
-                var externalId = Guid.NewGuid().ToString("N");
-                OneSignal.Current.SetExternalUserId(externalId);
-                Preferences.Set("extId", externalId);
-                staff.ExternalId = Preferences.Get("extId", null);
-                await HttpService.PostApiAsync<object>(Configuration.Api("staff/update"), staff);
-                App.Context.CurrentStaff = staff;
-                Preferences.Set("islogined", true);
-                Preferences.Set("username", UserName);
-                Preferences.Set("password", PassWord);
-                Application.Current.MainPage = new AppShell();
+                else await DialogService.ShowAlertAsync("Vui lòng kiểm tra lại tài khoản của bạn!", "Error", "OK");
+                IsVisible = false;
             }
-            else await DialogService.ShowAlertAsync("Vui lòng kiểm tra lại tài khoản của bạn!", "Error", "OK");
-            IsVisible = false;
         }
         public bool Hide
         {

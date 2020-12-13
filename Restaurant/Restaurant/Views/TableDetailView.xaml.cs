@@ -30,12 +30,21 @@ namespace Restaurant.Views
             vm.PickerChanged();
         }
 
-        private async void  tabView_TabItemTapped(object sender, Syncfusion.XForms.TabView.TabItemTappedEventArgs e)
+        private async void tabView_TabItemTapped(object sender, Syncfusion.XForms.TabView.TabItemTappedEventArgs e)
         {
             if (e.TabItem.Title == "Món đã đặt")
             {
                 var vm = BindingContext as TableDetailViewModel;
                 await vm.LoadOrderDetailData();
+            }
+        }
+        protected override void OnAppearing()
+        {
+            base.OnAppearing();
+            if (App.Context.CurrentStaff.Role == "3" || App.Context.CurrentStaff.Role == "4" || App.Context.CurrentStaff.Role == "5")
+            {
+                datmon.IsVisible = false;
+                dadat.IsVisible = false;
             }
         }
     }

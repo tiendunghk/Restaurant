@@ -13,18 +13,36 @@
                 FontSize="18"
                 HorizontalOptions="CenterAndExpand"
                 Text="Báo cáo món ăn" />
-            <DatePicker Date="{Binding Date}" DateSelected="DatePicker_DateSelected" />
+            <Label x:Name="lblMonth" Margin="5" />
             <Picker
                 ItemsSource="{Binding Pickers}"
                 SelectedIndex="{Binding SelectedIndex}"
                 SelectedIndexChanged="Picker_SelectedIndexChanged" />
-            <ListView ItemsSource="{Binding ListDishs}" SelectionMode="None">
+            <ListView
+                IsVisible="{Binding Orders}"
+                ItemsSource="{Binding ListDishsOrder}"
+                SelectionMode="None">
                 <ListView.ItemTemplate>
                     <DataTemplate>
                         <ViewCell>
                             <StackLayout Margin="8" Orientation="Horizontal">
                                 <Label Text="{Binding Name}" />
-                                <Label Text="{Binding Price}" />
+                                <Label Text="{Binding SoLuong}" />
+                            </StackLayout>
+                        </ViewCell>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+            <ListView
+                IsVisible="{Binding Revenue}"
+                ItemsSource="{Binding ListDishsRevenue}"
+                SelectionMode="None">
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <ViewCell>
+                            <StackLayout Margin="8" Orientation="Horizontal">
+                                <Label Text="{Binding Name}" />
+                                <Label Text="{Binding TotalAmount}" />
                             </StackLayout>
                         </ViewCell>
                     </DataTemplate>

@@ -24,25 +24,8 @@ namespace Restaurant.Views.Reports
         {
             InitializeComponent();
             BindingContext = new FoodReportViewModel();
+            lblMonth.Text = $"Tháng {DateTime.Now.Month}";
         }
-
-        private async void Button_Clicked(object sender, EventArgs e)
-        {
-            var _referenceObj = App.Context.CurrentStaff.Clone() as Staff;
-            _referenceObj.Name = "fucker";
-            //await HttpService.PostApiAsync<object>(Configuration.Api("staff/update"), _referenceObj);
-            HttpClient httpClient = new HttpClient();
-            httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", _referenceObj.Token);
-            var json = JsonConvert.SerializeObject(_referenceObj);
-            var a = await httpClient.PostAsJsonAsync(Configuration.Api("staff/update"), _referenceObj);
-        }
-
-        private void DatePicker_DateSelected(object sender, DateChangedEventArgs e)
-        {
-            var vm = BindingContext as FoodReportViewModel;
-            vm.DateChanged();
-        }
-
         private void Picker_SelectedIndexChanged(object sender, EventArgs e)
         {
             var vm = BindingContext as FoodReportViewModel;

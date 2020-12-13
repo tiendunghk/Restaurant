@@ -42,6 +42,9 @@ namespace Restaurant.Models
         string _dishImage;
         bool _isActive = true;
 
+        decimal _totalAmount;
+        [JsonIgnore]
+        public decimal TotalAmount { get => _totalAmount; set => SetProperty(ref _totalAmount, value); }
         public object Clone()
         {
             return MemberwiseClone();
