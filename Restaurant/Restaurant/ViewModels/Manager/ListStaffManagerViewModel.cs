@@ -10,6 +10,7 @@ using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Xamarin.Forms;
 
 namespace Restaurant.ViewModels.Manager
 {
@@ -47,16 +48,22 @@ namespace Restaurant.ViewModels.Manager
         }
         public ListStaffManagerViewModel()
         {
-
+            MessagingCenter.Subscribe<string>("abc", "AddStaffDone", async (s) =>
+            {
+                var listStaffs = await HttpService.GetAsync<List<Staff>>(Configuration.Api("staff/getall/false"));
+                ListStaffs = BackupStaffs = listStaffs;
+            });
         }
         public override async Task OnNavigationAsync(NavigationParameters parameters, NavigationType navigationType)
         {
-            var listStaffs = await HttpService.GetAsync<List<Staff>>(Configuration.Api("staff/getall/true"));
+            var listStaffs = await HttpService.GetAsync<List<Staff>>(Configuration.Api("staff/getall/false"));
             ListStaffs = BackupStaffs = listStaffs;
         }
         async void AddNavigate()
         {
-            await NavigationService.NavigateToAsync<AddStaffViewModel>();
+            var listStaffs = await HttpService.GetAsync<List<Staff>>(Configuration.Api("staff/getall/false"));
+            var userName = $"staff{(listStaffs.Count + 1).ToString("00")}";
+            await NavigationService.NavigateToAsync<AddStaffViewModel>(new NavigationParameters { { "userName", userName } });
         }
         async void Tapped(Staff obj)
         {

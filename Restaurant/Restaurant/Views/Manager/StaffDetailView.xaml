@@ -16,28 +16,37 @@
                         IsToggled="{Binding Staff.IsActive}"
                         VerticalOptions="StartAndExpand" />
                     <StackLayout Orientation="Horizontal">
-                        <Label HorizontalOptions="StartAndExpand" Text="Tên đăng nhập" />
-                        <Editor
-                            AutoSize="TextChanges"
-                            HorizontalOptions="EndAndExpand"
-                            Text="{Binding Staff.UserName}" />
+                        <Label
+                            HorizontalOptions="StartAndExpand"
+                            Text="Tên đăng nhập"
+                            VerticalOptions="CenterAndExpand" />
+                        <Label HorizontalOptions="EndAndExpand" Text="{Binding Staff.UserName}" />
                     </StackLayout>
                     <StackLayout Orientation="Horizontal">
-                        <Label HorizontalOptions="StartAndExpand" Text="Tên" />
+                        <Label
+                            HorizontalOptions="StartAndExpand"
+                            Text="Tên"
+                            VerticalOptions="CenterAndExpand" />
                         <Editor
                             AutoSize="TextChanges"
                             HorizontalOptions="EndAndExpand"
                             Text="{Binding Staff.Name}" />
                     </StackLayout>
                     <StackLayout Orientation="Horizontal">
-                        <Label HorizontalOptions="StartAndExpand" Text="Visa" />
+                        <Label
+                            HorizontalOptions="StartAndExpand"
+                            Text="Visa"
+                            VerticalOptions="CenterAndExpand" />
                         <Editor
                             AutoSize="TextChanges"
                             HorizontalOptions="EndAndExpand"
                             Text="{Binding Staff.StaffVisa}" />
                     </StackLayout>
                     <StackLayout Orientation="Horizontal">
-                        <Label HorizontalOptions="StartAndExpand" Text="Role" />
+                        <Label
+                            HorizontalOptions="StartAndExpand"
+                            Text="Role"
+                            VerticalOptions="CenterAndExpand" />
                         <Picker
                             Margin="0,0,5,0"
                             HorizontalOptions="EndAndExpand"
@@ -45,7 +54,10 @@
                             SelectedIndex="{Binding SelectedItem}" />
                     </StackLayout>
                     <StackLayout Orientation="Horizontal">
-                        <Label HorizontalOptions="StartAndExpand" Text="Ngày sinh" />
+                        <Label
+                            HorizontalOptions="StartAndExpand"
+                            Text="Ngày sinh"
+                            VerticalOptions="CenterAndExpand" />
                         <DatePicker
                             Date="{Binding Staff.StaffBirthdate}"
                             HorizontalOptions="EndAndExpand"

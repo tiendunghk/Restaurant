@@ -16,37 +16,55 @@
                         IsToggled="{Binding Staff.IsActive}"
                         VerticalOptions="StartAndExpand" />
                     <StackLayout Orientation="Horizontal">
-                        <Label HorizontalOptions="StartAndExpand" Text="Tên đăng nhập" />
-                        <Entry
+                        <Label
+                            HorizontalOptions="StartAndExpand"
+                            Text="Tên đăng nhập"
+                            VerticalOptions="CenterAndExpand" />
+                        <Label
+                            FontSize="15"
                             HorizontalOptions="EndAndExpand"
-                            Placeholder="tên đăng nhập"
-                            Text="{Binding Staff.UserName}" />
+                            IsEnabled="False"
+                            Text="{Binding Staff.UserName}"
+                            TextDecorations="Underline" />
                     </StackLayout>
                     <StackLayout Orientation="Horizontal">
-                        <Label HorizontalOptions="StartAndExpand" Text="Tên" />
+                        <Label
+                            HorizontalOptions="StartAndExpand"
+                            Text="Tên"
+                            VerticalOptions="CenterAndExpand" />
                         <Entry
-                            HorizontalOptions="FillAndExpand"
-                            Placeholder="tên"
+                            HorizontalOptions="EndAndExpand"
+                            Placeholder="Tên nhân viên"
                             Text="{Binding Staff.Name}" />
                     </StackLayout>
                     <StackLayout Orientation="Horizontal">
-                        <Label HorizontalOptions="StartAndExpand" Text="Visa" />
+                        <Label
+                            HorizontalOptions="StartAndExpand"
+                            Text="Visa"
+                            VerticalOptions="CenterAndExpand" />
                         <Entry
                             HorizontalOptions="EndAndExpand"
-                            Placeholder="Nhập visa"
+                            Placeholder="Nhập vào visa"
                             Text="{Binding Staff.StaffVisa}" />
                     </StackLayout>
 
                     <StackLayout Orientation="Horizontal">
-                        <Label HorizontalOptions="StartAndExpand" Text="Lương" />
+                        <Label
+                            HorizontalOptions="StartAndExpand"
+                            Text="Lương"
+                            VerticalOptions="CenterAndExpand" />
                         <Entry
                             HorizontalOptions="EndAndExpand"
-                            Placeholder="Nhập lương"
+                            Keyboard="Numeric"
+                            Placeholder="Nhập vào lương"
                             Text="{Binding Staff.StaffSalary}" />
                     </StackLayout>
 
                     <StackLayout Orientation="Horizontal">
-                        <Label HorizontalOptions="StartAndExpand" Text="Mật khẩu" />
+                        <Label
+                            HorizontalOptions="StartAndExpand"
+                            Text="Mật khẩu"
+                            VerticalOptions="CenterAndExpand" />
                         <Entry
                             HorizontalOptions="EndAndExpand"
                             Placeholder="Nhập mật khẩu"
@@ -54,14 +72,20 @@
                     </StackLayout>
 
                     <StackLayout Orientation="Horizontal">
-                        <Label HorizontalOptions="StartAndExpand" Text="Role" />
+                        <Label
+                            HorizontalOptions="StartAndExpand"
+                            Text="Role"
+                            VerticalOptions="CenterAndExpand" />
                         <Picker
                             HorizontalOptions="EndAndExpand"
                             ItemsSource="{Binding Roles}"
                             SelectedIndex="{Binding SelectedItem}" />
                     </StackLayout>
                     <StackLayout Orientation="Horizontal">
-                        <Label HorizontalOptions="StartAndExpand" Text="Ngày sinh" />
+                        <Label
+                            HorizontalOptions="StartAndExpand"
+                            Text="Ngày sinh"
+                            VerticalOptions="CenterAndExpand" />
                         <DatePicker
                             Date="{Binding Staff.StaffBirthdate}"
                             HorizontalOptions="EndAndExpand"

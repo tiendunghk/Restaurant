@@ -16,14 +16,21 @@
                         IsToggled="{Binding Obj.IsActive}"
                         VerticalOptions="StartAndExpand" />
                     <StackLayout Orientation="Horizontal">
-                        <Label HorizontalOptions="StartAndExpand" Text="Tên" />
-                        <Entry
+                        <Label
+                            HorizontalOptions="StartAndExpand"
+                            Text="Tên"
+                            VerticalOptions="CenterAndExpand" />
+                        <Editor
+                            AutoSize="TextChanges"
                             HorizontalOptions="FillAndExpand"
                             Placeholder="Tên món"
                             Text="{Binding Obj.Name}" />
                     </StackLayout>
                     <StackLayout Orientation="Horizontal">
-                        <Label HorizontalOptions="StartAndExpand" Text="Giá" />
+                        <Label
+                            HorizontalOptions="StartAndExpand"
+                            Text="Giá"
+                            VerticalOptions="CenterAndExpand" />
                         <Entry
                             HorizontalOptions="FillAndExpand"
                             Keyboard="Numeric"
@@ -31,14 +38,20 @@
                             Text="{Binding Obj.Price}" />
                     </StackLayout>
                     <StackLayout Orientation="Horizontal">
-                        <Label HorizontalOptions="StartAndExpand" Text="Mô tả" />
+                        <Label
+                            HorizontalOptions="StartAndExpand"
+                            Text="Mô tả"
+                            VerticalOptions="CenterAndExpand" />
                         <Entry
                             HorizontalOptions="EndAndExpand"
-                            Placeholder="Mô tả"
+                            Placeholder="Mô tả của món ăn"
                             Text="{Binding Obj.Description}" />
                     </StackLayout>
                     <StackLayout Orientation="Horizontal">
-                        <Label HorizontalOptions="StartAndExpand" Text="Hình minh họa" />
+                        <Label
+                            HorizontalOptions="StartAndExpand"
+                            Text="Hình minh họa"
+                            VerticalOptions="CenterAndExpand" />
                         <Grid Padding="5">
                             <Frame
                                 BackgroundColor="WhiteSmoke"

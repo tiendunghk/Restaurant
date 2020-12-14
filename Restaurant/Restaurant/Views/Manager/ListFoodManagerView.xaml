@@ -3,8 +3,8 @@
     x:Class="Restaurant.Views.Manager.ListFoodManagerView"
     xmlns="http://xamarin.com/schemas/2014/forms"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-    x:Name="Root"
     xmlns:ff="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms"
+    x:Name="Root"
     Title="Food">
     <ContentPage.Content>
         <AbsoluteLayout>
@@ -41,10 +41,10 @@
                                             </StackLayout>
                                             <StackLayout>
                                                 <ff:CachedImage
-                                                    LoadingPlaceholder="image_placeholder"
                                                     Aspect="AspectFit"
                                                     HeightRequest="60"
                                                     HorizontalOptions="CenterAndExpand"
+                                                    LoadingPlaceholder="image_placeholder"
                                                     Source="{Binding DishImage}"
                                                     WidthRequest="80" />
                                             </StackLayout>

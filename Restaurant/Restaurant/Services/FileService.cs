@@ -99,7 +99,7 @@ namespace Restaurant.Services
             };
             try
             {
-                using (UserDialogs.Instance.Loading("Saving.."))
+                using (UserDialogs.Instance.Loading("Upload image.."))
                 {
                     var uploadResult = await cloudinary.UploadAsync(uploadParams);
                     output = uploadResult.SecureUri.ToString();

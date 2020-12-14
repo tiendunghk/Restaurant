@@ -2,10 +2,13 @@
 using Restaurant.Models;
 using Restaurant.Mvvm.Command;
 using Restaurant.Services;
+using Restaurant.Services.Navigation;
 using Restaurant.ViewModels.Base;
 using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Threading.Tasks;
+using Xamarin.Forms;
 
 namespace Restaurant.ViewModels.Manager
 {
@@ -43,13 +46,22 @@ namespace Restaurant.ViewModels.Manager
                 Roles.Add(e.RoleName);
             }
         }
+        public override Task OnNavigationAsync(NavigationParameters parameters, NavigationType navigationType)
+        {
+            if (parameters.TryGetValue("userName", out string userName))
+            {
+                Staff.UserName = userName;
+                RaisePropertyChanged(nameof(Staff));
+            }
+            return Task.CompletedTask;
+        }
         async void Save()
         {
             var a = Staff;
             Staff.Role = Datas.Roles.ListRoles[SelectedItem].RoleId;
             await HttpService.PostApiAsync<object>(Configuration.Api("staff/add"), Staff);
             DialogService.ShowToast("Đã thêm thành công");
-            //lúc thêm backend chưa trả về id được thêm
+            MessagingCenter.Send("abc", "AddStaffDone");
             await NavigationService.NavigateBackAsync();
         }
         async void Cancel()

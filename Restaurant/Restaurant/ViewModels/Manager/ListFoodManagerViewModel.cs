@@ -10,6 +10,7 @@ using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Xamarin.Forms;
 
 namespace Restaurant.ViewModels.Manager
 {
@@ -47,11 +48,16 @@ namespace Restaurant.ViewModels.Manager
         }
         public ListFoodManagerViewModel()
         {
-
+            MessagingCenter.Subscribe<string>("abc", "AddFoodDone", async (s) =>
+            {
+                var listDishs = await HttpService.GetAsync<List<Dish>>(Configuration.Api("dish/getall/false"));
+                ListFoods = listDishs;
+                BackupFood = ListFoods;
+            });
         }
         public override async Task OnNavigationAsync(NavigationParameters parameters, NavigationType navigationType)
         {
-            var listDishs = await HttpService.GetAsync<List<Dish>>(Configuration.Api("dish/getall/true"));
+            var listDishs = await HttpService.GetAsync<List<Dish>>(Configuration.Api("dish/getall/false"));
             ListFoods = listDishs;
             BackupFood = ListFoods;
         }

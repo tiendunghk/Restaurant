@@ -1,4 +1,5 @@
-﻿using Restaurant.Datas;
+﻿using Acr.UserDialogs;
+using Restaurant.Datas;
 using Restaurant.Models;
 using Restaurant.Mvvm.Command;
 using Restaurant.Services;
@@ -8,6 +9,7 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 using System.Threading.Tasks;
+using Xamarin.Forms;
 
 namespace Restaurant.ViewModels.Manager
 {
@@ -55,12 +57,18 @@ namespace Restaurant.ViewModels.Manager
         }
         async void Save()
         {
-            var url = await FileService.UploadImageCloudinary(Obj.DishImage);
-            Obj.DishImage = url;
-            await HttpService.PostApiAsync<object>(Configuration.Api("dish/add"), Obj);
-            DialogService.ShowToast("Đã thêm thành công");
-            //lúc thêm backend chưa trả về id được thêm
-            await NavigationService.NavigateBackAsync();
+            using (UserDialogs.Instance.Loading("Saving", null, null, false))
+            {
+                if (!string.IsNullOrEmpty(Obj.DishImage))
+                {
+                    var url = await FileService.UploadImageCloudinary(Obj.DishImage);
+                    Obj.DishImage = url;
+                }
+                await HttpService.PostApiAsync<object>(Configuration.Api("dish/add"), Obj);
+                DialogService.ShowToast("Đã thêm thành công");
+                MessagingCenter.Send("abc", "AddFoodDone");
+                await NavigationService.NavigateBackAsync();
+            }
         }
         async void Cancel()
         {

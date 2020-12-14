@@ -21,10 +21,5 @@ namespace Restaurant.Views
             if (BindingContext == null)
                 BindingContext = new LoginViewModel();
         }
-        protected override void OnAppearing()
-        {
-            base.OnAppearing();
-            App.Current.On<Android>().UseWindowSoftInputModeAdjust(WindowSoftInputModeAdjust.Resize);
-        }
     }
 }
