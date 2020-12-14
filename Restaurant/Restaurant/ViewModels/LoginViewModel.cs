@@ -51,7 +51,7 @@ namespace Restaurant.ViewModels
         {
             using (UserDialogs.Instance.Loading("Login..."))
             {
-                IsVisible = true;
+                //IsVisible = true;
                 var obj = new
                 {
                     StaffUsername = UserName,
@@ -86,7 +86,7 @@ namespace Restaurant.ViewModels
                     Application.Current.MainPage = new AppShell();
                 }
                 else await DialogService.ShowAlertAsync("Vui lòng kiểm tra lại tài khoản của bạn!", "Error", "OK");
-                IsVisible = false;
+                //IsVisible = false;
             }
         }
         public bool Hide

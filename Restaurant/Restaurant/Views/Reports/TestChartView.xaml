@@ -3,10 +3,65 @@
     x:Class="Restaurant.Views.Reports.TestChartView"
     xmlns="http://xamarin.com/schemas/2014/forms"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-    xmlns:microcharts="clr-namespace:Microcharts.Forms;assembly=Microcharts.Forms">
+    xmlns:microcharts="clr-namespace:Microcharts.Forms;assembly=Microcharts.Forms"
+    x:Name="Root">
     <ContentPage.Content>
-        <StackLayout>
-            <Button Clicked="Button_Clicked" Text="Push noti" />
-        </StackLayout>
+        <AbsoluteLayout>
+            <StackLayout
+                AbsoluteLayout.LayoutBounds="0,0,1,1"
+                AbsoluteLayout.LayoutFlags="SizeProportional"
+                BackgroundColor="{StaticResource Backgroud}">
+                <ActivityIndicator
+                    HeightRequest="30"
+                    IsRunning="{Binding IsSearch}"
+                    IsVisible="{Binding IsSearch}"
+                    WidthRequest="30" />
+                <SearchBar
+                    Placeholder="Nhập nhân viên"
+                    SearchCommand="{Binding SearchCommand}"
+                    Text="{Binding SearchKeyWord}" />
+                <Label Text="abc" />
+                <ScrollView BackgroundColor="{StaticResource Backgroud}">
+                    <StackLayout BindableLayout.ItemsSource="{Binding ListStaffs}">
+                        <BindableLayout.ItemTemplate>
+                            <DataTemplate>
+                                <StackLayout Spacing="10">
+                                    <Frame
+                                        Margin="9,3,9,3"
+                                        BackgroundColor="{Binding IsActive, Converter={x:StaticResource StatusActiveConverter}}"
+                                        CornerRadius="5"
+                                        HasShadow="True">
+                                        <StackLayout Orientation="Horizontal">
+                                            <StackLayout
+                                                Margin="10,0,0,0"
+                                                HorizontalOptions="StartAndExpand"
+                                                Orientation="Vertical">
+                                                <Label Text="{Binding Name}" />
+                                                <Label Text="{Binding Role, Converter={StaticResource RoleToTextConverter}}" />
+                                            </StackLayout>
+                                            <StackLayout VerticalOptions="Center">
+                                                <Image
+                                                    BackgroundColor="Transparent"
+                                                    HeightRequest="25"
+                                                    Source="ic_next"
+                                                    WidthRequest="25" />
+                                            </StackLayout>
+                                        </StackLayout>
+                                    </Frame>
+                                </StackLayout>
+                            </DataTemplate>
+                        </BindableLayout.ItemTemplate>
+                    </StackLayout>
+                </ScrollView>
+            </StackLayout>
+            <ImageButton
+                AbsoluteLayout.LayoutBounds="0.95,0.95,80,80"
+                AbsoluteLayout.LayoutFlags="PositionProportional"
+                BackgroundColor="Transparent"
+                CornerRadius="40"
+                HeightRequest="80"
+                Source="fab.png"
+                WidthRequest="80" />
+        </AbsoluteLayout>
     </ContentPage.Content>
 </ContentPage>

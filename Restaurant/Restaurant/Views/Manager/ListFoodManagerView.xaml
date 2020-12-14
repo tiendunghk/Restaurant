@@ -37,7 +37,14 @@
                                             </StackLayout.GestureRecognizers>
                                             <StackLayout HorizontalOptions="StartAndExpand" Orientation="Vertical">
                                                 <Label Text="{Binding Name}" />
-                                                <Label Text="{Binding Price}" />
+                                                <Label>
+                                                    <Label.FormattedText>
+                                                        <FormattedString>
+                                                            <Span Text="{Binding Price}" />
+                                                            <Span Text=" đ" />
+                                                        </FormattedString>
+                                                    </Label.FormattedText>
+                                                </Label>
                                             </StackLayout>
                                             <StackLayout>
                                                 <ff:CachedImage

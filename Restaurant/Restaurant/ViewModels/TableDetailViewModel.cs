@@ -135,10 +135,15 @@ namespace Restaurant.ViewModels
         {
             if (App.Context.CurrentStaff.Role == "3" || App.Context.CurrentStaff.Role == "4" || App.Context.CurrentStaff.Role == "5")
             {
-                await DialogService.ShowAlertAsync("Bạn không có quyền đặt món", "Thông báo", "OK");
+                await DialogService.ShowAlertAsync("Bạn không có quyền đặt món!", "Thông báo", "OK");
                 return;
             }
 
+            if (Table.Status == TableStatus.DIRTY)
+            {
+                await DialogService.ShowAlertAsync("Bàn chưa được vệ sinh!", "Thông báo", "OK");
+                return;
+            }
             var b = BackupDish.Where(x => x.SoLuong > 0).Count() > 0 ? true : false;
             if (!b)
             {
@@ -210,6 +215,10 @@ namespace Restaurant.ViewModels
             if (App.Context.CurrentStaff.Role == "3" || App.Context.CurrentStaff.Role == "4" || App.Context.CurrentStaff.Role == "5")
             {
                 await DialogService.ShowAlertAsync("Bạn không có quyền đặt món", "Thông báo", "OK");
+                return;
+            }
+            if (Table.Status == TableStatus.DIRTY)
+            {
                 return;
             }
             if (OrderedItems.Count < 1)
