@@ -159,6 +159,10 @@ namespace Restaurant.ViewModels
                 await DialogService.ShowAlertAsync("Không thể order thêm, đang chờ thanh toán", "Thông báo", "OK");
                 return;
             }
+            if (!await DialogService.ShowConfirmDialog("Warning", "Bạn chắc chắn đặt món", "Yes", "No"))
+            {
+                return;
+            }
             if (order == null) order = new OrderModel { OrderDate = DateTime.Now, TableId = Table.Id, StaffId = App.Context.CurrentStaff.Id, TableName = Table.TableName };
 
             decimal cost = 0;
@@ -231,6 +235,10 @@ namespace Restaurant.ViewModels
                 return;
             }
             if (order.Status == OrderStatus.REQUESTPAYMENT || order.Status == OrderStatus.COMPLETED) return;
+            if (!await DialogService.ShowConfirmDialog("Warning", "Bạn chắc chắn yêu cầu thanh toán", "Yes", "No"))
+            {
+                return;
+            }
             using (UserDialogs.Instance.Loading("Waiting..."))
             {
                 order.Status = OrderStatus.REQUESTPAYMENT;

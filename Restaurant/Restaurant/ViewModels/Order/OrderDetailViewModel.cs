@@ -63,6 +63,10 @@ namespace Restaurant.ViewModels.Order
         }
         async void Purchase()
         {
+            if (!await DialogService.ShowConfirmDialog("Warning", "Bạn chắc chắn thanh toán", "Yes", "No"))
+            {
+                return;
+            }
             using (UserDialogs.Instance.Loading("Waiting..."))
             {
                 var order = await HttpService.GetAsync<OrderModel>(Configuration.Api($"order/{OrderDetailUIs[0].OrderDetail.OrderDetail_OrderID}"));
