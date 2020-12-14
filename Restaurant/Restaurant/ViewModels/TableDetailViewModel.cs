@@ -242,16 +242,22 @@ namespace Restaurant.ViewModels
         }
         DelegateCommand<OrderDetailUI> _deleteDetailCommand;
         public DelegateCommand<OrderDetailUI> DeleteDetailCommand => _deleteDetailCommand ??= new DelegateCommand<OrderDetailUI>(DeleteDetail);
-        async void DeleteDetail(OrderDetailUI obj)
+        void DeleteDetail(OrderDetailUI obj)
         {
-            OrderedItems.Remove(obj);
-            OrderedItemsBackup.Remove(obj);
-            var idOrderDetail = obj.OrderDetail.OrderDetailId;
-            order.OrderTotalAmount -= obj.Dish.Price;
-            await HttpService.PostApiAsync<object>(Configuration.Api($"orderdetail/{idOrderDetail}"), new { });
-            await HttpService.PostApiAsync<object>(Configuration.Api($"order/update"), order);
-            RaisePropertyChanged(nameof(OrderedItems));
-            DialogService.ShowToast("Đã xóa item");
+            Device.InvokeOnMainThreadAsync(async () =>
+            {
+                OrderedItems.Remove(obj);
+                OrderedItemsBackup.Remove(obj);
+                var idOrderDetail = obj.OrderDetail.OrderDetailId;
+                order.OrderTotalAmount -= obj.Dish.Price;
+                await HttpService.PostApiAsync<object>(Configuration.Api($"orderdetail/{idOrderDetail}"), new { });
+                await HttpService.PostApiAsync<object>(Configuration.Api($"order/update"), order);
+                RaisePropertyChanged(nameof(OrderedItems));
+                await PushNotiKitchen();
+                DialogService.ShowToast("Đã xóa item");
+            }
+             );
+
         }
         async void ShowDetail(Dish dish)
         {

@@ -17,7 +17,7 @@ namespace Restaurant.Converters
                 if (e.RoleId == idRole)
                     name = e.RoleName;
             }
-            if (name == "Manager" || name == "Kitchen")
+            if (/*name == "Manager" || */name == "Kitchen")
                 return true;
             return false;
         }
