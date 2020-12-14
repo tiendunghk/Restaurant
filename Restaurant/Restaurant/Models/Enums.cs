@@ -27,6 +27,7 @@ namespace Restaurant.Models
         SENDTOCASHIER,
         PAYDONE,
         TABLEDETAILORDER,
-        KITCHEN
+        KITCHEN,
+        TABLESTATUS
     }
 }

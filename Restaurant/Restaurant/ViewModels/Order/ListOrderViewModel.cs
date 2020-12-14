@@ -45,9 +45,12 @@ namespace Restaurant.ViewModels.Order
 
             Filters = new List<string> { "Tất cả", "Cần thanh toán", "Đã thanh toán" };
             SelectedIndex = 0;
-            MessagingCenter.Subscribe<string>("abc", "LoadDataOrder", async (a) =>
+            MessagingCenter.Subscribe<string>("abc", "LoadDataOrder", (a) =>
             {
-                await LoadData();
+                Device.BeginInvokeOnMainThread(async () =>
+                {
+                    await LoadData();
+                });
             });
         }
         async Task LoadData()

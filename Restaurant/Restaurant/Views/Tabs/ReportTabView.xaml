@@ -12,5 +12,5 @@
     <!--  Pages can be added as references or inline  -->
     <reports:OrderReportView Title="Order" IconImageSource="order_rp" />
     <reports:FoodReportView Title="Food" IconImageSource="ic_food" />
-    <reports:TestChartView Title="Cost" IconImageSource="cost_report" />
+    <!--<reports:TestChartView Title="Cost" IconImageSource="cost_report" />-->
 </TabbedPage>

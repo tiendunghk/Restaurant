@@ -126,6 +126,7 @@ namespace Restaurant.ViewModels
                 e.TableName = Tables.ListTables.Find(x => x.Id == e.TableId).TableName;
             }
             ListOrders = orders;
+            if (ListOrders.Count > 0) IsNoData = false;
             ListItems = new ObservableCollection<FoodHeaderInfo>();
             FoodHeaderInfo obj;
             Dish d;

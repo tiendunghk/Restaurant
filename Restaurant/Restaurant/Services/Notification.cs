@@ -45,6 +45,10 @@ namespace Restaurant.Services
                         if (d == typeof(TableDetailView))
                             MessagingCenter.Send("abc", "KitchenSelectedCook");
                         break;
+                    case NotiFlag.TABLESTATUS:
+                        if (d == typeof(TableDetailView))
+                            MessagingCenter.Send("abc", "PaymentAccepted");
+                        break;
                     default:
                         break;
                 }

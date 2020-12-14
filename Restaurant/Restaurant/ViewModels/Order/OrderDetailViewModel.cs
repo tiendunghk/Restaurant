@@ -71,13 +71,14 @@ namespace Restaurant.ViewModels.Order
                 order.Status = Models.OrderStatus.COMPLETED;
                 OrderStatus = (int)Models.OrderStatus.COMPLETED;
                 await HttpService.PostApiAsync<object>(Configuration.Api("order/update"), order);
-                Notification.PushExternalID(null, idpush, "Yêu cầu thanh toán đã được chấp nhận");
 
                 //var table = order.TableId;
                 var tables = await HttpService.GetAsync<List<Table>>(Configuration.Api($"table/getall/true"));
                 var table = tables.Where(t => t.Id == order.TableId).FirstOrDefault();
                 table.TableIdOrderServing = null;
+                table.Status = TableStatus.DIRTY;
                 await HttpService.PostApiAsync<object>(Configuration.Api("table/update"), table);
+                Notification.PushExternalID(new { flag = NotiFlag.TABLESTATUS }, idpush, "Yêu cầu thanh toán đã được chấp nhận");
                 await PushNotiCashier();
                 MessagingCenter.Send("abc", "LoadDataOrder");
             }
