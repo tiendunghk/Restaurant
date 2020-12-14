@@ -9,7 +9,10 @@
     Title="{Binding Title}"
     Shell.BackgroundColor="{Binding Table.Status, Converter={StaticResource TableColorConverter}}">
     <ContentPage.ToolbarItems>
-        <ToolbarItem Command="{Binding ChangeTableStatusCommand}" Text="Sửa trạng thái" />
+        <ToolbarItem
+            x:Name="tbItem"
+            Command="{Binding ChangeTableStatusCommand}"
+            Text="Sửa trạng thái" />
     </ContentPage.ToolbarItems>
     <ContentPage.Content>
         <StackLayout>

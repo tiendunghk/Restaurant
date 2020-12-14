@@ -46,6 +46,10 @@ namespace Restaurant.Views
                 datmon.IsVisible = false;
                 dadat.IsVisible = false;
             }
+            if (App.Context.CurrentStaff.Role == "3")
+                tbItem.IsEnabled = true;
+            else
+                tbItem.IsEnabled = false;
         }
     }
 }

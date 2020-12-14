@@ -127,7 +127,6 @@ namespace Restaurant.ViewModels
             MessagingCenter.Subscribe<string>("abc", "PaymentAccepted", async (args) =>
             {
                 Table.Status = TableStatus.DIRTY;
-                await NavigationService.NavigateBackAsync();
             });
         }
         void Tapped(object o)

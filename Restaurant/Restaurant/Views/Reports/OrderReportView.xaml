@@ -63,22 +63,24 @@
                 ItemsSource="{Binding Pickers}"
                 SelectedIndex="{Binding SelectedIndex}"
                 SelectedIndexChanged="Picker_SelectedIndexChanged" />
-            <microcharts:ChartView
-                Margin="10,0,10,10"
-                Chart="{Binding BarChartOrders}"
-                HeightRequest="300"
-                HorizontalOptions="Fill"
-                IsVisible="{Binding IsVisible0}"
-                Rotation="90"
-                VerticalOptions="Start" />
-            <microcharts:ChartView
-                Margin="10,0,10,10"
-                Chart="{Binding BarChartRevenues}"
-                HeightRequest="300"
-                HorizontalOptions="Fill"
-                IsVisible="{Binding IsVisible1}"
-                Rotation="90"
-                VerticalOptions="Start" />
+            <Grid Padding="35">
+                <microcharts:ChartView
+                    Margin="10,0,10,10"
+                    Chart="{Binding BarChartOrders}"
+                    HeightRequest="300"
+                    HorizontalOptions="Fill"
+                    IsVisible="{Binding IsVisible0}"
+                    Rotation="0"
+                    VerticalOptions="Start" />
+                <microcharts:ChartView
+                    Margin="10,0,10,10"
+                    Chart="{Binding BarChartRevenues}"
+                    HeightRequest="300"
+                    HorizontalOptions="Fill"
+                    IsVisible="{Binding IsVisible1}"
+                    Rotation="90"
+                    VerticalOptions="Start" />
+            </Grid>
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>
