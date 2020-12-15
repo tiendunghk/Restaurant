@@ -1,4 +1,5 @@
-﻿using Restaurant.Datas;
+﻿using Acr.UserDialogs;
+using Restaurant.Datas;
 using Restaurant.Models;
 using Restaurant.Mvvm.Command;
 using Restaurant.Services;
@@ -8,6 +9,7 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 using System.Threading.Tasks;
+using Xamarin.Forms;
 
 namespace Restaurant.ViewModels.Manager
 {
@@ -50,18 +52,22 @@ namespace Restaurant.ViewModels.Manager
         }
         async void Save()
         {
-            _referenceObj.IsActive = Obj.IsActive;
-            _referenceObj.Name = Obj.Name;
-            if (!Obj.DishImage.Contains("http"))
+            using (UserDialogs.Instance.Loading("Saving..."))
             {
-                var urlImage = await FileService.UploadImageCloudinary(Obj.DishImage);
-                _referenceObj.DishImage = urlImage;
-            }
-            _referenceObj.Description = Obj.Description;
-            _referenceObj.Price = Obj.Price;
+                _referenceObj.IsActive = Obj.IsActive;
+                _referenceObj.Name = Obj.Name;
+                if (!Obj.DishImage.Contains("http"))
+                {
+                    var urlImage = await FileService.UploadImageCloudinary(Obj.DishImage);
+                    _referenceObj.DishImage = urlImage;
+                }
+                _referenceObj.Description = Obj.Description;
+                _referenceObj.Price = Obj.Price;
 
-            await HttpService.PostApiAsync<object>(Configuration.Api("dish/update"), _referenceObj);
-            await NavigationService.NavigateBackAsync();
+                await HttpService.PostApiAsync<object>(Configuration.Api("dish/update"), _referenceObj);
+                MessagingCenter.Send("abc", "AddFoodDone");
+                await NavigationService.NavigateBackAsync();
+            }
         }
         void Remove(Dish dish)
         {

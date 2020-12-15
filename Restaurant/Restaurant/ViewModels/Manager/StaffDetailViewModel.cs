@@ -10,6 +10,7 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 using System.Threading.Tasks;
+using Xamarin.Forms;
 
 namespace Restaurant.ViewModels.Manager
 {
@@ -61,17 +62,21 @@ namespace Restaurant.ViewModels.Manager
         }
         async void Save()
         {
-            _referenceObj.Name = Staff.Name;
-            _referenceObj.IsActive = Staff.IsActive;
-            _referenceObj.Name = Staff.Name;
-            _referenceObj.UserName = Staff.UserName;
-            _referenceObj.StaffVisa = Staff.StaffVisa;
-            _referenceObj.Role = Staff.Role = Datas.Roles.ListRoles[SelectedItem].RoleId;
-            _referenceObj.StaffSalary = Staff.StaffSalary;
-            _referenceObj.StaffBirthdate = Staff.StaffBirthdate;
-            var url = JsonConvert.SerializeObject(_referenceObj);
-            var output = await HttpService.PostApiAsync<object>(Configuration.Api("staff/update"), _referenceObj);
-            await NavigationService.NavigateBackAsync();
+            using (UserDialogs.Instance.Loading("Saving..."))
+            {
+                _referenceObj.Name = Staff.Name;
+                _referenceObj.IsActive = Staff.IsActive;
+                _referenceObj.Name = Staff.Name;
+                _referenceObj.UserName = Staff.UserName;
+                _referenceObj.StaffVisa = Staff.StaffVisa;
+                _referenceObj.Role = Staff.Role = Datas.Roles.ListRoles[SelectedItem].RoleId;
+                _referenceObj.StaffSalary = Staff.StaffSalary;
+                _referenceObj.StaffBirthdate = Staff.StaffBirthdate;
+                var url = JsonConvert.SerializeObject(_referenceObj);
+                var output = await HttpService.PostApiAsync<object>(Configuration.Api("staff/update"), _referenceObj);
+                MessagingCenter.Send<string>("abc", "AddStaffDone");
+                await NavigationService.NavigateBackAsync();
+            }
         }
     }
 }
