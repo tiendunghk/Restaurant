@@ -145,7 +145,7 @@ namespace Restaurant.ViewModels
 
             if (Table.Status == TableStatus.DIRTY)
             {
-                await DialogService.ShowAlertAsync("Bàn chưa được vệ sinh!", "Thông báo", "OK");
+                await DialogService.ShowAlertAsync("Bàn không sẵn sàng!", "Thông báo", "OK");
                 return;
             }
             var b = BackupDish.Where(x => x.SoLuong > 0).Count() > 0 ? true : false;
@@ -203,7 +203,7 @@ namespace Restaurant.ViewModels
                 await HttpService.PostApiAsync<object>(Configuration.Api("order/update"), order);
                 App.Context.CurrentOrder[Table.Id] = order;
             }
-
+            Table.Status = TableStatus.OCCUPIED;
             await HttpService.PostApiAsync<object>(Configuration.Api("table/update"), Table);
             foreach (var e in orderDetails)
             {
