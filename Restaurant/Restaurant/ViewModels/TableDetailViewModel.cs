@@ -163,8 +163,9 @@ namespace Restaurant.ViewModels
             {
                 return;
             }
+            string a = DateTime.Now.ToString();
             if (order == null) order = new OrderModel { OrderDate = DateTime.Now, TableId = Table.Id, StaffId = App.Context.CurrentStaff.Id, TableName = Table.TableName };
-
+            var json = JsonConvert.SerializeObject(order);
             decimal cost = 0;
             List<OrderDetail> orderDetails = new List<OrderDetail>();
             foreach (var elem in BackupDish)

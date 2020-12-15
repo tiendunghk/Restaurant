@@ -57,7 +57,7 @@ namespace Restaurant.ViewModels.Order
         {
             IsLoadingData = true;
             var orders = await HttpService.GetAsync<List<OrderModel>>(Configuration.Api("order/getall"));
-            orders = orders.Where(or => or.OrderDate?.Date == DateTime.Now.Date).ToList();
+            orders = orders.Where(or => or.OrderDate?.ToLocalTime().Date == DateTime.Now.Date).ToList();
             foreach (var e in orders)
             {
                 e.TableName = Tables.ListTables.Find(x => x.Id == e.TableId).TableName;
