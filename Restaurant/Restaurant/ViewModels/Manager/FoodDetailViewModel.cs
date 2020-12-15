@@ -57,6 +57,8 @@ namespace Restaurant.ViewModels.Manager
                 var urlImage = await FileService.UploadImageCloudinary(Obj.DishImage);
                 _referenceObj.DishImage = urlImage;
             }
+            _referenceObj.Description = Obj.Description;
+            _referenceObj.Price = Obj.Price;
 
             await HttpService.PostApiAsync<object>(Configuration.Api("dish/update"), _referenceObj);
             await NavigationService.NavigateBackAsync();

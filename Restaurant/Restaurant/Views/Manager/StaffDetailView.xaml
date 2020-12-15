@@ -45,6 +45,27 @@
                     <StackLayout Orientation="Horizontal">
                         <Label
                             HorizontalOptions="StartAndExpand"
+                            Text="Lương"
+                            VerticalOptions="CenterAndExpand" />
+                        <Editor
+                            AutoSize="TextChanges"
+                            HorizontalOptions="EndAndExpand"
+                            Keyboard="Numeric"
+                            Text="{Binding Staff.StaffSalary}" />
+                    </StackLayout>
+                    <StackLayout Orientation="Horizontal">
+                        <Label
+                            HorizontalOptions="StartAndExpand"
+                            Text="Mật khẩu"
+                            VerticalOptions="CenterAndExpand" />
+                        <Editor
+                            AutoSize="TextChanges"
+                            HorizontalOptions="EndAndExpand"
+                            Text="{Binding Staff.PassWord}" />
+                    </StackLayout>
+                    <StackLayout Orientation="Horizontal">
+                        <Label
+                            HorizontalOptions="StartAndExpand"
                             Text="Role"
                             VerticalOptions="CenterAndExpand" />
                         <Picker

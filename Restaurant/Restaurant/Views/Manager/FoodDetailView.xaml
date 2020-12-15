@@ -30,24 +30,18 @@
                             Keyboard="Numeric"
                             Text="{Binding Obj.Price}" />
                     </StackLayout>
-                    <StackLayout Orientation="Horizontal">
-                        <Grid>
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="50" />
-                                <ColumnDefinition Width="Auto" />
-                            </Grid.ColumnDefinitions>
-                            <Label
-                                Grid.Column="0"
-                                HorizontalOptions="StartAndExpand"
-                                Text="Mô tả"
-                                VerticalOptions="CenterAndExpand" />
-                            <Entry
-                                Grid.Column="1"
-                                HorizontalOptions="EndAndExpand"
-                                MaxLength="150"
-                                Placeholder="Mô tả của món ăn"
-                                Text="{Binding Obj.Description}" />
-                        </Grid>
+                    <StackLayout Orientation="Horizontal" Spacing="10">
+                        <Label
+                            HorizontalOptions="StartAndExpand"
+                            Text="Mô tả"
+                            VerticalOptions="CenterAndExpand" />
+                        <Editor
+                            AutoSize="TextChanges"
+                            HorizontalOptions="EndAndExpand"
+                            MaxLength="150"
+                            Placeholder="Mô tả của món ăn"
+                            Text="{Binding Obj.Description}"
+                            WidthRequest="200" />
                     </StackLayout>
                     <StackLayout Orientation="Horizontal">
                         <Label

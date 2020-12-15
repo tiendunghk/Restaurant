@@ -42,10 +42,13 @@
                             HorizontalOptions="StartAndExpand"
                             Text="Mô tả"
                             VerticalOptions="CenterAndExpand" />
-                        <Entry
+                        <Editor
+                            AutoSize="TextChanges"
                             HorizontalOptions="EndAndExpand"
+                            MaxLength="150"
                             Placeholder="Mô tả của món ăn"
-                            Text="{Binding Obj.Description}" />
+                            Text="{Binding Obj.Description}"
+                            WidthRequest="200" />
                     </StackLayout>
                     <StackLayout Orientation="Horizontal">
                         <Label
