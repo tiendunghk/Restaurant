@@ -62,6 +62,11 @@ namespace Restaurant.ViewModels.Manager
         }
         async void Save()
         {
+            if (!Staff.Validate())
+            {
+                await DialogService.ShowAlertAsync("Kiểm tra lại input nhé!", "Error", "OK");
+                return;
+            }
             using (UserDialogs.Instance.Loading("Saving..."))
             {
                 _referenceObj.Name = Staff.Name;

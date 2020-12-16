@@ -21,7 +21,6 @@
                 ItemsSource="{Binding Pickers}"
                 SelectedIndex="{Binding SelectedIndex}"
                 SelectedIndexChanged="Picker_SelectedIndexChanged" />
-            <Label Text="{Binding ListDishsOrder.Count}" />
             <ListView
                 IsVisible="{Binding Orders}"
                 ItemsSource="{Binding ListDishsOrder}"

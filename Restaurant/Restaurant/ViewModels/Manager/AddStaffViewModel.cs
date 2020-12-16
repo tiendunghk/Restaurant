@@ -59,6 +59,11 @@ namespace Restaurant.ViewModels.Manager
         {
             var a = Staff;
             Staff.Role = Datas.Roles.ListRoles[SelectedItem].RoleId;
+            if (!Staff.Validate())
+            {
+                await DialogService.ShowAlertAsync("Kiểm tra lại input nhé!", "Error", "OK");
+                return;
+            }
             await HttpService.PostApiAsync<object>(Configuration.Api("staff/add"), Staff);
             DialogService.ShowToast("Đã thêm thành công");
             MessagingCenter.Send("abc", "AddStaffDone");

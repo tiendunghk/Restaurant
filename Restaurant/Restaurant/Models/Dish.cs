@@ -49,5 +49,13 @@ namespace Restaurant.Models
         {
             return MemberwiseClone();
         }
+        public bool Validate()
+        {
+            if (string.IsNullOrEmpty(Name)) return false;
+            if (string.IsNullOrEmpty(Description)) return false;
+            if (Price == 0) return false;
+            if (string.IsNullOrEmpty(DishImage)) return false;
+            return true;
+        }
     }
 }

@@ -44,5 +44,13 @@ namespace Restaurant.Models
         {
             return MemberwiseClone();
         }
+        public bool Validate()
+        {
+            if (string.IsNullOrEmpty(Name)) return false;
+            if (string.IsNullOrEmpty(PassWord)) return false;
+            if (string.IsNullOrEmpty(StaffVisa)) return false;
+            if (StaffSalary == 0) return false;
+            return true;
+        }
     }
 }
