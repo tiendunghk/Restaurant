@@ -132,6 +132,7 @@ namespace Restaurant.ViewModels
             ListItems = new ObservableCollection<FoodHeaderInfo>();
             FoodHeaderInfo obj;
             Dish d;
+            var listDishs = await HttpService.GetAsync<List<Dish>>(Configuration.Api("dish/getall/false"));
 
             for (int i = 0; i < ListOrders.Count; i++)
             {
@@ -145,7 +146,7 @@ namespace Restaurant.ViewModels
                 {
                     if (e.OrderDetailStatus == OrderDetailStatus.COMPLETED)
                         continue;
-                    d = Datas.Dishs.ListDishs.ToList().Find(x => x.Id == e.DishId);
+                    d = listDishs.ToList().Find(x => x.Id == e.DishId);
                     obj.Add(new OrderDetailUI
                     {
                         OrderDetailUIId = Guid.NewGuid().ToString("N"),

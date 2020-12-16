@@ -57,6 +57,10 @@ namespace Restaurant.ViewModels.Order
         {
             IsLoadingData = true;
             var orders = await HttpService.GetAsync<List<OrderModel>>(Configuration.Api("order/getall"));
+            foreach (var e in orders)
+            {
+                e.OrderDate = e.OrderDate?.ToLocalTime();
+            }
             orders = orders.Where(or => or.OrderDate?.ToLocalTime().Date == DateTime.Now.Date).ToList();
             foreach (var e in orders)
             {
@@ -75,13 +79,13 @@ namespace Restaurant.ViewModels.Order
         {
             Dish d;
             List<OrderDetailUI> orderDetailUIs = new List<OrderDetailUI>();
-
+            var listDishs = await HttpService.GetAsync<List<Dish>>(Configuration.Api("dish/getall/false"));
             var orderdetails = await HttpService.GetAsync<List<OrderDetail>>(Configuration.Api($"orderdetail/byorder/{obj.Id}"));
             foreach (var e in orderdetails)
             {
                 if (e.OrderDetail_OrderID == obj.Id)
                 {
-                    d = Datas.Dishs.ListDishs.ToList().Find(x => x.Id == e.DishId);
+                    d = listDishs.Find(x => x.Id == e.DishId);
                     orderDetailUIs.Add(new OrderDetailUI
                     {
                         OrderDetail = e,
