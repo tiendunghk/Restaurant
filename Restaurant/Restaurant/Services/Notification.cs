@@ -48,6 +48,8 @@ namespace Restaurant.Services
                     case NotiFlag.TABLESTATUS:
                         if (d == typeof(TableDetailView))
                             MessagingCenter.Send("abc", "PaymentAccepted");
+                        if (d == typeof(ListTableView))
+                            MessagingCenter.Send("abc", "LoadDataTable");
                         break;
                     default:
                         break;

@@ -73,7 +73,7 @@ namespace Restaurant.ViewModels.Reports
             //số order hàng tháng
             for (int i = 1; i <= 12; i++)
             {
-                var orderm = listOrders.Where(x => x.OrderDate?.Date.Month == i && x.OrderDate?.Date.Year == DateTime.Now.Year).Count();
+                var orderm = listOrders.Where(x => x.OrderDate?.ToLocalTime().Month == i && x.OrderDate?.ToLocalTime().Year == DateTime.Now.Year).Count();
                 chartEntries.Add(new ChartEntry(orderm)
                 {
                     Label = $"{i}",

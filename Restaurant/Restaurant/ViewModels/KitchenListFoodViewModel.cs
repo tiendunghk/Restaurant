@@ -75,6 +75,7 @@ namespace Restaurant.ViewModels
                         {
                             var od = str.OrderDetail;
                             od.OrderDetailStatus = OrderDetailStatus.COMPLETED;
+                            od.OrderDetailEndTime = DateTime.Now;
                             await HttpService.PostApiAsync<object>(Configuration.Api("orderdetail/update"), od);
 
                             DialogService.ShowToast("Đã thông báo cho waiter!");
@@ -96,6 +97,7 @@ namespace Restaurant.ViewModels
             else
             {
                 str.Status = OrderDetailStatus.COOKING;
+                str.OrderDetail.OrderDetailStartTime = DateTime.Now;
                 str.OrderDetail.OrderDetailStatus = OrderDetailStatus.COOKING;
                 await HttpService.PostApiAsync<object>(Configuration.Api("orderdetail/update"), str.OrderDetail);
                 string content = $"Món ăn đang được nấu!\nĐầu bếp {App.Context.CurrentStaff.Name}";

@@ -84,7 +84,7 @@ namespace Restaurant.ViewModels.Reports
                 Dictionary<Dish, int> mostOrders = new Dictionary<Dish, int>();
                 var foods = await HttpService.GetAsync<List<Dish>>(Configuration.Api($"dish/getall/false"));
                 var orders = await HttpService.GetAsync<List<OrderModel>>(Configuration.Api("order/getall"));
-                orders = orders.Where(x => x.OrderDate?.Date.Month == DateTime.Now.Month).ToList();
+                orders = orders.Where(x => x.OrderDate?.ToLocalTime().Month == DateTime.Now.Month).ToList();
                 foreach (var e in foods)
                 {
                     decimal doanhthu = 0;

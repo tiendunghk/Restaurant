@@ -72,6 +72,7 @@ namespace Restaurant.ViewModels.Order
                 var order = await HttpService.GetAsync<OrderModel>(Configuration.Api($"order/{OrderDetailUIs[0].OrderDetail.OrderDetail_OrderID}"));
                 var staffs = await HttpService.GetAsync<List<Staff>>(Configuration.Api("staff/getall/true"));
                 var idpush = staffs.Where(x => x.Id == order.StaffId).Select(x => x.ExternalId).ToList();
+                var busboys = staffs.Where(x => x.Role == "3").Select(x => x.ExternalId).ToList();
                 order.Status = Models.OrderStatus.COMPLETED;
                 OrderStatus = (int)Models.OrderStatus.COMPLETED;
                 await HttpService.PostApiAsync<object>(Configuration.Api("order/update"), order);
@@ -84,6 +85,7 @@ namespace Restaurant.ViewModels.Order
                 await HttpService.PostApiAsync<object>(Configuration.Api("table/update"), table);
                 Notification.PushExternalID(new { flag = NotiFlag.TABLESTATUS }, idpush, "Yêu cầu thanh toán đã được chấp nhận");
                 await PushNotiCashier();
+                Notification.SilentPush(busboys, new { flag = NotiFlag.TABLESTATUS });
                 MessagingCenter.Send("abc", "LoadDataOrder");
             }
         }

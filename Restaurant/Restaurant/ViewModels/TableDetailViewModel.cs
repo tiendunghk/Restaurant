@@ -163,9 +163,7 @@ namespace Restaurant.ViewModels
             {
                 return;
             }
-            string a = DateTime.Now.ToString();
             if (order == null) order = new OrderModel { OrderDate = DateTime.Now, TableId = Table.Id, StaffId = App.Context.CurrentStaff.Id, TableName = Table.TableName };
-            var json = JsonConvert.SerializeObject(order);
             decimal cost = 0;
             List<OrderDetail> orderDetails = new List<OrderDetail>();
             foreach (var elem in BackupDish)
@@ -257,6 +255,8 @@ namespace Restaurant.ViewModels
         public DelegateCommand<OrderDetailUI> DeleteDetailCommand => _deleteDetailCommand ??= new DelegateCommand<OrderDetailUI>(DeleteDetail);
         void DeleteDetail(OrderDetailUI obj)
         {
+            if (order.Status != OrderStatus.PENDING)
+                return;
             Device.InvokeOnMainThreadAsync(async () =>
             {
                 OrderedItems.Remove(obj);
@@ -270,7 +270,6 @@ namespace Restaurant.ViewModels
                 DialogService.ShowToast("Đã xóa item");
             }
              );
-
         }
         async void ShowDetail(Dish dish)
         {
@@ -284,12 +283,13 @@ namespace Restaurant.ViewModels
             SearchMonAn = true;
             var unicodeKeyword = Helpers.RemoveSign4VietnameseString(MonAn).ToLower();
             Tests = new ObservableCollection<Dish>();
-            await Task.Delay(1500);
+            await Task.Delay(1000);
             SearchMonAn = false;
             Tests = new ObservableCollection<Dish>(BackupDish.Where(x => Helpers.RemoveSign4VietnameseString(x.Name).ToLower().Contains(unicodeKeyword)));
         }
         async void ChangeTableStatus()
         {
+            if (Table.Status != TableStatus.DIRTY) return;
             var b = await DialogService.ShowConfirmDialog("Warning", "Bạn có chắc chắn muốn sửa trạng thái không", "Yes", "Cancel");
             if (b)
             {
@@ -318,7 +318,7 @@ namespace Restaurant.ViewModels
                     //await DialogService.ShowAlertAsync("Trạng thái bàn đã chuyển từ CLEAN sang OCCUPIED", "Thông báo", "OK");
                     //return;
                 }
-                var json = JsonConvert.SerializeObject(Table);
+                Table.TableIdOrderServing = null;
                 await HttpService.PostApiAsync<object>(Configuration.Api("table/update"), Table);
                 //await NavigationService.NavigateBackAsync();
             }
