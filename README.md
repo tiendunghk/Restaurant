@@ -7,7 +7,7 @@
 
 - Code: Xamarin.Forms (FE), .NET Core 3.1 (BE), MySQL (DB).
 
-- Deloy: Heroku
+- Deploy: Heroku
 
 
 
